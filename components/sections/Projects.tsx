@@ -30,18 +30,16 @@ export default function Projects() {
         className="container px-4 md:px-6"
       >
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.h2 
-            variants={fadeIn("up")}
+          <h2 
             className="text-3xl md:text-4xl font-bold mb-4"
           >
             My <span className="text-indigo-600">Projects</span>
-          </motion.h2>
-          <motion.p 
-            variants={fadeIn("up", 0.1)}
-            className="text-lg text-muted-foreground"
+          </h2>
+          <p 
+          className="text-lg text-muted-foreground"
           >
             A showcase of my recent work and featured projects
-          </motion.p>
+          </p>
           <div className="w-20 h-1 bg-indigo-600 mt-6 mx-auto"></div>
         </div>
 

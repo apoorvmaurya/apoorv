@@ -37,12 +37,12 @@ export default function Experience() {
           >
             Work <span className="text-indigo-600">Experience</span>
           </motion.h2>
-          <motion.p 
-            variants={fadeIn("up", 0.1)}
+          <p 
+            
             className="text-lg text-muted-foreground"
           >
             My professional journey and career highlights
-          </motion.p>
+          </p>
           <div className="w-20 h-1 bg-indigo-600 mt-6 mx-auto"></div>
         </div>
 

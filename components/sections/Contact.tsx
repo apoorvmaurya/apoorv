@@ -86,18 +86,16 @@ export default function Contact() {
         className="container px-4 md:px-6"
       >
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.h2 
-            variants={fadeIn("up")}
+          <h2
             className="text-3xl md:text-4xl font-bold mb-4"
           >
             Get In <span className="text-indigo-600">Touch</span>
-          </motion.h2>
-          <motion.p 
-            variants={fadeIn("up", 0.1)}
+          </h2>
+          <p
             className="text-lg text-muted-foreground"
           >
             Have a question or want to work together? Feel free to contact me!
-          </motion.p>
+          </p>
           <div className="w-20 h-1 bg-indigo-600 mt-6 mx-auto"></div>
         </div>
 
@@ -124,7 +122,7 @@ export default function Contact() {
                     <div>
                       <h4 className="font-medium">Email</h4>
                       <a href="mailto:hello@example.com" className="text-muted-foreground hover:text-indigo-600 transition-colors">
-                        hello@example.com
+                        apoorvmauryaapoorv@gmail.com
                       </a>
                     </div>
                   </div>
@@ -136,7 +134,7 @@ export default function Contact() {
                     <div>
                       <h4 className="font-medium">Phone</h4>
                       <a href="tel:+11234567890" className="text-muted-foreground hover:text-indigo-600 transition-colors">
-                        +1 (123) 456-7890
+                        +91 7081817800
                       </a>
                     </div>
                   </div>
@@ -148,7 +146,7 @@ export default function Contact() {
                     <div>
                       <h4 className="font-medium">Location</h4>
                       <p className="text-muted-foreground">
-                        San Francisco, California
+                        Noida, India
                       </p>
                     </div>
                   </div>
@@ -156,7 +154,7 @@ export default function Contact() {
                 
                 <div className="mt-8 p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-md">
                   <p className="text-sm text-muted-foreground italic">
-                    Currently available for freelance projects, full-time positions, and consulting opportunities.
+                    Currently available for contract based, freelance projects and full-time positions.
                   </p>
                 </div>
               </div>

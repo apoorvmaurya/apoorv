@@ -14,66 +14,51 @@ export const sections = [
 export const skills = {
   technical: [
     { name: "JavaScript", level: 90 },
-    { name: "TypeScript", level: 85 },
+    { name: "TypeScript", level: 80 },
     { name: "HTML5", level: 95 },
-    { name: "CSS3", level: 90 },
+    { name: "CSS3", level: 95 },
     { name: "Python", level: 75 },
-    { name: "SQL", level: 80 },
+    { name: "MYSQL", level: 70 },
   ],
   frameworks: [
-    { name: "React", level: 90 },
-    { name: "Next.js", level: 85 },
+    { name: "React", level: 80 },
+    { name: "Next.js", level: 80 },
     { name: "Node.js", level: 80 },
     { name: "Express", level: 75 },
-    { name: "TailwindCSS", level: 90 },
-    { name: "React Native", level: 70 },
+    { name: "TailwindCSS", level: 75 },
   ],
   tools: [
-    { name: "Git", level: 85 },
-    { name: "Docker", level: 70 },
-    { name: "AWS", level: 65 },
-    { name: "Figma", level: 75 },
-    { name: "Jest", level: 80 },
-    { name: "Webpack", level: 65 },
+    { name: "Git", level: 90 },
+    { name: "AWS", level: 60 },
+    { name: "Figma", level: 70 },
   ],
 };
 
 // Work experience data
 export const experiences = [
   {
-    title: "Senior Frontend Developer",
-    company: "Tech Innovations Inc.",
-    date: "Jan 2022 - Present",
+    title: "Full Stack Developer",
+    company: "DevX Days",
+    date: "Jan 2025 - Present",
     description: [
-      "Led a team of 5 developers to build a responsive web application using React and TypeScript",
-      "Implemented state management with Redux and improved performance by 40%",
-      "Collaborated with UI/UX designers to implement pixel-perfect designs",
-      "Mentored junior developers and conducted code reviews",
+      "Built responsive landing page using Next.js with TypeScript implementing SSR for improved SEO performance.",  
+"Reduced page loading time by 40% through code splitting and lazy loading techniques.", 
+"Implemented client-side caching strategies resulting in smoother navigation experience for users.", 
+"Resolved cross-browser compatibility issues by creating custom CSS solutions for legacy browser support.",
     ],
-    tech: ["React", "TypeScript", "Redux", "TailwindCSS", "Jest"],
+    tech: ["React", "Next.js", "TypeScript", "Redux", "TailwindCSS", ],
   },
   {
     title: "Frontend Developer",
-    company: "Digital Solutions LLC",
-    date: "Mar 2019 - Dec 2021",
+    company: "Pixelwand",
+    date: "June 2024 - Dec 2024",
     description: [
-      "Developed and maintained multiple client-facing web applications",
-      "Implemented responsive designs and ensured cross-browser compatibility",
-      "Worked with REST APIs and GraphQL to integrate frontend with backend services",
-      "Participated in agile development processes",
+      "Developed AWS service migration UI with optimistic updates, reducing user wait time by 30%.", 
+"Translated complex Figma design mock-ups into pixel-perfect web pages using React and styled-components.",
+"Created reusable component library that reduced development time for new features by 25%.",
+"Implemented responsive designs ensuring consistent user experience across mobile, tablet, and desktop devices.", 
     ],
-    tech: ["JavaScript", "React", "SCSS", "GraphQL", "Cypress"],
-  },
-  {
-    title: "Web Developer Intern",
-    company: "Startup Incubator",
-    date: "Jun 2018 - Feb 2019",
-    description: [
-      "Assisted in developing web applications for early-stage startups",
-      "Gained experience with modern JavaScript frameworks and tools",
-      "Collaborated with cross-functional teams including designers and backend developers",
-    ],
-    tech: ["HTML", "CSS", "JavaScript", "jQuery", "Bootstrap"],
+    tech: ["React", "TypeScript", ],
   },
 ];
 
@@ -116,26 +101,16 @@ export const projects = [
 // Education data
 export const education = [
   {
-    degree: "Master of Science in Computer Science",
-    institution: "University of Technology",
-    date: "2016 - 2018",
-    description: "Specialized in Web Technologies and Distributed Systems. Thesis on 'Performance Optimization Techniques for Modern Web Applications'.",
-    achievements: [
-      "Dean's List: All semesters",
-      "Graduate Research Assistant",
-      "Published paper on web performance optimization",
-    ],
+    degree: "Extended Credit Linked Program in AIML",
+    institution: "Daksh Gurukul IIT Guwahati",
+    date: "2025 - 2026",
+    description: "Focused on Artificial Intelligence and Machine Learning. Learning natural language processing and Agentic AI.",
   },
   {
-    degree: "Bachelor of Science in Computer Science",
-    institution: "State University",
-    date: "2012 - 2016",
-    description: "Focused on Software Engineering and Database Systems. Minor in Digital Media Design.",
-    achievements: [
-      "Graduated with Honors",
-      "President of Computer Science Club",
-      "Participated in ACM Programming Competition",
-    ],
+    degree: "B.Tech in Computer Science and Engineering",
+    institution: "Galgotias University",
+    date: "2021 - 2025",
+    description: "Specialized in Web Technologies and Software Engineering, developed Community Leadership and Technical Writing.",
   },
 ];
 

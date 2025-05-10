@@ -39,7 +39,7 @@ export default function About() {
             </motion.div>
 
             <motion.p variants={fadeIn("right", 0.1)} className="text-lg text-muted-foreground">
-              I&apos;m a passionate senior frontend developer with over 5 years of experience building modern web applications. I specialize in React, TypeScript, and Next.js, creating responsive and performant user interfaces.
+              I&apos;m a passionate Full Stack developer speciallised in Frontend Development with over 2 years of experience building modern web applications. I specialize in React, TypeScript, and Next.js, creating responsive and performant user interfaces.
             </motion.p>
             
             <motion.p variants={fadeIn("right", 0.2)} className="text-lg text-muted-foreground">
@@ -53,15 +53,15 @@ export default function About() {
             <motion.div variants={fadeIn("right", 0.4)} className="grid grid-cols-2 gap-4 pt-4">
               <div>
                 <h3 className="font-semibold text-xl">Location</h3>
-                <p className="text-muted-foreground">San Francisco, CA</p>
+                <p className="text-muted-foreground">Noida</p>
               </div>
               <div>
                 <h3 className="font-semibold text-xl">Email</h3>
-                <p className="text-muted-foreground">hello@example.com</p>
+                <p className="text-muted-foreground">apoorvmauryaapoorv.com</p>
               </div>
               <div>
                 <h3 className="font-semibold text-xl">Experience</h3>
-                <p className="text-muted-foreground">5+ Years</p>
+                <p className="text-muted-foreground">2 years</p>
               </div>
               <div>
                 <h3 className="font-semibold text-xl">Availability</h3>

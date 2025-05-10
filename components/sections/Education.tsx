@@ -30,18 +30,15 @@ export default function Education() {
         className="container px-4 md:px-6"
       >
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.h2 
-            variants={fadeIn("up")}
-            className="text-3xl md:text-4xl font-bold mb-4"
-          >
-            My <span className="text-indigo-600">Education</span>
-          </motion.h2>
-          <motion.p 
-            variants={fadeIn("up", 0.1)}
-            className="text-lg text-muted-foreground"
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+  My <span className="text-indigo-600">Education</span>
+</h2>
+          
+            <h3 className="text-lg text-muted-foreground"
           >
             Academic achievements and qualifications
-          </motion.p>
+            </h3>
+          
           <div className="w-20 h-1 bg-indigo-600 mt-6 mx-auto"></div>
         </div>
 
@@ -77,26 +74,6 @@ export default function Education() {
               <p className="text-muted-foreground mb-6">
                 {edu.description}
               </p>
-              
-              <div className="space-y-4">
-                <h4 className="font-semibold flex items-center">
-                  <Award className="w-5 h-5 mr-2 text-indigo-600" />
-                  Achievements & Activities
-                </h4>
-                <motion.ul 
-                  variants={staggerContainer}
-                  className="space-y-2 pl-7 list-disc text-muted-foreground"
-                >
-                  {edu.achievements.map((achievement, i) => (
-                    <motion.li 
-                      key={i} 
-                      variants={listItem}
-                    >
-                      {achievement}
-                    </motion.li>
-                  ))}
-                </motion.ul>
-              </div>
             </motion.div>
           ))}
         </motion.div>

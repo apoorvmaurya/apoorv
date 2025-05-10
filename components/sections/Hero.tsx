@@ -46,7 +46,7 @@ export default function Hero() {
             variants={fadeIn("up", 0.3)}
             className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight"
           >
-            Your Name
+            Apoorv Maurya
           </motion.h1>
           
           <motion.div
@@ -54,10 +54,10 @@ export default function Hero() {
             className="space-y-2"
           >
             <p className="text-2xl md:text-3xl font-semibold text-muted-foreground">
-              Senior Frontend Developer
+              Full Stack Developer
             </p>
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-              Building beautiful, responsive, and user-friendly web applications with modern technologies
+              UI/UX Engineer | ML Practitioner | Bridging Code and Intelligence
             </p>
           </motion.div>
           

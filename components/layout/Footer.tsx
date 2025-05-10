@@ -14,22 +14,22 @@ import { Button } from "@/components/ui/button";
 const socialLinks = [
   {
     name: "GitHub",
-    href: "https://github.com/yourusername",
+    href: "https://github.com/apoorvmaurya",
     icon: Github,
   },
   {
     name: "LinkedIn",
-    href: "https://linkedin.com/in/yourusername",
+    href: "https://www.linkedin.com/in/apoorv-maurya2506/",
     icon: Linkedin,
   },
   {
     name: "Twitter",
-    href: "https://twitter.com/yourusername",
+    href: "https://twitter.com/apoorvmaurya_",
     icon: Twitter,
   },
   {
     name: "Email",
-    href: "mailto:your.email@example.com",
+    href: "mailto:apoorvmauryaapoorv@gmail.com",
     icon: Mail,
   },
 ];
@@ -43,7 +43,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div>
             <p className="text-muted-foreground text-sm">
-              © {currentYear} Your Name. All rights reserved.
+              © {currentYear} Apoorv Maurya. All rights reserved.
             </p>
           </div>
           
