@@ -39,15 +39,15 @@ export default function About() {
             </motion.div>
 
             <motion.p variants={fadeIn("right", 0.1)} className="text-lg text-muted-foreground">
-              I&apos;m a passionate Full Stack developer speciallised in Frontend Development with over 2 years of experience building modern web applications. I specialize in React, TypeScript, and Next.js, creating responsive and performant user interfaces.
+              I&apos;m a Full Stack developer speciallised in Frontend development with hands-on experience in building responsive, scalable web interfaces using Next.js, React, and TypeScript
             </motion.p>
             
             <motion.p variants={fadeIn("right", 0.2)} className="text-lg text-muted-foreground">
-              With a strong foundation in user experience design principles and a keen eye for detail, I strive to create intuitive and visually appealing interfaces that solve real-world problems and delight users.
+              I&apos;m currently exploring AI/ML by working on practical projects and expanding my backend understanding. Passionate about clean UI, performance optimization, and contributing to impactful tech communities.
             </motion.p>
             
             <motion.p variants={fadeIn("right", 0.3)} className="text-lg text-muted-foreground">
-              Beyond coding, I&apos;m an active member of the developer community, where I contribute to open-source projects, write technical articles, and mentor junior developers.
+              Beyond coding, I&apos;m an active member of the developer community, where I contribute to open-source projects and write technical articles.
             </motion.p>
             
             <motion.div variants={fadeIn("right", 0.4)} className="grid grid-cols-2 gap-4 pt-4">

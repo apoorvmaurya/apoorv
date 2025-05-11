@@ -3,7 +3,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { experiences } from "@/lib/constants";
 import { revealSection, staggerContainer, fadeIn, listItem } from "@/lib/animation";
 import { Badge } from "@/components/ui/badge";
 import { 
@@ -18,6 +17,45 @@ export default function Experience() {
     threshold: 0.1,
   });
 
+  // Define experiences data directly in this component
+  // Work experience data 
+  const experiences = [
+    {
+      title: "Full Stack Developer",
+      company: "DevX Days",
+      date: "Jan 2025 - Present",
+      description: [
+        "Built responsive landing page using Next.js with TypeScript implementing SSR for improved SEO performance.",
+        "Reduced page loading time by 40% through code splitting and lazy loading techniques.",
+        "Implemented client-side caching strategies resulting in smoother navigation experience for users.",
+        "Resolved cross-browser compatibility issues by creating custom CSS solutions for legacy browser support.",
+      ],
+      tech: ["React", "Next.js", "TypeScript", "TailwindCSS"],
+    },
+    {
+      title: "Frontend Developer Intern",
+      company: "Pixelwand",
+      date: "July 2024 - Dec 2024",
+      description: [
+        "Developed AWS service migration UI with optimistic updates, reducing user wait time by 30%.",
+        "Translated complex Figma design mock-ups into pixel-perfect web pages using React and styled-components.",
+        "Created reusable component library that reduced development time for new features by 25%.",
+        "Implemented responsive designs ensuring consistent user experience across mobile, tablet, and desktop devices.",
+      ],
+      tech: ["React", "styled-components", "Figma", "AWS"],
+    },
+    {
+      title: "AIML Trainee",
+      company: "Verzeo",
+      date: "October 2022 - January 2023",
+      description: [
+        "Implemented object recognition model using TensorFlow and Keras achieving 87% accuracy.",
+        "Documented model architecture and training process for team knowledge sharing.",
+      ],
+      tech: ["TensorFlow", "Keras", "Python"],
+    },
+  ];
+
   return (
     <section
       id="experience"
@@ -31,16 +69,12 @@ export default function Experience() {
         className="container px-4 md:px-6"
       >
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.h2 
-            variants={fadeIn("up")}
+          <h2 
             className="text-3xl md:text-4xl font-bold mb-4"
           >
             Work <span className="text-indigo-600">Experience</span>
-          </motion.h2>
-          <p 
-            
-            className="text-lg text-muted-foreground"
-          >
+          </h2>
+          <p className="text-lg text-muted-foreground">
             My professional journey and career highlights
           </p>
           <div className="w-20 h-1 bg-indigo-600 mt-6 mx-auto"></div>
@@ -52,8 +86,8 @@ export default function Experience() {
           animate={inView ? "show" : "hidden"}
           className="max-w-4xl mx-auto relative"
         >
-          {/* Timeline center line */}
-          <div className="hidden md:block absolute left-1/2 top-0 h-full w-0.5 bg-indigo-200 dark:bg-indigo-800/50 transform -translate-x-1/2" />
+          {/* Timeline center line - fixed in the middle */}
+          <div className="hidden md:block absolute left-1/2 top-0 h-full w-0.5 bg-indigo-200 dark:bg-indigo-800/50 transform -translate-x-1/2 z-10" />
           
           {experiences.map((experience, index) => (
             <motion.div
@@ -63,11 +97,12 @@ export default function Experience() {
                 index % 2 === 0 ? "md:mr-auto" : "md:ml-auto"
               }`}
             >
-              {/* Timeline dot */}
+              {/* Timeline dot - always positioned at the center line */}
               <div 
-                className={`hidden md:block absolute top-0 w-6 h-6 rounded-full bg-indigo-600 ${
-                  index % 2 === 0 ? "-right-[3.25rem]" : "-left-[3.25rem]"
-                }`}
+                className="hidden md:block absolute top-10 w-6 h-6 rounded-full bg-indigo-600 z-20"
+                style={{ 
+                  left: index % 2 === 0 ? 'calc(100% + 2rem)' : 'calc(-2rem - 24px)',
+                }}
               >
                 <div className="absolute inset-0 rounded-full bg-indigo-200 dark:bg-indigo-400 animate-ping" style={{ animationDuration: '3s' }}></div>
               </div>
@@ -92,21 +127,63 @@ export default function Experience() {
                   </div>
                 </div>
                 
-                <motion.ul 
-                  variants={staggerContainer}
-                  className="mb-4 space-y-2"
-                >
-                  {experience.description.map((item, i) => (
-                    <motion.li 
-                      key={i} 
-                      variants={listItem}
-                      className="flex"
-                    >
-                      <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
-                      <span className="text-muted-foreground">{item}</span>
-                    </motion.li>
-                  ))}
-                </motion.ul>
+                {/* Hardcoded descriptions based on job title */}
+                <div className="mb-4 space-y-2">
+                  {experience.title === "Full Stack Developer" && (
+                    <>
+                      <div className="flex">
+                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground">Built responsive landing page using Next.js with TypeScript implementing SSR for improved SEO performance.</span>
+                      </div>
+                      <div className="flex">
+                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground">Reduced page loading time by 40% through code splitting and lazy loading techniques.</span>
+                      </div>
+                      <div className="flex">
+                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground">Implemented client-side caching strategies resulting in smoother navigation experience for users.</span>
+                      </div>
+                      <div className="flex">
+                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground">Resolved cross-browser compatibility issues by creating custom CSS solutions for legacy browser support.</span>
+                      </div>
+                    </>
+                  )}
+                  
+                  {experience.title === "Frontend Developer Intern" && (
+                    <>
+                      <div className="flex">
+                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground">Developed AWS service migration UI with optimistic updates, reducing user wait time by 30%.</span>
+                      </div>
+                      <div className="flex">
+                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground">Translated complex Figma design mock-ups into pixel-perfect web pages using React and styled-components.</span>
+                      </div>
+                      <div className="flex">
+                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground">Created reusable component library that reduced development time for new features by 25%.</span>
+                      </div>
+                      <div className="flex">
+                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground">Implemented responsive designs ensuring consistent user experience across mobile, tablet, and desktop devices.</span>
+                      </div>
+                    </>
+                  )}
+                  
+                  {experience.title === "AIML Trainee" && (
+                    <>
+                      <div className="flex">
+                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground">Implemented object recognition model using TensorFlow and Keras achieving 87% accuracy.</span>
+                      </div>
+                      <div className="flex">
+                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground">Documented model architecture and training process for team knowledge sharing.</span>
+                      </div>
+                    </>
+                  )}
+                </div>
                 
                 <div className="flex flex-wrap gap-2 mt-4">
                   {experience.tech.map((tech, i) => (

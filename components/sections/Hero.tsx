@@ -98,16 +98,6 @@ export default function Hero() {
           </motion.div>
         </motion.div>
         
-        {/* Scroll indicator */}
-        <motion.div 
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer"
-          initial={{ y: 0, opacity: 0.8 }}
-          animate={{ y: [0, 12, 0], opacity: [0.8, 1, 0.8] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          onClick={scrollToNextSection}
-        >
-          <ArrowDown className="h-8 w-8 text-muted-foreground" />
-        </motion.div>
       </div>
     </section>
   );

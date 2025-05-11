@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useForm } from "react-hook-form";
@@ -11,7 +11,8 @@ import {
   Mail, 
   Phone, 
   MapPin, 
-  Send 
+  Send,
+  Loader2 
 } from "lucide-react";
 import { 
   Form, 
@@ -50,6 +51,7 @@ export default function Contact() {
   });
   
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -61,16 +63,46 @@ export default function Contact() {
     },
   });
 
-  const onSubmit = (data: FormValues) => {
-    console.log(data);
-    // In a real implementation, you would send this data to your backend
+  const onSubmit = async (data: FormValues) => {
+    setIsSubmitting(true);
     
-    toast({
-      title: "Message sent!",
-      description: "Thank you for your message. I'll get back to you soon.",
-    });
-    
-    form.reset();
+    try {
+      // Send the form data to our API route
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: "apoorvmauryapoorv@gmail.com",
+          from: data.email,
+          subject: `Contact Form: ${data.subject}`,
+          name: data.name,
+          message: data.message,
+        }),
+      });
+      
+      const result = await response.json();
+      
+      if (response.ok) {
+        toast({
+          title: "Message sent successfully!",
+          description: "Thank you for your message. I'll get back to you soon.",
+        });
+        form.reset();
+      } else {
+        throw new Error(result.message || "Failed to send message");
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast({
+        title: "Failed to send message",
+        description: "There was an error sending your message. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -121,8 +153,8 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-medium">Email</h4>
-                      <a href="mailto:hello@example.com" className="text-muted-foreground hover:text-indigo-600 transition-colors">
-                        apoorvmauryaapoorv@gmail.com
+                      <a href="mailto:apoorvmauryapoorv@gmail.com" className="text-muted-foreground hover:text-indigo-600 transition-colors">
+                        apoorvmauryapoorv@gmail.com
                       </a>
                     </div>
                   </div>
@@ -133,7 +165,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-medium">Phone</h4>
-                      <a href="tel:+11234567890" className="text-muted-foreground hover:text-indigo-600 transition-colors">
+                      <a href="tel:+917081817800" className="text-muted-foreground hover:text-indigo-600 transition-colors">
                         +91 7081817800
                       </a>
                     </div>
@@ -235,9 +267,19 @@ export default function Contact() {
                     <Button 
                       type="submit" 
                       className="w-full md:w-auto bg-indigo-600 hover:bg-indigo-700"
+                      disabled={isSubmitting}
                     >
-                      <Send className="w-4 h-4 mr-2" />
-                      Send Message
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4 mr-2" />
+                          Send Message
+                        </>
+                      )}
                     </Button>
                   </form>
                 </Form>
