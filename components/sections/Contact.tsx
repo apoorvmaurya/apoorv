@@ -26,6 +26,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from '@emailjs/browser';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -67,31 +68,31 @@ export default function Contact() {
     setIsSubmitting(true);
     
     try {
-      // Send the form data to our API route
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          to: "apoorvmauryapoorv@gmail.com",
-          from: data.email,
-          subject: `Contact Form: ${data.subject}`,
-          name: data.name,
-          message: data.message,
-        }),
-      });
+      // Prepare the template parameters for EmailJS
+      const templateParams = {
+        to_email: "apoorvmauryapoorv@gmail.com",
+        from_name: data.name,
+        from_email: data.email,
+        subject: data.subject,
+        message: data.message,
+      };
       
-      const result = await response.json();
+      // Send email using EmailJS with environment variables
+      const response = await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!, 
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!, 
+        templateParams,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
       
-      if (response.ok) {
+      if (response.status === 200) {
         toast({
           title: "Message sent successfully!",
           description: "Thank you for your message. I'll get back to you soon.",
         });
         form.reset();
       } else {
-        throw new Error(result.message || "Failed to send message");
+        throw new Error("Failed to send message");
       }
     } catch (error) {
       console.error("Error sending email:", error);

@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import NavBar from '@/components/layout/NavBar';
 import Footer from '@/components/layout/Footer';
 import { Toaster } from '@/components/ui/toaster';
+import EmailJSInit from '@/components/sections/EmailJSInit';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -24,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} overflow-x-hidden`}>
+         <EmailJSInit />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
