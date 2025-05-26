@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
 import Image from "next/image";
-import { projects } from "@/lib/constants";
+import { projects } from "@/tailwind.config";
 import { revealSection, staggerContainer, fadeIn, cardHover } from "@/lib/animation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -61,7 +61,7 @@ export default function Projects() {
                 variants={cardHover}
                 className="bg-card border border-border rounded-lg overflow-hidden h-full flex flex-col shadow-md hover:shadow-xl transition-all duration-300"
               >
-                <div className="relative w-full aspect-video overflow-hidden">
+                <div className="relative w-full h-64 md:h-96">
                   <Image
                     src={project.imageUrl}
                     alt={project.title}
@@ -69,6 +69,7 @@ export default function Projects() {
                     className="object-cover transition-transform duration-500 hover:scale-110"
                     loading={index < 2 ? "eager" : "lazy"}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority={index < 2}
                   />
                 </div>
                 

@@ -80,7 +80,8 @@ export default function About() {
             className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden border border-border shadow-xl"
           >
             <Image
-              src="https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              src="/about.png"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               alt="Profile"
               fill
               className="object-cover"
