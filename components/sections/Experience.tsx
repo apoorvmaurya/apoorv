@@ -61,12 +61,14 @@ export default function Experience() {
       id="experience"
       ref={ref}
       className="py-20 bg-indigo-50 dark:bg-indigo-950/20 overflow-hidden"
+      suppressHydrationWarning={true}
     >
       <motion.div
         variants={revealSection}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
         className="container px-4 md:px-6"
+        suppressHydrationWarning={true}
       >
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 
@@ -85,6 +87,7 @@ export default function Experience() {
           initial="hidden"
           animate={inView ? "show" : "hidden"}
           className="max-w-4xl mx-auto relative"
+          suppressHydrationWarning={true}
         >
           {/* Timeline center line - fixed in the middle */}
           <div className="hidden md:block absolute left-1/2 top-0 h-full w-0.5 bg-indigo-200 dark:bg-indigo-800/50 transform -translate-x-1/2 z-10" />
@@ -96,6 +99,7 @@ export default function Experience() {
               className={`relative mb-12 md:mb-24 md:w-[calc(50%-2rem)] ${
                 index % 2 === 0 ? "md:mr-auto" : "md:ml-auto"
               }`}
+              suppressHydrationWarning={true}
             >
               {/* Timeline dot - always positioned at the center line */}
               <div 
@@ -103,6 +107,7 @@ export default function Experience() {
                 style={{ 
                   left: index % 2 === 0 ? 'calc(100% + 2rem)' : 'calc(-2rem - 24px)',
                 }}
+                suppressHydrationWarning={true}
               >
                 <div className="absolute inset-0 rounded-full bg-indigo-200 dark:bg-indigo-400 animate-ping" style={{ animationDuration: '3s' }}></div>
               </div>
@@ -112,6 +117,7 @@ export default function Experience() {
                 whileHover={{ y: -5 }}
                 transition={{ duration: 0.3 }}
                 className="bg-card border border-border rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow"
+                suppressHydrationWarning={true}
               >
                 <div className="flex items-center mb-4">
                   <Briefcase className="w-5 h-5 mr-2 text-indigo-600" />
@@ -127,67 +133,19 @@ export default function Experience() {
                   </div>
                 </div>
                 
-                {/* Hardcoded descriptions based on job title */}
+                {/* Use array-based descriptions instead of hardcoded ones */}
                 <div className="mb-4 space-y-2">
-                  {experience.title === "Full Stack Developer" && (
-                    <>
-                      <div className="flex">
-                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground">Built responsive landing page using Next.js with TypeScript implementing SSR for improved SEO performance.</span>
-                      </div>
-                      <div className="flex">
-                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground">Reduced page loading time by 40% through code splitting and lazy loading techniques.</span>
-                      </div>
-                      <div className="flex">
-                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground">Implemented client-side caching strategies resulting in smoother navigation experience for users.</span>
-                      </div>
-                      <div className="flex">
-                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground">Resolved cross-browser compatibility issues by creating custom CSS solutions for legacy browser support.</span>
-                      </div>
-                    </>
-                  )}
-                  
-                  {experience.title === "Frontend Developer Intern" && (
-                    <>
-                      <div className="flex">
-                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground">Developed AWS service migration UI with optimistic updates, reducing user wait time by 30%.</span>
-                      </div>
-                      <div className="flex">
-                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground">Translated complex Figma design mock-ups into pixel-perfect web pages using React and styled-components.</span>
-                      </div>
-                      <div className="flex">
-                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground">Created reusable component library that reduced development time for new features by 25%.</span>
-                      </div>
-                      <div className="flex">
-                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground">Implemented responsive designs ensuring consistent user experience across mobile, tablet, and desktop devices.</span>
-                      </div>
-                    </>
-                  )}
-                  
-                  {experience.title === "AIML Trainee" && (
-                    <>
-                      <div className="flex">
-                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground">Implemented object recognition model using TensorFlow and Keras achieving 87% accuracy.</span>
-                      </div>
-                      <div className="flex">
-                        <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground">Documented model architecture and training process for team knowledge sharing.</span>
-                      </div>
-                    </>
-                  )}
+                  {experience.description.map((desc, i) => (
+                    <div key={i} className="flex" suppressHydrationWarning={true}>
+                      <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">{desc}</span>
+                    </div>
+                  ))}
                 </div>
                 
-                <div className="flex flex-wrap gap-2 mt-4">
+                <div className="flex flex-wrap gap-2 mt-4" suppressHydrationWarning={true}>
                   {experience.tech.map((tech, i) => (
-                    <Badge key={i} variant="secondary">
+                    <Badge key={i} variant="secondary" suppressHydrationWarning={true}>
                       {tech}
                     </Badge>
                   ))}

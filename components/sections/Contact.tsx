@@ -202,7 +202,11 @@ export default function Contact() {
                 <h3 className="text-xl font-bold mb-6">Send me a Message</h3>
                 
                 <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <form 
+                    onSubmit={form.handleSubmit(onSubmit)} 
+                    className="space-y-6"
+                    suppressHydrationWarning={true}
+                  >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <FormField
                         control={form.control}
@@ -211,7 +215,11 @@ export default function Contact() {
                           <FormItem>
                             <FormLabel>Name</FormLabel>
                             <FormControl>
-                              <Input placeholder="Your name" {...field} />
+                              <Input 
+                                placeholder="Your name" 
+                                {...field}
+                                suppressHydrationWarning={true}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -225,7 +233,11 @@ export default function Contact() {
                           <FormItem>
                             <FormLabel>Email</FormLabel>
                             <FormControl>
-                              <Input placeholder="Your email" {...field} />
+                              <Input 
+                                placeholder="Your email" 
+                                {...field}
+                                suppressHydrationWarning={true}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -240,7 +252,11 @@ export default function Contact() {
                         <FormItem>
                           <FormLabel>Subject</FormLabel>
                           <FormControl>
-                            <Input placeholder="Subject" {...field} />
+                            <Input 
+                              placeholder="Subject" 
+                              {...field}
+                              suppressHydrationWarning={true}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -257,7 +273,8 @@ export default function Contact() {
                             <Textarea 
                               placeholder="Your message" 
                               rows={6} 
-                              {...field} 
+                              {...field}
+                              suppressHydrationWarning={true}
                             />
                           </FormControl>
                           <FormMessage />
@@ -269,6 +286,7 @@ export default function Contact() {
                       type="submit" 
                       className="w-full md:w-auto bg-indigo-600 hover:bg-indigo-700"
                       disabled={isSubmitting}
+                      suppressHydrationWarning={true}
                     >
                       {isSubmitting ? (
                         <>

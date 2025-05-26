@@ -1,23 +1,26 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
 import { revealSection, staggerContainer, fadeIn } from "@/lib/animation";
 
 export default function About() {
+  const [hasMounted, setHasMounted] = useState(false);
   const [ref, inView] = useInView({
     triggerOnce: false,
     threshold: 0.1,
   });
 
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) return null;
+
   return (
-    <section
-      id="about"
-      ref={ref}
-      className="py-20 bg-muted/30"
-    >
+    <section id="about" ref={ref} className="py-20 bg-muted/30">
       <motion.div
         variants={revealSection}
         initial="hidden"
@@ -39,17 +42,17 @@ export default function About() {
             </motion.div>
 
             <motion.p variants={fadeIn("right", 0.1)} className="text-lg text-muted-foreground">
-              I&apos;m a Full Stack developer speciallised in Frontend development with hands-on experience in building responsive, scalable web interfaces using Next.js, React, and TypeScript
+              I&apos;m a Full Stack developer specialised in Frontend development with hands-on experience in building responsive, scalable web interfaces using Next.js, React, and TypeScript.
             </motion.p>
-            
+
             <motion.p variants={fadeIn("right", 0.2)} className="text-lg text-muted-foreground">
               I&apos;m currently exploring AI/ML by working on practical projects and expanding my backend understanding. Passionate about clean UI, performance optimization, and contributing to impactful tech communities.
             </motion.p>
-            
+
             <motion.p variants={fadeIn("right", 0.3)} className="text-lg text-muted-foreground">
               Beyond coding, I&apos;m an active member of the developer community, where I contribute to open-source projects and write technical articles.
             </motion.p>
-            
+
             <motion.div variants={fadeIn("right", 0.4)} className="grid grid-cols-2 gap-4 pt-4">
               <div>
                 <h3 className="font-semibold text-xl">Location</h3>

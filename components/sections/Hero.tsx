@@ -1,25 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { fadeIn, staggerContainer } from "@/lib/animation";
 
 export default function Hero() {
-  const scrollToNextSection = () => {
-    const aboutSection = document.getElementById("about");
-    if (aboutSection) {
-      window.scrollTo({
-        top: aboutSection.offsetTop - 80,
-        behavior: "smooth",
-      });
-    }
-  };
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) return null;
 
   return (
-    <section 
-      id="hero" 
+    <section
+      id="hero"
       className="relative min-h-screen flex items-center pt-16 pb-20 overflow-hidden bg-gradient-to-b from-background to-background/90"
     >
       {/* Background decorative elements */}
@@ -27,7 +24,7 @@ export default function Hero() {
         <div className="absolute -top-[30%] -right-[10%] w-[80%] h-[80%] rounded-full bg-indigo-500/5 blur-3xl" />
         <div className="absolute -bottom-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-indigo-500/5 blur-3xl" />
       </div>
-      
+
       <div className="container relative z-10 px-4 md:px-6">
         <motion.div
           variants={staggerContainer}
@@ -35,24 +32,21 @@ export default function Hero() {
           animate="show"
           className="flex flex-col gap-8 max-w-4xl mx-auto text-center"
         >
-          <motion.h2 
+          <motion.h2
             variants={fadeIn("up", 0.2)}
             className="text-lg md:text-xl font-medium text-indigo-500"
           >
             Hello, I&apos;m
           </motion.h2>
-          
-          <motion.h1 
+
+          <motion.h1
             variants={fadeIn("up", 0.3)}
             className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight"
           >
             Apoorv Maurya
           </motion.h1>
-          
-          <motion.div
-            variants={fadeIn("up", 0.4)}
-            className="space-y-2"
-          >
+
+          <motion.div variants={fadeIn("up", 0.4)} className="space-y-2">
             <p className="text-2xl md:text-3xl font-semibold text-muted-foreground">
               Full Stack Developer
             </p>
@@ -60,7 +54,7 @@ export default function Hero() {
               UI/UX Engineer | ML Practitioner | Bridging Code and Intelligence
             </p>
           </motion.div>
-          
+
           <motion.div
             variants={fadeIn("up", 0.5)}
             className="flex justify-center gap-4 pt-6"
@@ -97,7 +91,6 @@ export default function Hero() {
             </Button>
           </motion.div>
         </motion.div>
-        
       </div>
     </section>
   );

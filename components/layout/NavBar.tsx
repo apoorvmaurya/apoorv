@@ -10,47 +10,55 @@ import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { sections } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
+// Utility hook to check if component is mounted
+const useHasMounted = () => {
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  return hasMounted;
+};
+
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("");
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const hasMounted = useHasMounted();
 
-  // Handle scroll event to track active section
+  // Handle scroll and active section detection
   useEffect(() => {
+    if (!hasMounted) return;
+
     const handleScroll = () => {
-      // Check if page is scrolled for styling
       setIsScrolled(window.scrollY > 10);
-      
-      // Determine which section is currently in view
-      const sectionElements = sections.map(section => ({
-        id: section.id,
-        element: document.getElementById(section.id),
-      })).filter(section => section.element !== null);
-      
-      // Find the section that is currently in view (or closest to top)
-      const currentSection = sectionElements.find(section => {
+
+      const sectionElements = sections
+        .map((section) => ({
+          id: section.id,
+          element: document.getElementById(section.id),
+        }))
+        .filter((section) => section.element !== null);
+
+      const currentSection = sectionElements.find((section) => {
         if (!section.element) return false;
         const rect = section.element.getBoundingClientRect();
         return rect.top <= 100 && rect.bottom >= 100;
       });
-      
+
       if (currentSection) {
         setActiveSection(currentSection.id);
       } else if (sectionElements.length > 0 && window.scrollY < 100) {
-        // If at the top of the page, highlight the first section
         setActiveSection(sectionElements[0].id);
       }
     };
-    
-    window.addEventListener("scroll", handleScroll);
-    // Initial check
-    handleScroll();
-    
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [pathname]);
 
-  // Navigation link click handler with smooth scroll
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [pathname, hasMounted]);
+
   const handleNavClick = (sectionId: string) => {
     setIsOpen(false);
     const element = document.getElementById(sectionId);
@@ -63,45 +71,46 @@ export default function NavBar() {
   };
 
   return (
-    <header 
+    <header
       className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300",
-        isScrolled ? "bg-background/80 backdrop-blur-md border-b" : "bg-transparent"
+        isScrolled
+          ? "bg-background/80 backdrop-blur-md border-b"
+          : "bg-transparent"
       )}
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold">
-              Apoorv Maurya
-            </Link>
-          </div>
-          
+          <Link href="/" className="text-xl font-bold">
+            Apoorv Maurya
+          </Link>
+
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            {sections.map((section) => (
-              <button
-                key={section.id}
-                onClick={() => handleNavClick(section.id)}
-                className={cn(
-                  "relative px-1 py-2 text-sm font-medium transition-colors",
-                  activeSection === section.id 
-                    ? "text-primary" 
-                    : "text-muted-foreground hover:text-foreground"
-                )}
-              >
-                {section.name}
-                {activeSection === section.id && (
-                  <motion.div
-                    layoutId="activeSection"
-                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
-              </button>
-            ))}
+            {hasMounted &&
+              sections.map((section) => (
+                <button
+                  key={section.id}
+                  onClick={() => handleNavClick(section.id)}
+                  className={cn(
+                    "relative px-1 py-2 text-sm font-medium transition-colors",
+                    activeSection === section.id
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {section.name}
+                  {activeSection === section.id && (
+                    <motion.div
+                      layoutId="activeSection"
+                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  )}
+                </button>
+              ))}
             <ThemeToggle />
           </nav>
 
@@ -120,7 +129,7 @@ export default function NavBar() {
           </div>
         </div>
       </div>
-      
+
       {/* Mobile Navigation */}
       <AnimatePresence>
         {isOpen && (
@@ -133,20 +142,21 @@ export default function NavBar() {
           >
             <div className="container py-4 px-4">
               <nav className="flex flex-col space-y-4">
-                {sections.map((section) => (
-                  <button
-                    key={section.id}
-                    onClick={() => handleNavClick(section.id)}
-                    className={cn(
-                      "px-4 py-2 text-sm font-medium rounded-md transition-colors",
-                      activeSection === section.id 
-                        ? "bg-primary/10 text-primary" 
-                        : "text-muted-foreground hover:bg-accent hover:text-foreground"
-                    )}
-                  >
-                    {section.name}
-                  </button>
-                ))}
+                {hasMounted &&
+                  sections.map((section) => (
+                    <button
+                      key={section.id}
+                      onClick={() => handleNavClick(section.id)}
+                      className={cn(
+                        "px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                        activeSection === section.id
+                          ? "bg-primary/10 text-primary"
+                          : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                      )}
+                    >
+                      {section.name}
+                    </button>
+                  ))}
               </nav>
             </div>
           </motion.div>

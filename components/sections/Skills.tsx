@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { skills } from "@/lib/constants";
@@ -8,10 +8,15 @@ import { revealSection, staggerContainer, fadeIn, progressBar } from "@/lib/anim
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Skills() {
+  const [isClient, setIsClient] = useState(false);
   const [ref, inView] = useInView({
     triggerOnce: false,
     threshold: 0.1,
   });
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <section
@@ -22,7 +27,7 @@ export default function Skills() {
       <motion.div
         variants={revealSection}
         initial="hidden"
-        animate={inView ? "visible" : "hidden"}
+        animate={isClient && inView ? "visible" : "hidden"}
         className="container px-4 md:px-6"
       >
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -42,7 +47,7 @@ export default function Skills() {
         <motion.div
           variants={staggerContainer}
           initial="hidden"
-          animate={inView ? "show" : "hidden"}
+          animate={isClient && inView ? "show" : "hidden"}
           className="max-w-4xl mx-auto"
         >
           <Tabs defaultValue="technical" className="w-full">
@@ -67,7 +72,7 @@ export default function Skills() {
                       <motion.div
                         variants={progressBar}
                         initial="hidden"
-                        animate={inView ? "visible" : "hidden"}
+                        animate={isClient && inView ? "visible" : "hidden"}
                         custom={skill.level}
                         className="h-full bg-indigo-600 rounded-full"
                       />
@@ -92,7 +97,7 @@ export default function Skills() {
                       <motion.div
                         variants={progressBar}
                         initial="hidden"
-                        animate={inView ? "visible" : "hidden"}
+                        animate={isClient && inView ? "visible" : "hidden"}
                         custom={skill.level}
                         className="h-full bg-indigo-600 rounded-full"
                       />
@@ -117,7 +122,7 @@ export default function Skills() {
                       <motion.div
                         variants={progressBar}
                         initial="hidden"
-                        animate={inView ? "visible" : "hidden"}
+                        animate={isClient && inView ? "visible" : "hidden"}
                         custom={skill.level}
                         className="h-full bg-indigo-600 rounded-full"
                       />
