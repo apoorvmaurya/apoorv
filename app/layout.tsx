@@ -15,6 +15,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Professional Portfolio',
   description: 'A showcase of professional work, skills and experience',
+  icons: {
+    icon: '/profile.png',
+  },
 };
 
 export default function RootLayout({
