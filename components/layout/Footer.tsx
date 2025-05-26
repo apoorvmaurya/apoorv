@@ -40,9 +40,9 @@ export default function Footer() {
   return (
     <footer className="mt-12 bg-muted/40 py-8">
       <div className="container px-4 md:px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="flex flex-col items-center gap-4 text-center md:flex-row md:justify-between md:text-left">
           <div>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-sm text-muted-foreground">
               © {currentYear} Apoorv Maurya. All rights reserved.
             </p>
           </div>

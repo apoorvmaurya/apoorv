@@ -27,8 +27,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} overflow-x-hidden`}>
-         <EmailJSInit />
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      </head>
+      <body className={`${inter.className} overflow-x-hidden w-screen`}>
+        <EmailJSInit />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
