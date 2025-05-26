@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
+import Image from "next/image";
 import { projects } from "@/lib/constants";
 import { revealSection, staggerContainer, fadeIn, cardHover } from "@/lib/animation";
 import { Badge } from "@/components/ui/badge";
@@ -61,12 +62,13 @@ export default function Projects() {
                 className="bg-card border border-border rounded-lg overflow-hidden h-full flex flex-col shadow-md hover:shadow-xl transition-all duration-300"
               >
                 <div className="relative w-full aspect-video overflow-hidden">
-                  {/* Using regular img tag instead of Next.js Image for static export */}
-                  <img
+                  <Image
                     src={project.imageUrl}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                    loading={index < 2 ? "eager" : "lazy"} // Prioritize loading first 2 images
+                    fill
+                    className="object-cover transition-transform duration-500 hover:scale-110"
+                    loading={index < 2 ? "eager" : "lazy"}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </div>
                 

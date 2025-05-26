@@ -7,26 +7,20 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { revealSection, staggerContainer, fadeIn } from "@/lib/animation";
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Send,
-  Loader2 
-} from "lucide-react";
-import { 
-  Form, 
-  FormControl, 
-  FormField, 
-  FormItem, 
-  FormLabel, 
-  FormMessage 
+import { Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -50,7 +44,7 @@ export default function Contact() {
     triggerOnce: false,
     threshold: 0.1,
   });
-  
+
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -66,9 +60,8 @@ export default function Contact() {
 
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
-    
+
     try {
-      // Prepare the template parameters for EmailJS
       const templateParams = {
         to_email: "apoorvmauryapoorv@gmail.com",
         from_name: data.name,
@@ -76,15 +69,14 @@ export default function Contact() {
         subject: data.subject,
         message: data.message,
       };
-      
-      // Send email using EmailJS with environment variables
+
       const response = await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!, 
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!, 
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         templateParams,
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
-      
+
       if (response.status === 200) {
         toast({
           title: "Message sent successfully!",
@@ -107,11 +99,7 @@ export default function Contact() {
   };
 
   return (
-    <section
-      id="contact"
-      ref={ref}
-      className="py-20 bg-background"
-    >
+    <section id="contact" ref={ref} className="py-20 bg-background">
       <motion.div
         variants={revealSection}
         initial="hidden"
@@ -119,14 +107,10 @@ export default function Contact() {
         className="container px-4 md:px-6"
       >
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2
-            className="text-3xl md:text-4xl font-bold mb-4"
-          >
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Get In <span className="text-indigo-600">Touch</span>
           </h2>
-          <p
-            className="text-lg text-muted-foreground"
-          >
+          <p className="text-lg text-muted-foreground">
             Have a question or want to work together? Feel free to contact me!
           </p>
           <div className="w-20 h-1 bg-indigo-600 mt-6 mx-auto"></div>
@@ -140,13 +124,10 @@ export default function Contact() {
         >
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
             {/* Contact Info */}
-            <motion.div
-              variants={fadeIn("right")}
-              className="lg:col-span-2 space-y-8"
-            >
+            <motion.div variants={fadeIn("right")} className="lg:col-span-2 space-y-8">
               <div className="bg-card border border-border rounded-lg p-6 shadow-md">
                 <h3 className="text-xl font-bold mb-6">Contact Information</h3>
-                
+
                 <div className="space-y-6">
                   <div className="flex items-start">
                     <div className="bg-indigo-100 dark:bg-indigo-900/30 p-3 rounded-full mr-4">
@@ -159,7 +140,7 @@ export default function Contact() {
                       </a>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start">
                     <div className="bg-indigo-100 dark:bg-indigo-900/30 p-3 rounded-full mr-4">
                       <Phone className="w-5 h-5 text-indigo-600" />
@@ -171,20 +152,18 @@ export default function Contact() {
                       </a>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start">
                     <div className="bg-indigo-100 dark:bg-indigo-900/30 p-3 rounded-full mr-4">
                       <MapPin className="w-5 h-5 text-indigo-600" />
                     </div>
                     <div>
                       <h4 className="font-medium">Location</h4>
-                      <p className="text-muted-foreground">
-                        Noida, India
-                      </p>
+                      <p className="text-muted-foreground">Noida, India</p>
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="mt-8 p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-md">
                   <p className="text-sm text-muted-foreground italic">
                     Currently available for contract based, freelance projects and full-time positions.
@@ -192,21 +171,14 @@ export default function Contact() {
                 </div>
               </div>
             </motion.div>
-            
+
             {/* Contact Form */}
-            <motion.div
-              variants={fadeIn("left", 0.2)}
-              className="lg:col-span-3"
-            >
+            <motion.div variants={fadeIn("left", 0.2)} className="lg:col-span-3">
               <div className="bg-card border border-border rounded-lg p-6 shadow-md">
                 <h3 className="text-xl font-bold mb-6">Send me a Message</h3>
-                
+
                 <Form {...form}>
-                  <form 
-                    onSubmit={form.handleSubmit(onSubmit)} 
-                    className="space-y-6"
-                    suppressHydrationWarning={true}
-                  >
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <FormField
                         control={form.control}
@@ -215,17 +187,17 @@ export default function Contact() {
                           <FormItem>
                             <FormLabel>Name</FormLabel>
                             <FormControl>
-                              <Input 
-                                placeholder="Your name" 
+                              <Input
+                                placeholder="Your name"
+                                autoComplete="name"
                                 {...field}
-                                suppressHydrationWarning={true}
                               />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
                       />
-                      
+
                       <FormField
                         control={form.control}
                         name="email"
@@ -233,10 +205,10 @@ export default function Contact() {
                           <FormItem>
                             <FormLabel>Email</FormLabel>
                             <FormControl>
-                              <Input 
-                                placeholder="Your email" 
+                              <Input
+                                placeholder="Your email"
+                                autoComplete="email"
                                 {...field}
-                                suppressHydrationWarning={true}
                               />
                             </FormControl>
                             <FormMessage />
@@ -244,7 +216,7 @@ export default function Contact() {
                         )}
                       />
                     </div>
-                    
+
                     <FormField
                       control={form.control}
                       name="subject"
@@ -252,17 +224,17 @@ export default function Contact() {
                         <FormItem>
                           <FormLabel>Subject</FormLabel>
                           <FormControl>
-                            <Input 
-                              placeholder="Subject" 
+                            <Input
+                              placeholder="Subject"
+                              autoComplete="off"
                               {...field}
-                              suppressHydrationWarning={true}
                             />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={form.control}
                       name="message"
@@ -270,23 +242,22 @@ export default function Contact() {
                         <FormItem>
                           <FormLabel>Message</FormLabel>
                           <FormControl>
-                            <Textarea 
-                              placeholder="Your message" 
-                              rows={6} 
+                            <Textarea
+                              placeholder="Your message"
+                              rows={6}
+                              autoComplete="off"
                               {...field}
-                              suppressHydrationWarning={true}
                             />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    
-                    <Button 
-                      type="submit" 
+
+                    <Button
+                      type="submit"
                       className="w-full md:w-auto bg-indigo-600 hover:bg-indigo-700"
                       disabled={isSubmitting}
-                      suppressHydrationWarning={true}
                     >
                       {isSubmitting ? (
                         <>
