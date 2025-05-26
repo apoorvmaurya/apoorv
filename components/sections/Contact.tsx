@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -135,7 +133,10 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-medium">Email</h4>
-                      <a href="mailto:apoorvmauryapoorv@gmail.com" className="text-muted-foreground hover:text-indigo-600 transition-colors">
+                      <a 
+                        href="mailto:apoorvmauryapoorv@gmail.com" 
+                        className="text-muted-foreground hover:text-indigo-600 transition-colors break-words"
+                      >
                         apoorvmauryapoorv@gmail.com
                       </a>
                     </div>

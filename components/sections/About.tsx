@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -53,14 +51,18 @@ export default function About() {
               Beyond coding, I&apos;m an active member of the developer community, where I contribute to open-source projects and write technical articles.
             </motion.p>
 
-            <motion.div variants={fadeIn("right", 0.4)} className="grid grid-cols-2 gap-4 pt-4">
+            <motion.div variants={fadeIn("right", 0.4)} className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
               <div>
                 <h3 className="font-semibold text-xl">Location</h3>
                 <p className="text-muted-foreground">Noida</p>
               </div>
               <div>
                 <h3 className="font-semibold text-xl">Email</h3>
-                <p className="text-muted-foreground">apoorvmauryaapoorv.com</p>
+                <p className="text-muted-foreground break-words">
+                  <a href="mailto:apoorvmauryapoorv@gmail.com" className="hover:text-indigo-600 transition-colors">
+                    apoorvmauryapoorv@gmail.com
+                  </a>
+                </p>
               </div>
               <div>
                 <h3 className="font-semibold text-xl">Experience</h3>
