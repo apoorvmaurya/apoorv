@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
 import Image from "next/image";
-import { projects } from "@/tailwind.config";
+import { projects } from "@/lib/constants";
 import { revealSection, staggerContainer, fadeIn, cardHover } from "@/lib/animation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
