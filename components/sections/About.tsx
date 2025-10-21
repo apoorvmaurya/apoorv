@@ -68,7 +68,7 @@ export default function About() {
               </div>
               <div>
                 <h3 className="font-semibold text-xl">Experience</h3>
-                <p className="text-muted-foreground">2 years</p>
+                <p className="text-muted-foreground">0-1 Yrs.</p>
               </div>
               <div>
                 <h3 className="font-semibold text-xl">Availability</h3>

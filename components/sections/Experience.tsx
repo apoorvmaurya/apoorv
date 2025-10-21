@@ -23,7 +23,7 @@ export default function Experience() {
     {
       title: "Full Stack Developer",
       company: "DevX Days",
-      date: "Jan 2025 - Present",
+      date: "Jan 2025 - Nov 2025",
       description: [
         "Built responsive landing page using Next.js with TypeScript implementing SSR for improved SEO performance.",
         "Reduced page loading time by 40% through code splitting and lazy loading techniques.",
@@ -37,12 +37,11 @@ export default function Experience() {
       company: "Pixelwand",
       date: "July 2024 - Dec 2024",
       description: [
-        "Developed AWS service migration UI with optimistic updates, reducing user wait time by 30%.",
         "Translated complex Figma design mock-ups into pixel-perfect web pages using React and styled-components.",
         "Created reusable component library that reduced development time for new features by 25%.",
         "Implemented responsive designs ensuring consistent user experience across mobile, tablet, and desktop devices.",
       ],
-      tech: ["React", "styled-components", "Figma", "AWS"],
+      tech: ["React", "styled-components", "Figma",],
     },
     {
       title: "AIML Trainee",

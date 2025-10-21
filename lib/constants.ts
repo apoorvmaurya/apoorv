@@ -120,6 +120,22 @@ export const communityActivities = [
 
 export const projects = [
   {
+    title: "AI Companion",
+    description: "A full-stack web application for real-time video calls with AI companions, featuring WebRTC peer-to-peer streaming, intelligent conversations powered by Google Gemini, voice synthesis via ElevenLabs, lifelike avatars from D-ID, and conversation memory via LangMem.",
+    imageUrl: "/companion.png",
+    demoUrl: "https://companion-smoky.vercel.app/",
+    githubUrl: "https://github.com/apoorvmaurya/companion",
+    tech: ["AI Agents", "TypeScript + Vite", "Python", "PostgreSQL + Auth + Storage", "WebRTC", "LangMem"],
+  },
+  {
+    title: "Data Alchemist",
+    description: "Data Alchemist is an AI-powered Next.js web application designed to transform messy spreadsheet data (CSV or XLSX) into clean, validated, and actionable insights for resource allocation",
+    imageUrl: "/alchemist.png",
+    demoUrl: "https://data-alchemist-ten-lovat.vercel.app/",
+    githubUrl: "https://github.com/apoorvmaurya/data_alchemist",
+    tech: ["Next.js", "TypeScript", "Data Parsing",],
+  },
+  {
     title: "AssessMed",
     description: "Machine learning-based disease prediction system with intuitive UI flows that simplified complex medical input processes for non-technical users.",
     imageUrl: "/assesmed.png",
@@ -134,21 +150,5 @@ export const projects = [
     demoUrl: "https://github.com/apoorvmaurya/iCloud",
     githubUrl: "https://github.com/apoorvmaurya/iCloud",
     tech: ["PHP", "CSS", "MySQL", "XAMPP", "Apache Server"],
-  },
-  {
-    title: "Virtual Workstation",
-    description: "Personal desktop voice assistant with custom voice command recognition achieving 90% accuracy using speech recognition libraries.",
-    imageUrl: "/workstation.png",
-    demoUrl: "https://apoorvmaurya.github.io/WorkStation-Virtual-Assistant-/",
-    githubUrl: "https://github.com/apoorvmaurya/WorkStation-Virtual-Assistant-",
-    tech: ["Python", "speech recognition", "pyttsx3", "multithreading"],
-  },
-  {
-    title: "Open Source: Vibey",
-    description: "Enhanced UI/UX and implemented predictive search functionality with typeahead feature.",
-    imageUrl: "/vibey.png",
-    demoUrl: "https://vibey.live",
-    githubUrl: "https://github.com/apoorvmaurya/vibey",
-    tech: ["JavaScript", "React", "CSS"],
   },
 ];
