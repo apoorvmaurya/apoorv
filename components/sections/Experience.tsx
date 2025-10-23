@@ -21,11 +21,11 @@ export default function Experience() {
   // Work experience data 
   const experiences = [
     {
-      title: "Full Stack Developer",
+      title: "Full Stack Developer Intern",
       company: "DevX Days",
-      date: "Jan 2025 - Nov 2025",
+      date: "Jan 2025 - Sep 2025",
       description: [
-        "Built responsive landing page using Next.js with TypeScript implementing SSR for improved SEO performance.",
+        "Built responsive landing page using Next.js with TypeScript",
         "Reduced page loading time by 40% through code splitting and lazy loading techniques.",
         "Implemented client-side caching strategies resulting in smoother navigation experience for users.",
         "Resolved cross-browser compatibility issues by creating custom CSS solutions for legacy browser support.",
