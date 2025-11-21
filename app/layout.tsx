@@ -9,14 +9,35 @@ import EmailJSInit from '@/components/sections/EmailJSInit';
 
 const inter = Inter({
   subsets: ['latin'],
-  display: 'swap', 
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'Apoorv&apos;s Portfolio',
+  title: 'Apoorv\'s Portfolio',
   description: 'A showcase of professional work, skills and experience',
   icons: {
     icon: '/profile.png',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://apoorv-gamma.vercel.app/',
+    title: 'Apoorv\'s Portfolio',
+    description: 'Full Stack Developer | UI/UX Engineer | ML Practitioner',
+    images: [
+      {
+        url: '/profile.png', // Should ideally be a larger OG image
+        width: 1200,
+        height: 630,
+        alt: 'Apoorv Maurya',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Apoorv\'s Portfolio',
+    description: 'Full Stack Developer | UI/UX Engineer | ML Practitioner',
+    images: ['/profile.png'],
   },
 };
 
@@ -28,9 +49,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body className={`${inter.className} overflow-x-hidden w-screen`}>
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-background focus:text-foreground">
+          Skip to content
+        </a>
         <EmailJSInit />
         <ThemeProvider
           attribute="class"
@@ -40,7 +64,7 @@ export default function RootLayout({
         >
           <div className="relative min-h-screen flex flex-col">
             <NavBar />
-            <main className="flex-grow">{children}</main>
+            <main id="main-content" className="flex-grow">{children}</main>
             <Footer />
           </div>
           <Toaster />

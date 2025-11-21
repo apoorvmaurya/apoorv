@@ -6,10 +6,12 @@ import Projects from "@/components/sections/Projects";
 import Education from "@/components/sections/Education";
 import Community from "@/components/sections/Community";
 import Contact from "@/components/sections/Contact";
+import StructuredData from "@/components/seo/structured-data";
 
 export default function Home() {
   return (
     <div className="relative">
+      <StructuredData />
       <Hero />
       <About />
       <Skills />
