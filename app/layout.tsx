@@ -13,7 +13,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Professional Portfolio',
+  title: 'Apoorv&apos;s Portfolio',
   description: 'A showcase of professional work, skills and experience',
   icons: {
     icon: '/profile.png',
