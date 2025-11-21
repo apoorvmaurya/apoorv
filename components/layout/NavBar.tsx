@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -25,6 +25,7 @@ export default function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const hasMounted = useHasMounted();
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   // Handle scroll and active section detection
   useEffect(() => {
@@ -59,6 +60,28 @@ export default function NavBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathname, hasMounted]);
 
+  // Close mobile menu on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("keydown", handleEscape);
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   const handleNavClick = (sectionId: string) => {
     setIsOpen(false);
     const element = document.getElementById(sectionId);
@@ -75,13 +98,16 @@ export default function NavBar() {
       className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300",
         isScrolled
-          ? "bg-background/80 backdrop-blur-md border-b"
+          ? "bg-background/95 backdrop-blur-md border-b shadow-sm"
           : "bg-transparent"
       )}
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="text-xl font-bold">
+          <Link
+            href="/"
+            className="text-lg sm:text-xl font-bold hover:text-indigo-600 transition-colors focus:outline-none focus:ring-2 focus:ring-ring rounded-sm px-1"
+          >
             Apoorv Maurya
           </Link>
 
@@ -93,7 +119,7 @@ export default function NavBar() {
                   key={section.id}
                   onClick={() => handleNavClick(section.id)}
                   className={cn(
-                    "relative px-1 py-2 text-sm font-medium transition-colors",
+                    "relative px-2 py-2 text-sm font-medium transition-colors rounded-sm",
                     activeSection === section.id
                       ? "text-primary"
                       : "text-muted-foreground hover:text-foreground"
@@ -115,14 +141,15 @@ export default function NavBar() {
           </nav>
 
           {/* Mobile Menu Button */}
-          <div className="flex items-center md:hidden">
+          <div className="flex items-center gap-2 md:hidden">
             <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle menu"
-              className="ml-2"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
+              className="min-h-[44px] min-w-[44px]"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
@@ -133,33 +160,52 @@ export default function NavBar() {
       {/* Mobile Navigation */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden border-b bg-background/95 backdrop-blur-sm"
-          >
-            <div className="container py-4 px-4">
-              <nav className="flex flex-col space-y-4">
-                {hasMounted &&
-                  sections.map((section) => (
-                    <button
-                      key={section.id}
-                      onClick={() => handleNavClick(section.id)}
-                      className={cn(
-                        "px-4 py-2 text-sm font-medium rounded-md transition-colors",
-                        activeSection === section.id
-                          ? "bg-primary/10 text-primary"
-                          : "text-muted-foreground hover:bg-accent hover:text-foreground"
-                      )}
-                    >
-                      {section.name}
-                    </button>
-                  ))}
-              </nav>
-            </div>
-          </motion.div>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 top-16 bg-background/80 backdrop-blur-sm md:hidden"
+              onClick={() => setIsOpen(false)}
+              aria-hidden="true"
+            />
+
+            {/* Menu */}
+            <motion.div
+              ref={mobileMenuRef}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="fixed top-16 left-0 right-0 md:hidden border-b bg-background/98 backdrop-blur-md shadow-lg max-h-[calc(100vh-4rem)] overflow-y-auto"
+            >
+              <div className="container py-6 px-4">
+                <nav className="flex flex-col space-y-2" role="navigation">
+                  {hasMounted &&
+                    sections.map((section, index) => (
+                      <motion.button
+                        key={section.id}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.05 }}
+                        onClick={() => handleNavClick(section.id)}
+                        className={cn(
+                          "min-h-[44px] px-4 py-3 text-base font-medium rounded-md transition-all duration-200",
+                          "focus:outline-none focus:ring-2 focus:ring-ring",
+                          activeSection === section.id
+                            ? "bg-indigo-500/15 text-indigo-600 dark:text-indigo-400"
+                            : "text-muted-foreground hover:bg-accent hover:text-foreground active:scale-[0.98]"
+                        )}
+                      >
+                        {section.name}
+                      </motion.button>
+                    ))}
+                </nav>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>

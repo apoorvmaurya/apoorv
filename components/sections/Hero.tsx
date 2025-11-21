@@ -17,10 +17,10 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center pt-16 pb-20 overflow-hidden bg-gradient-to-b from-background to-background/90"
+      className="relative min-h-screen flex items-center pt-20 sm:pt-16 pb-16 sm:pb-20 overflow-hidden bg-gradient-to-b from-background to-background/90"
     >
       {/* Background decorative elements */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-[30%] -right-[10%] w-[80%] h-[80%] rounded-full bg-indigo-500/5 blur-3xl" />
         <div className="absolute -bottom-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-indigo-500/5 blur-3xl" />
       </div>
@@ -30,38 +30,38 @@ export default function Hero() {
           variants={staggerContainer}
           initial="hidden"
           animate="show"
-          className="flex flex-col gap-8 max-w-4xl mx-auto text-center"
+          className="flex flex-col gap-6 sm:gap-8 max-w-4xl mx-auto text-center"
         >
           <motion.h2
             variants={fadeIn("up", 0.2)}
-            className="text-lg md:text-xl font-medium text-indigo-500"
+            className="text-base sm:text-lg md:text-xl font-medium text-indigo-500"
           >
             Hello, I&apos;m
           </motion.h2>
 
           <motion.h1
             variants={fadeIn("up", 0.3)}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight"
           >
             Apoorv Maurya
           </motion.h1>
 
-          <motion.div variants={fadeIn("up", 0.4)} className="space-y-2">
-            <p className="text-2xl md:text-3xl font-semibold text-muted-foreground">
+          <motion.div variants={fadeIn("up", 0.4)} className="space-y-2 sm:space-y-3">
+            <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-muted-foreground">
               Full Stack Developer
             </p>
-            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4 sm:px-0">
               UI/UX Engineer | ML Practitioner | Bridging Code and Intelligence
             </p>
           </motion.div>
 
           <motion.div
             variants={fadeIn("up", 0.5)}
-            className="flex justify-center gap-4 pt-6"
+            className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 pt-4 sm:pt-6 px-4 sm:px-0"
           >
             <Button
               size="lg"
-              className="bg-indigo-600 hover:bg-indigo-700 text-white"
+              className="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white min-h-[44px] text-base"
               onClick={() => {
                 const contactSection = document.getElementById("contact");
                 if (contactSection) {
@@ -77,6 +77,7 @@ export default function Hero() {
             <Button
               size="lg"
               variant="outline"
+              className="w-full sm:w-auto min-h-[44px] text-base"
               onClick={() => {
                 const projectsSection = document.getElementById("projects");
                 if (projectsSection) {

@@ -22,7 +22,7 @@ export default function Skills() {
     <section
       id="skills"
       ref={ref}
-      className="py-20 bg-background"
+      className="py-12 sm:py-16 md:py-20 bg-background"
     >
       <motion.div
         variants={revealSection}
@@ -30,14 +30,14 @@ export default function Skills() {
         animate={isClient && inView ? "visible" : "hidden"}
         className="container px-4 md:px-6"
       >
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 
-            className="text-3xl md:text-4xl font-bold mb-4"
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <h2
+            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
           >
             My <span className="text-indigo-600">Skills</span>
           </h2>
-          <p 
-            className="text-lg text-muted-foreground"
+          <p
+            className="text-base sm:text-lg text-muted-foreground"
           >
             A comprehensive overview of my technical expertise and proficiency
           </p>
@@ -51,22 +51,22 @@ export default function Skills() {
           className="max-w-4xl mx-auto"
         >
           <Tabs defaultValue="technical" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-8">
-              <TabsTrigger value="technical">Technical</TabsTrigger>
-              <TabsTrigger value="frameworks">Frameworks</TabsTrigger>
-              <TabsTrigger value="tools">Tools</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-3 mb-6 sm:mb-8 h-auto">
+              <TabsTrigger value="technical" className="text-xs sm:text-sm min-h-[44px] sm:min-h-0">Technical</TabsTrigger>
+              <TabsTrigger value="frameworks" className="text-xs sm:text-sm min-h-[44px] sm:min-h-0">Frameworks</TabsTrigger>
+              <TabsTrigger value="tools" className="text-xs sm:text-sm min-h-[44px] sm:min-h-0">Tools</TabsTrigger>
             </TabsList>
-            
+
             <TabsContent value="technical" className="mt-6">
-              <motion.div 
+              <motion.div
                 variants={staggerContainer}
-                className="space-y-6"
+                className="space-y-4 sm:space-y-6"
               >
                 {skills.technical.map((skill, index) => (
                   <motion.div key={skill.name} variants={fadeIn("up", index * 0.1)} className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <h3 className="font-medium">{skill.name}</h3>
-                      <span className="text-sm text-muted-foreground">{skill.level}%</span>
+                      <h3 className="font-medium text-sm sm:text-base">{skill.name}</h3>
+                      <span className="text-xs sm:text-sm text-muted-foreground">{skill.level}%</span>
                     </div>
                     <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
                       <motion.div
@@ -81,17 +81,17 @@ export default function Skills() {
                 ))}
               </motion.div>
             </TabsContent>
-            
+
             <TabsContent value="frameworks" className="mt-6">
-              <motion.div 
+              <motion.div
                 variants={staggerContainer}
-                className="space-y-6"
+                className="space-y-4 sm:space-y-6"
               >
                 {skills.frameworks.map((skill, index) => (
                   <motion.div key={skill.name} variants={fadeIn("up", index * 0.1)} className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <h3 className="font-medium">{skill.name}</h3>
-                      <span className="text-sm text-muted-foreground">{skill.level}%</span>
+                      <h3 className="font-medium text-sm sm:text-base">{skill.name}</h3>
+                      <span className="text-xs sm:text-sm text-muted-foreground">{skill.level}%</span>
                     </div>
                     <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
                       <motion.div
@@ -106,17 +106,17 @@ export default function Skills() {
                 ))}
               </motion.div>
             </TabsContent>
-            
+
             <TabsContent value="tools" className="mt-6">
-              <motion.div 
+              <motion.div
                 variants={staggerContainer}
-                className="space-y-6"
+                className="space-y-4 sm:space-y-6"
               >
                 {skills.tools.map((skill, index) => (
                   <motion.div key={skill.name} variants={fadeIn("up", index * 0.1)} className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <h3 className="font-medium">{skill.name}</h3>
-                      <span className="text-sm text-muted-foreground">{skill.level}%</span>
+                      <h3 className="font-medium text-sm sm:text-base">{skill.name}</h3>
+                      <span className="text-xs sm:text-sm text-muted-foreground">{skill.level}%</span>
                     </div>
                     <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
                       <motion.div
