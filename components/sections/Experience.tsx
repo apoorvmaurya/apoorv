@@ -1,159 +1,75 @@
-"use client";
+'use client';
 
-import React from "react";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { revealSection, staggerContainer, fadeIn, listItem } from "@/lib/animation";
-import { Badge } from "@/components/ui/badge";
-import { 
-  Briefcase,
-  Calendar,
-  CheckCircle2
-} from "lucide-react";
+import { motion } from 'framer-motion';
+import AnimatedSection from '@/components/ui/AnimatedSection';
+import Card from '@/components/ui/Card';
+import { experiences } from '@/lib/data/portfolio';
+import { formatDate } from '@/lib/utils';
+import Badge from '@/components/ui/Badge';
 
 export default function Experience() {
-  const [ref, inView] = useInView({
-    triggerOnce: false,
-    threshold: 0.1,
-  });
+    return (
+        <section id="experience" className="py-20 bg-background-secondary relative">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <AnimatedSection>
+                    <h2 className="text-4xl md:text-5xl font-heading font-bold text-gradient mb-12 text-center">
+                        Work Experience
+                    </h2>
+                </AnimatedSection>
 
-  // Define experiences data directly in this component
-  // Work experience data 
-  const experiences = [
-    {
-      title: "Full Stack Developer Intern",
-      company: "DevX Days",
-      date: "Jan 2025 - Sep 2025",
-      description: [
-        "Built responsive landing page using Next.js with TypeScript",
-        "Reduced page loading time by 40% through code splitting and lazy loading techniques.",
-        "Implemented client-side caching strategies resulting in smoother navigation experience for users.",
-        "Resolved cross-browser compatibility issues by creating custom CSS solutions for legacy browser support.",
-      ],
-      tech: ["React", "Next.js", "TypeScript", "TailwindCSS"],
-    },
-    {
-      title: "Frontend Developer Intern",
-      company: "Pixelwand",
-      date: "July 2024 - Dec 2024",
-      description: [
-        "Translated complex Figma design mock-ups into pixel-perfect web pages using React and styled-components.",
-        "Created reusable component library that reduced development time for new features by 25%.",
-        "Implemented responsive designs ensuring consistent user experience across mobile, tablet, and desktop devices.",
-      ],
-      tech: ["React", "styled-components", "Figma",],
-    },
-    {
-      title: "AIML Trainee",
-      company: "Verzeo",
-      date: "October 2022 - January 2023",
-      description: [
-        "Implemented object recognition model using TensorFlow and Keras achieving 87% accuracy.",
-        "Documented model architecture and training process for team knowledge sharing.",
-      ],
-      tech: ["TensorFlow", "Keras", "Python"],
-    },
-  ];
+                <div className="relative">
+                    {/* Timeline line */}
+                    <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-600 via-accent-purple to-accent-cyan" />
 
-  return (
-    <section
-      id="experience"
-      ref={ref}
-      className="py-20 bg-indigo-50 dark:bg-indigo-950/20 overflow-hidden"
-      suppressHydrationWarning={true}
-    >
-      <motion.div
-        variants={revealSection}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-        className="container px-4 md:px-6"
-        suppressHydrationWarning={true}
-      >
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 
-            className="text-3xl md:text-4xl font-bold mb-4"
-          >
-            Work <span className="text-indigo-600">Experience</span>
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            My professional journey and career highlights
-          </p>
-          <div className="w-20 h-1 bg-indigo-600 mt-6 mx-auto"></div>
-        </div>
+                    <div className="space-y-12">
+                        {experiences.map((exp, index) => (
+                            <AnimatedSection key={exp.id} delay={index * 0.2}>
+                                <div className={`flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                                    <div className="flex-1" />
 
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate={inView ? "show" : "hidden"}
-          className="max-w-4xl mx-auto relative"
-          suppressHydrationWarning={true}
-        >
-          {/* Timeline center line - fixed in the middle */}
-          <div className="hidden md:block absolute left-1/2 top-0 h-full w-0.5 bg-indigo-200 dark:bg-indigo-800/50 transform -translate-x-1/2 z-10" />
-          
-          {experiences.map((experience, index) => (
-            <motion.div
-              key={index}
-              variants={fadeIn(index % 2 === 0 ? "left" : "right", index * 0.2)}
-              className={`relative mb-12 md:mb-24 md:w-[calc(50%-2rem)] ${
-                index % 2 === 0 ? "md:mr-auto" : "md:ml-auto"
-              }`}
-              suppressHydrationWarning={true}
-            >
-              {/* Timeline dot - always positioned at the center line */}
-              <div 
-                className="hidden md:block absolute top-10 w-6 h-6 rounded-full bg-indigo-600 z-20"
-                style={{ 
-                  left: index % 2 === 0 ? 'calc(100% + 2rem)' : 'calc(-2rem - 24px)',
-                }}
-                suppressHydrationWarning={true}
-              >
-                <div className="absolute inset-0 rounded-full bg-indigo-200 dark:bg-indigo-400 animate-ping" style={{ animationDuration: '3s' }}></div>
-              </div>
-              
-              {/* Experience card */}
-              <motion.div
-                whileHover={{ y: -5 }}
-                transition={{ duration: 0.3 }}
-                className="bg-card border border-border rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow"
-                suppressHydrationWarning={true}
-              >
-                <div className="flex items-center mb-4">
-                  <Briefcase className="w-5 h-5 mr-2 text-indigo-600" />
-                  <h3 className="text-xl font-bold">{experience.title}</h3>
-                </div>
-                
-                <div className="flex items-center mb-4 text-muted-foreground">
-                  <span className="font-medium mr-2">{experience.company}</span>
-                  <span>•</span>
-                  <div className="flex items-center ml-2">
-                    <Calendar className="w-4 h-4 mr-1" />
-                    <span>{experience.date}</span>
-                  </div>
-                </div>
-                
-                {/* Use array-based descriptions instead of hardcoded ones */}
-                <div className="mb-4 space-y-2">
-                  {experience.description.map((desc, i) => (
-                    <div key={i} className="flex" suppressHydrationWarning={true}>
-                      <CheckCircle2 className="w-5 h-5 mr-2 text-indigo-600 shrink-0 mt-0.5" />
-                      <span className="text-muted-foreground">{desc}</span>
+                                    {/* Timeline dot */}
+                                    <div className="relative flex-shrink-0 w-16 flex justify-center">
+                                        <div className="w-4 h-4 rounded-full bg-gradient-to-r from-primary-600 to-accent-purple glow-effect-strong" />
+                                    </div>
+
+                                    <div className="flex-1">
+                                        <Card className={index % 2 === 0 ? 'md:ml-8' : 'md:mr-8'}>
+                                            <div className="flex items-start justify-between mb-4">
+                                                <div>
+                                                    <h3 className="text-xl font-heading font-bold text-white">
+                                                        {exp.position}
+                                                    </h3>
+                                                    <p className="text-accent-cyan font-medium">{exp.company}</p>
+                                                </div>
+                                                <span className="text-sm text-gray-400 whitespace-nowrap ml-4">
+                                                    {formatDate(exp.startDate)} - {exp.endDate === 'Present' ? 'Present' : formatDate(exp.endDate)}
+                                                </span>
+                                            </div>
+
+                                            <ul className="space-y-2 mb-4">
+                                                {exp.description.map((item, i) => (
+                                                    <li key={i} className="text-gray-300 text-sm flex items-start">
+                                                        <span className="text-primary-500 mr-2">▹</span>
+                                                        <span>{item}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+
+                                            <div className="flex flex-wrap gap-2">
+                                                {exp.technologies.map((tech) => (
+                                                    <Badge key={tech} variant="primary">
+                                                        {tech}
+                                                    </Badge>
+                                                ))}
+                                            </div>
+                                        </Card>
+                                    </div>
+                                </div>
+                            </AnimatedSection>
+                        ))}
                     </div>
-                  ))}
                 </div>
-                
-                <div className="flex flex-wrap gap-2 mt-4" suppressHydrationWarning={true}>
-                  {experience.tech.map((tech, i) => (
-                    <Badge key={i} variant="secondary" suppressHydrationWarning={true}>
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-              </motion.div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.div>
-    </section>
-  );
+            </div>
+        </section>
+    );
 }

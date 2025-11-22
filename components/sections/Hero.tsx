@@ -1,98 +1,131 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { fadeIn, staggerContainer } from "@/lib/animation";
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Button from '@/components/ui/Button';
+import { fadeInUp, staggerContainer, staggerItem } from '@/lib/animations';
+import { scrollToElement } from '@/lib/utils';
 
 export default function Hero() {
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  if (!hasMounted) return null;
-
-  return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex items-center pt-20 sm:pt-16 pb-16 sm:pb-20 overflow-hidden bg-gradient-to-b from-background to-background/90"
-    >
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-[30%] -right-[10%] w-[80%] h-[80%] rounded-full bg-indigo-500/5 blur-3xl" />
-        <div className="absolute -bottom-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-indigo-500/5 blur-3xl" />
-      </div>
-
-      <div className="container relative z-10 px-4 md:px-6">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate="show"
-          className="flex flex-col gap-6 sm:gap-8 max-w-4xl mx-auto text-center"
+    return (
+        <section
+            id="hero"
+            className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20"
         >
-          <motion.h2
-            variants={fadeIn("up", 0.2)}
-            className="text-base sm:text-lg md:text-xl font-medium text-indigo-500"
-          >
-            Hello, I&apos;m
-          </motion.h2>
+            {/* Background effects */}
+            <div className="absolute inset-0 cyber-grid opacity-20" />
+            <div className="absolute inset-0 bg-gradient-radial from-primary-900/20 via-transparent to-transparent" />
 
-          <motion.h1
-            variants={fadeIn("up", 0.3)}
-            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight"
-          >
-            Apoorv Maurya
-          </motion.h1>
-
-          <motion.div variants={fadeIn("up", 0.4)} className="space-y-2 sm:space-y-3">
-            <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-muted-foreground">
-              Full Stack Developer
-            </p>
-            <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4 sm:px-0">
-              UI/UX Engineer | ML Practitioner | Bridging Code and Intelligence
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={fadeIn("up", 0.5)}
-            className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 pt-4 sm:pt-6 px-4 sm:px-0"
-          >
-            <Button
-              size="lg"
-              className="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white min-h-[44px] text-base"
-              onClick={() => {
-                const contactSection = document.getElementById("contact");
-                if (contactSection) {
-                  window.scrollTo({
-                    top: contactSection.offsetTop - 80,
-                    behavior: "smooth",
-                  });
-                }
-              }}
+            <motion.div
+                className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+                variants={staggerContainer}
+                initial="hidden"
+                animate="visible"
             >
-              Get In Touch
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="w-full sm:w-auto min-h-[44px] text-base"
-              onClick={() => {
-                const projectsSection = document.getElementById("projects");
-                if (projectsSection) {
-                  window.scrollTo({
-                    top: projectsSection.offsetTop - 80,
-                    behavior: "smooth",
-                  });
-                }
-              }}
-            >
-              View Projects
-            </Button>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
-  );
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    {/* Text content */}
+                    <motion.div variants={staggerItem}>
+                        <motion.p
+                            className="text-accent-cyan font-medium mb-4"
+                            variants={fadeInUp}
+                        >
+                            👋 Hello, I'm
+                        </motion.p>
+
+                        <motion.h1
+                            className="text-5xl md:text-7xl font-heading font-bold mb-6"
+                            variants={fadeInUp}
+                        >
+                            <span className="text-gradient">Apoorv Maurya</span>
+                        </motion.h1>
+
+                        <motion.h2
+                            className="text-2xl md:text-3xl text-gray-300 mb-6"
+                            variants={fadeInUp}
+                        >
+                            Full Stack Developer & AI Enthusiast
+                        </motion.h2>
+
+                        <motion.p
+                            className="text-lg text-gray-400 mb-8 max-w-xl"
+                            variants={fadeInUp}
+                        >
+                            Building innovative solutions at the intersection of web development and artificial
+                            intelligence. Passionate about creating scalable applications that make a difference.
+                        </motion.p>
+
+                        <motion.div
+                            className="flex flex-wrap gap-4"
+                            variants={fadeInUp}
+                        >
+                            <Button
+                                variant="primary"
+                                size="lg"
+                                onClick={() => scrollToElement('projects')}
+                            >
+                                View My Work
+                            </Button>
+                            <Button
+                                variant="outline"
+                                size="lg"
+                                onClick={() => scrollToElement('contact')}
+                            >
+                                Get In Touch
+                            </Button>
+                        </motion.div>
+                    </motion.div>
+
+                    {/* Profile image */}
+                    <motion.div
+                        className="relative"
+                        variants={staggerItem}
+                    >
+                        <div className="relative w-full aspect-square max-w-md mx-auto">
+                            <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-accent-purple rounded-full blur-3xl opacity-30 animate-pulse-slow" />
+                            <div className="relative glass-strong rounded-full p-2 glow-effect">
+                                <Image
+                                    src="/profile.png"
+                                    alt="Apoorv Maurya"
+                                    width={500}
+                                    height={500}
+                                    className="rounded-full"
+                                    priority
+                                />
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+
+                {/* Scroll indicator */}
+                <motion.div
+                    className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1, duration: 0.6 }}
+                >
+                    <div className="flex flex-col items-center">
+                        <p className="text-sm text-gray-400 mb-2">Scroll to explore</p>
+                        <motion.div
+                            animate={{ y: [0, 10, 0] }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                        >
+                            <svg
+                                className="w-6 h-6 text-primary-500"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                                />
+                            </svg>
+                        </motion.div>
+                    </div>
+                </motion.div>
+            </motion.div>
+        </section>
+    );
 }

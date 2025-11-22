@@ -1,139 +1,39 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { skills } from "@/lib/constants";
-import { revealSection, staggerContainer, fadeIn, progressBar } from "@/lib/animation";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import AnimatedSection from '@/components/ui/AnimatedSection';
+import Card from '@/components/ui/Card';
+import Badge from '@/components/ui/Badge';
+import { skillCategories } from '@/lib/data/portfolio';
 
 export default function Skills() {
-  const [isClient, setIsClient] = useState(false);
-  const [ref, inView] = useInView({
-    triggerOnce: false,
-    threshold: 0.1,
-  });
+    return (
+        <section id="skills" className="py-20 relative">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <AnimatedSection>
+                    <h2 className="text-4xl md:text-5xl font-heading font-bold text-gradient mb-12 text-center">
+                        Technical Skills
+                    </h2>
+                </AnimatedSection>
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  return (
-    <section
-      id="skills"
-      ref={ref}
-      className="py-12 sm:py-16 md:py-20 bg-background"
-    >
-      <motion.div
-        variants={revealSection}
-        initial="hidden"
-        animate={isClient && inView ? "visible" : "hidden"}
-        className="container px-4 md:px-6"
-      >
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <h2
-            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
-          >
-            My <span className="text-indigo-600">Skills</span>
-          </h2>
-          <p
-            className="text-base sm:text-lg text-muted-foreground"
-          >
-            A comprehensive overview of my technical expertise and proficiency
-          </p>
-          <div className="w-20 h-1 bg-indigo-600 mt-6 mx-auto"></div>
-        </div>
-
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate={isClient && inView ? "show" : "hidden"}
-          className="max-w-4xl mx-auto"
-        >
-          <Tabs defaultValue="technical" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-6 sm:mb-8 h-auto">
-              <TabsTrigger value="technical" className="text-xs sm:text-sm min-h-[44px] sm:min-h-0">Technical</TabsTrigger>
-              <TabsTrigger value="frameworks" className="text-xs sm:text-sm min-h-[44px] sm:min-h-0">Frameworks</TabsTrigger>
-              <TabsTrigger value="tools" className="text-xs sm:text-sm min-h-[44px] sm:min-h-0">Tools</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="technical" className="mt-6">
-              <motion.div
-                variants={staggerContainer}
-                className="space-y-4 sm:space-y-6"
-              >
-                {skills.technical.map((skill, index) => (
-                  <motion.div key={skill.name} variants={fadeIn("up", index * 0.1)} className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <h3 className="font-medium text-sm sm:text-base">{skill.name}</h3>
-                      <span className="text-xs sm:text-sm text-muted-foreground">{skill.level}%</span>
-                    </div>
-                    <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
-                      <motion.div
-                        variants={progressBar}
-                        initial="hidden"
-                        animate={isClient && inView ? "visible" : "hidden"}
-                        custom={skill.level}
-                        className="h-full bg-indigo-600 rounded-full"
-                      />
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </TabsContent>
-
-            <TabsContent value="frameworks" className="mt-6">
-              <motion.div
-                variants={staggerContainer}
-                className="space-y-4 sm:space-y-6"
-              >
-                {skills.frameworks.map((skill, index) => (
-                  <motion.div key={skill.name} variants={fadeIn("up", index * 0.1)} className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <h3 className="font-medium text-sm sm:text-base">{skill.name}</h3>
-                      <span className="text-xs sm:text-sm text-muted-foreground">{skill.level}%</span>
-                    </div>
-                    <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
-                      <motion.div
-                        variants={progressBar}
-                        initial="hidden"
-                        animate={isClient && inView ? "visible" : "hidden"}
-                        custom={skill.level}
-                        className="h-full bg-indigo-600 rounded-full"
-                      />
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </TabsContent>
-
-            <TabsContent value="tools" className="mt-6">
-              <motion.div
-                variants={staggerContainer}
-                className="space-y-4 sm:space-y-6"
-              >
-                {skills.tools.map((skill, index) => (
-                  <motion.div key={skill.name} variants={fadeIn("up", index * 0.1)} className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <h3 className="font-medium text-sm sm:text-base">{skill.name}</h3>
-                      <span className="text-xs sm:text-sm text-muted-foreground">{skill.level}%</span>
-                    </div>
-                    <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
-                      <motion.div
-                        variants={progressBar}
-                        initial="hidden"
-                        animate={isClient && inView ? "visible" : "hidden"}
-                        custom={skill.level}
-                        className="h-full bg-indigo-600 rounded-full"
-                      />
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </TabsContent>
-          </Tabs>
-        </motion.div>
-      </motion.div>
-    </section>
-  );
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {skillCategories.map((category, index) => (
+                        <AnimatedSection key={category.category} delay={index * 0.1}>
+                            <Card>
+                                <h3 className="text-xl font-heading font-bold text-white mb-4">
+                                    {category.category}
+                                </h3>
+                                <div className="flex flex-wrap gap-2">
+                                    {category.skills.map((skill) => (
+                                        <Badge key={skill.name} variant="primary">
+                                            {skill.name}
+                                        </Badge>
+                                    ))}
+                                </div>
+                            </Card>
+                        </AnimatedSection>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
 }

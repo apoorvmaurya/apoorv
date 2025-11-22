@@ -1,98 +1,76 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import Image from "next/image";
-import { revealSection, staggerContainer, fadeIn } from "@/lib/animation";
+import Image from 'next/image';
+import AnimatedSection from '@/components/ui/AnimatedSection';
+import Card from '@/components/ui/Card';
 
 export default function About() {
-  const [hasMounted, setHasMounted] = useState(false);
-  const [ref, inView] = useInView({
-    triggerOnce: false,
-    threshold: 0.1,
-  });
+    return (
+        <section id="about" className="py-20 relative">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <AnimatedSection>
+                    <h2 className="text-4xl md:text-5xl font-heading font-bold text-gradient mb-12 text-center">
+                        About Me
+                    </h2>
+                </AnimatedSection>
 
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <AnimatedSection delay={0.2}>
+                        <div className="relative">
+                            <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-accent-purple rounded-2xl blur-2xl opacity-20" />
+                            <Image
+                                src="/about.png"
+                                alt="About Apoorv"
+                                width={600}
+                                height={600}
+                                className="rounded-2xl relative z-10"
+                            />
+                        </div>
+                    </AnimatedSection>
 
-  if (!hasMounted) return null;
+                    <AnimatedSection delay={0.4}>
+                        <Card>
+                            <h3 className="text-2xl font-heading font-bold mb-4">
+                                Passionate Developer & Technology Leader
+                            </h3>
+                            <div className="space-y-4 text-gray-300">
+                                <p>
+                                    I'm a Full Stack Developer with a passion for creating innovative solutions that
+                                    combine cutting-edge web technologies with artificial intelligence. With years of
+                                    experience in software development, I specialize in building scalable, performant
+                                    applications that deliver exceptional user experiences.
+                                </p>
+                                <p>
+                                    My expertise spans across modern web frameworks like Next.js and React, backend
+                                    technologies including Node.js and Python, and AI/ML integration using Google
+                                    Gemini and OpenAI APIs. I'm constantly exploring new technologies and best
+                                    practices to stay at the forefront of web development.
+                                </p>
+                                <p>
+                                    Beyond coding, I'm committed to giving back to the developer community through
+                                    open-source contributions, mentorship, and knowledge sharing. I believe in the
+                                    power of collaboration and continuous learning.
+                                </p>
+                            </div>
 
-  return (
-    <section id="about" ref={ref} className="py-12 sm:py-16 md:py-20 bg-muted/30">
-      <motion.div
-        variants={revealSection}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-        className="container px-4 md:px-6"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            animate={inView ? "show" : "hidden"}
-            className="space-y-4 sm:space-y-6"
-          >
-            <motion.div variants={fadeIn("right")}>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">
-                About <span className="text-indigo-600">Me</span>
-              </h2>
-              <div className="w-20 h-1 bg-indigo-600 mb-6 sm:mb-8"></div>
-            </motion.div>
-
-            <motion.p variants={fadeIn("right", 0.1)} className="text-base sm:text-lg text-muted-foreground">
-              I&apos;m a Full Stack developer specialised in Frontend development with hands-on experience in building responsive, scalable web interfaces using Next.js, React, and TypeScript.
-            </motion.p>
-
-            <motion.p variants={fadeIn("right", 0.2)} className="text-base sm:text-lg text-muted-foreground">
-              I&apos;m currently exploring AI/ML by working on practical projects and expanding my backend understanding. Passionate about clean UI, performance optimization, and contributing to impactful tech communities.
-            </motion.p>
-
-            <motion.p variants={fadeIn("right", 0.3)} className="text-base sm:text-lg text-muted-foreground">
-              Beyond coding, I&apos;m an active member of the developer community, where I contribute to open-source projects and write technical articles.
-            </motion.p>
-
-            <motion.div variants={fadeIn("right", 0.4)} className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-              <div>
-                <h3 className="font-semibold text-lg sm:text-xl">Location</h3>
-                <p className="text-sm sm:text-base text-muted-foreground">Noida</p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg sm:text-xl">Email</h3>
-                <p className="text-sm sm:text-base text-muted-foreground break-words">
-                  <a href="mailto:apoorvmauryapoorv@gmail.com" className="hover:text-indigo-600 transition-colors">
-                    apoorvmauryapoorv@gmail.com
-                  </a>
-                </p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg sm:text-xl">Experience</h3>
-                <p className="text-sm sm:text-base text-muted-foreground">0-1 Yrs.</p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg sm:text-xl">Availability</h3>
-                <p className="text-sm sm:text-base text-muted-foreground">Open to offers</p>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            variants={fadeIn("left", 0.3)}
-            initial="hidden"
-            animate={inView ? "show" : "hidden"}
-            className="relative h-[350px] sm:h-[400px] md:h-[500px] rounded-lg overflow-hidden border border-border shadow-xl order-first md:order-last"
-          >
-            <Image
-              src="/about.png"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              alt="Profile"
-              fill
-              className="object-cover"
-            />
-          </motion.div>
-        </div>
-      </motion.div>
-    </section>
-  );
+                            <div className="mt-6 grid grid-cols-3 gap-4">
+                                <div className="text-center">
+                                    <div className="text-3xl font-bold text-gradient">5+</div>
+                                    <div className="text-sm text-gray-400">Years Experience</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-3xl font-bold text-gradient">50+</div>
+                                    <div className="text-sm text-gray-400">Projects Completed</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-3xl font-bold text-gradient">100%</div>
+                                    <div className="text-sm text-gray-400">Client Satisfaction</div>
+                                </div>
+                            </div>
+                        </Card>
+                    </AnimatedSection>
+                </div>
+            </div>
+        </section>
+    );
 }
