@@ -22,10 +22,10 @@ export default function Community() {
                     </h2>
                 </AnimatedSection>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="centered-card-grid">
                     {communityActivities.map((activity, index) => (
                         <AnimatedSection key={activity.id} delay={index * 0.1}>
-                            <Card className="h-full">
+                            <Card className="flex flex-col h-full">
                                 <div className="text-4xl mb-4">{activityIcons[activity.type]}</div>
                                 <h3 className="text-xl font-heading font-bold text-white mb-2">
                                     {activity.title}

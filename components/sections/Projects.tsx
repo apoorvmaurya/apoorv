@@ -41,15 +41,16 @@ export default function Projects() {
                     </div>
                 </AnimatedSection>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="centered-card-grid">
                     {filteredProjects.map((project, index) => (
                         <AnimatedSection key={project.id} delay={index * 0.1}>
-                            <Card className="h-full flex flex-col">
+                            <Card className="flex flex-col h-full">
                                 <div className="relative h-48 mb-4 rounded-lg overflow-hidden">
                                     <Image
                                         src={project.image}
                                         alt={project.title}
                                         fill
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         className="object-cover"
                                     />
                                 </div>

@@ -70,7 +70,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
-            <body className="antialiased min-h-screen w-full">
+            <body className="antialiased min-h-screen w-full" suppressHydrationWarning>
                 {children}
             </body>
         </html>

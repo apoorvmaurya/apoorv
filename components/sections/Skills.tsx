@@ -15,10 +15,10 @@ export default function Skills() {
                     </h2>
                 </AnimatedSection>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="centered-card-grid">
                     {skillCategories.map((category, index) => (
                         <AnimatedSection key={category.category} delay={index * 0.1}>
-                            <Card>
+                            <Card className="flex flex-col h-full">
                                 <h3 className="text-xl font-heading font-bold text-white mb-4">
                                     {category.category}
                                 </h3>

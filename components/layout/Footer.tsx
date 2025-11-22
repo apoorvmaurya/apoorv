@@ -33,7 +33,7 @@ export default function Footer() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                     {/* Brand */}
-                    <div>
+                    <div className="text-center md:text-left">
                         <h3 className="text-xl font-heading font-bold text-gradient mb-4">
                             Apoorv Maurya
                         </h3>
@@ -44,7 +44,7 @@ export default function Footer() {
                     </div>
 
                     {/* Quick Links */}
-                    <div>
+                    <div className="text-center md:text-left">
                         <h4 className="text-white font-semibold mb-4">Quick Links</h4>
                         <ul className="space-y-2">
                             <li>
@@ -83,9 +83,9 @@ export default function Footer() {
                     </div>
 
                     {/* Social Links */}
-                    <div>
+                    <div className="text-center md:text-left">
                         <h4 className="text-white font-semibold mb-4">Connect</h4>
-                        <div className="flex space-x-4">
+                        <div className="flex space-x-4 justify-center md:justify-start">
                             {socialLinks.map((link) => (
                                 <a
                                     key={link.name}

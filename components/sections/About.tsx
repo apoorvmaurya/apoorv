@@ -24,6 +24,9 @@ export default function About() {
                                 width={600}
                                 height={600}
                                 className="rounded-2xl relative z-10"
+                                style={{ height: "auto" }}
+                                loading="eager"
+                                priority
                             />
                         </div>
                     </AnimatedSection>

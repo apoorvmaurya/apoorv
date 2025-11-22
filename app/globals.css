@@ -84,7 +84,7 @@ body {
   }
 
   .cyber-grid {
-    background-image: 
+    background-image:
       linear-gradient(rgba(122, 122, 255, 0.1) 1px, transparent 1px),
       linear-gradient(90deg, rgba(122, 122, 255, 0.1) 1px, transparent 1px);
     background-size: 50px 50px;
@@ -101,6 +101,7 @@ body {
 
 /* Smooth transitions for all interactive elements */
 @layer base {
+
   button,
   a,
   input,
@@ -111,6 +112,7 @@ body {
 
 /* Animation performance optimization */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -136,18 +138,47 @@ body {
   0% {
     background-position: -1000px 0;
   }
+
   100% {
     background-position: 1000px 0;
   }
 }
 
 .skeleton {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(255, 255, 255, 0.05) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0.05) 100%);
   background-size: 1000px 100%;
   animation: shimmer 2s infinite linear;
+}
+
+/* Centered Card Layout using Flexbox */
+@layer utilities {
+  .centered-card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  .centered-card-grid>* {
+    width: 100%;
+    max-width: 384px;
+  }
+
+  @media (min-width: 768px) {
+    .centered-card-grid>* {
+      width: calc(50% - 1rem);
+      max-width: 384px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .centered-card-grid>* {
+      width: calc(33.333% - 1.5rem);
+      max-width: 384px;
+    }
+  }
 }
