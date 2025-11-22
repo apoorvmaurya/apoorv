@@ -24,8 +24,8 @@ export default function Experience() {
                     <div className="space-y-12">
                         {experiences.map((exp, index) => (
                             <AnimatedSection key={exp.id} delay={index * 0.2}>
-                                <div className={`flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                                    <div className="flex-1" />
+                                <div className={`flex items-center flex-row ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                                    <div className="hidden md:block flex-1" />
 
                                     {/* Timeline dot */}
                                     <div className="relative flex-shrink-0 w-16 flex justify-center">
@@ -33,7 +33,7 @@ export default function Experience() {
                                     </div>
 
                                     <div className="flex-1">
-                                        <Card className={index % 2 === 0 ? 'md:ml-8' : 'md:mr-8'}>
+                                        <Card className={`ml-4 ${index % 2 === 0 ? 'md:ml-8' : 'md:mr-8 md:ml-0'}`}>
                                             <div className="flex items-start justify-between mb-4">
                                                 <div>
                                                     <h3 className="text-xl font-heading font-bold text-white">

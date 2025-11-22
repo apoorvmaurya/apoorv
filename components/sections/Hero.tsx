@@ -24,7 +24,7 @@ export default function Hero() {
             >
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     {/* Text content */}
-                    <motion.div variants={staggerItem}>
+                    <motion.div variants={staggerItem} className="text-center lg:text-left">
                         <motion.p
                             className="text-accent-cyan font-medium mb-4"
                             variants={fadeInUp}
@@ -47,7 +47,7 @@ export default function Hero() {
                         </motion.h2>
 
                         <motion.p
-                            className="text-lg text-gray-400 mb-8 max-w-xl"
+                            className="text-lg text-gray-400 mb-8 max-w-xl mx-auto lg:mx-0"
                             variants={fadeInUp}
                         >
                             Building innovative solutions at the intersection of web development and artificial
@@ -55,7 +55,7 @@ export default function Hero() {
                         </motion.p>
 
                         <motion.div
-                            className="flex flex-wrap gap-4"
+                            className="flex flex-wrap gap-4 justify-center lg:justify-start"
                             variants={fadeInUp}
                         >
                             <Button

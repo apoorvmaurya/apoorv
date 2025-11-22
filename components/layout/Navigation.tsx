@@ -54,13 +54,13 @@ export default function Navigation() {
         <>
             {/* Progress bar */}
             <motion.div
-                className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-600 via-accent-purple to-accent-cyan z-50 origin-left"
+                className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-600 via-accent-purple to-accent-cyan z-[60] origin-left"
                 style={{ scaleX: scrollProgress / 100 }}
             />
 
             {/* Navigation */}
             <motion.nav
-                className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled ? 'glass-strong shadow-glass' : 'bg-transparent'
+                className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'glass-strong shadow-glass' : 'bg-transparent'
                     }`}
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}

@@ -77,7 +77,7 @@ export async function GET() {
             success: true,
             data: {
                 configured: isConfigured,
-                model: 'gemini-2.0-flash-exp',
+                model: 'gemini-1.5-flash',
                 features: ['context-aware', 'action-detection', 'resume-trained'],
             },
         });

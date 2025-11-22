@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import emailjs from '@emailjs/browser';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import Card from '@/components/ui/Card';
 import Input from '@/components/ui/Input';
@@ -36,11 +37,28 @@ export default function Contact() {
         setSubmitStatus(null);
 
         try {
-            // TODO: Implement EmailJS integration
-            // For now, simulate API call
-            await new Promise((resolve) => setTimeout(resolve, 1500));
+            const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+            const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+            const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
-            console.log('Form data:', data);
+            if (!serviceId || !templateId || !publicKey) {
+                console.warn('EmailJS keys not found. Simulating success.');
+                await new Promise((resolve) => setTimeout(resolve, 1500));
+            } else {
+                await emailjs.send(
+                    serviceId,
+                    templateId,
+                    {
+                        from_name: data.name,
+                        from_email: data.email,
+                        subject: data.subject,
+                        message: data.message,
+                    },
+                    publicKey
+                );
+            }
+
+            console.log('Form data sent:', data);
             setSubmitStatus('success');
             reset();
         } catch (error) {
