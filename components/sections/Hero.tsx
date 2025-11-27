@@ -26,28 +26,28 @@ export default function Hero() {
                     {/* Text content */}
                     <motion.div variants={staggerItem} className="text-center lg:text-left">
                         <motion.p
-                            className="text-accent-cyan font-medium mb-4"
+                            className="text-accent-cyan font-medium mb-4 text-base sm:text-lg"
                             variants={fadeInUp}
                         >
                             👋 Hello, I'm
                         </motion.p>
 
                         <motion.h1
-                            className="text-5xl md:text-7xl font-heading font-bold mb-6"
+                            className="text-6xl sm:text-7xl md:text-8xl font-heading font-bold mb-6 leading-tight"
                             variants={fadeInUp}
                         >
                             <span className="text-gradient">Apoorv Maurya</span>
                         </motion.h1>
 
                         <motion.h2
-                            className="text-2xl md:text-3xl text-gray-300 mb-6"
+                            className="text-3xl sm:text-4xl md:text-5xl text-gray-300 mb-6 leading-snug"
                             variants={fadeInUp}
                         >
                             Full Stack Developer & AI Enthusiast
                         </motion.h2>
 
                         <motion.p
-                            className="text-lg text-gray-400 mb-8 max-w-xl mx-auto lg:mx-0"
+                            className="text-lg sm:text-xl text-gray-400 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed"
                             variants={fadeInUp}
                         >
                             Building innovative solutions at the intersection of web development and artificial

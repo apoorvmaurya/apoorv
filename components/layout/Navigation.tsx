@@ -45,9 +45,24 @@ export default function Navigation() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Keyboard support - ESC to close menu
+    useEffect(() => {
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && isMobileMenuOpen) {
+                setIsMobileMenuOpen(false);
+            }
+        };
+
+        window.addEventListener('keydown', handleEscape);
+        return () => window.removeEventListener('keydown', handleEscape);
+    }, [isMobileMenuOpen]);
+
     const handleNavClick = (href: string) => {
-        scrollToElement(href);
         setIsMobileMenuOpen(false);
+        // Small delay to let menu close animation start before scrolling
+        setTimeout(() => {
+            scrollToElement(href);
+        }, 100);
     };
 
     return (
@@ -87,9 +102,10 @@ export default function Navigation() {
                                     key={item.href}
                                     onClick={() => handleNavClick(item.href)}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${activeSection === item.href
-                                        ? 'text-white bg-white/10'
-                                        : 'text-gray-300 hover:text-white hover:bg-white/5'
+                                            ? 'text-white bg-white/10'
+                                            : 'text-gray-300 hover:text-white hover:bg-white/5'
                                         }`}
+                                    suppressHydrationWarning
                                 >
                                     {item.label}
                                 </button>
@@ -98,8 +114,13 @@ export default function Navigation() {
 
                         {/* Mobile menu button */}
                         <button
-                            className="md:hidden p-2 rounded-lg glass hover:glass-strong transition-all"
-                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            className="md:hidden p-3 rounded-lg glass hover:glass-strong transition-all active:scale-95"
+                            onPointerDown={(e) => {
+                                e.preventDefault();
+                                setIsMobileMenuOpen(!isMobileMenuOpen);
+                            }}
+                            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+                            aria-expanded={isMobileMenuOpen}
                         >
                             <svg
                                 className="w-6 h-6 text-white"
@@ -126,35 +147,53 @@ export default function Navigation() {
                         </button>
                     </div>
                 </div>
-
-                {/* Mobile Navigation */}
-                <AnimatePresence>
-                    {isMobileMenuOpen && (
-                        <motion.div
-                            className="md:hidden glass-strong border-t border-white/10"
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <div className="px-4 py-4 space-y-2">
-                                {navItems.map((item) => (
-                                    <button
-                                        key={item.href}
-                                        onClick={() => handleNavClick(item.href)}
-                                        className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${activeSection === item.href
-                                            ? 'text-white bg-white/10'
-                                            : 'text-gray-300 hover:text-white hover:bg-white/5'
-                                            }`}
-                                    >
-                                        {item.label}
-                                    </button>
-                                ))}
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
             </motion.nav>
+
+            {/* Backdrop overlay - click outside to close */}
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <motion.div
+                        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.15 }}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                    />
+                )}
+            </AnimatePresence>
+
+            {/* Mobile Navigation */}
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <motion.div
+                        className="fixed top-20 left-0 right-0 bottom-0 md:hidden glass-strong border-t border-white/10 z-50 overflow-y-auto"
+                        initial={{ x: '100%' }}
+                        animate={{ x: 0 }}
+                        exit={{ x: '100%' }}
+                        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                    >
+                        <nav className="px-4 py-6 space-y-1" role="navigation" aria-label="Mobile navigation">
+                            {navItems.map((item) => (
+                                <button
+                                    key={item.href}
+                                    onPointerDown={(e) => {
+                                        e.preventDefault();
+                                        handleNavClick(item.href);
+                                    }}
+                                    className={`w-full text-left px-6 py-4 rounded-xl text-lg font-medium transition-all duration-200 active:scale-[0.98] ${activeSection === item.href
+                                        ? 'text-white bg-white/15 shadow-lg'
+                                        : 'text-gray-300 hover:text-white hover:bg-white/10'
+                                        }`}
+                                    aria-current={activeSection === item.href ? 'page' : undefined}
+                                >
+                                    {item.label}
+                                </button>
+                            ))}
+                        </nav>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     );
 }

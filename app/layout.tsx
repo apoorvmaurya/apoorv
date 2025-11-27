@@ -29,6 +29,10 @@ export const metadata: Metadata = {
     ],
     authors: [{ name: 'Apoorv Maurya' }],
     creator: 'Apoorv Maurya',
+    icons: {
+        icon: '/favicon.ico',
+        apple: '/apple-touch-icon.png',
+    },
     openGraph: {
         type: 'website',
         locale: 'en_US',
@@ -37,12 +41,28 @@ export const metadata: Metadata = {
         description:
             'Portfolio of Apoorv Maurya - Full Stack Developer, AI Enthusiast, and Technology Leader.',
         siteName: 'Apoorv Maurya Portfolio',
+        images: [
+            {
+                url: '/og-image.png',
+                width: 1200,
+                height: 630,
+                alt: 'Apoorv Maurya - Full Stack Developer & AI Enthusiast',
+            },
+        ],
     },
     twitter: {
         card: 'summary_large_image',
         title: 'Apoorv Maurya | AI-Enabled Portfolio',
         description:
             'Portfolio of Apoorv Maurya - Full Stack Developer, AI Enthusiast, and Technology Leader.',
+        images: ['/og-image.png'],
+    },
+    other: {
+        'x:card': 'summary_large_image',
+        'x:title': 'Apoorv Maurya | AI-Enabled Portfolio',
+        'x:description':
+            'Portfolio of Apoorv Maurya - Full Stack Developer, AI Enthusiast, and Technology Leader.',
+        'x:image': '/og-image.png',
     },
     robots: {
         index: true,
