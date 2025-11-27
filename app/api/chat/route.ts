@@ -50,6 +50,14 @@ export async function POST(req: NextRequest) {
             },
         });
     } catch (error: any) {
+        // Log detailed error for debugging
+        console.error('=== CHAT API ERROR ===');
+        console.error('Error name:', error.name);
+        console.error('Error message:', error.message);
+        console.error('Error stack:', error.stack);
+        console.error('Full error:', error);
+        console.error('=====================');
+
         logError(error, 'Chat API');
 
         const statusCode = error.statusCode || 500;
@@ -59,6 +67,7 @@ export async function POST(req: NextRequest) {
             {
                 success: false,
                 error: message,
+                details: process.env.NODE_ENV === 'development' ? error.message : undefined,
             },
             { status: statusCode }
         );
@@ -77,7 +86,7 @@ export async function GET() {
             success: true,
             data: {
                 configured: isConfigured,
-                model: 'gemini-1.5-flash',
+                model: 'gemini-2.5-flash-lite',
                 features: ['context-aware', 'action-detection', 'resume-trained'],
             },
         });

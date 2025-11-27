@@ -1,51 +1,14 @@
-import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 import { APIError } from '@/lib/errors';
 
-// Initialize Gemini AI
+// Initialize Gemini AI with new SDK
 const apiKey = process.env.GOOGLE_GEMINI_API_KEY;
 
 if (!apiKey) {
     console.warn('GOOGLE_GEMINI_API_KEY is not set. AI chatbot will not function.');
 }
 
-const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
-
-/**
- * Get Gemini model instance
- */
-export function getGeminiModel() {
-    if (!genAI) {
-        throw new APIError('Gemini API is not configured. Please set GOOGLE_GEMINI_API_KEY.', 500);
-    }
-
-    return genAI.getGenerativeModel({
-        model: 'gemini-1.5-flash',
-        generationConfig: {
-            temperature: 0.7,
-            topP: 0.95,
-            topK: 40,
-            maxOutputTokens: 1024,
-        },
-        safetySettings: [
-            {
-                category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-                threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-            },
-            {
-                category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-                threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-            },
-            {
-                category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-                threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-            },
-            {
-                category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-                threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-            },
-        ],
-    });
-}
+const genAI = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 /**
  * Build system prompt with resume context
@@ -120,7 +83,7 @@ export function parseAction(response: string): {
 }
 
 /**
- * Generate chat response
+ * Generate chat response using new Google GenAI SDK
  */
 export async function generateChatResponse(
     userMessage: string,
@@ -128,32 +91,47 @@ export async function generateChatResponse(
     conversationHistory: { role: string; parts: { text: string }[] }[] = []
 ): Promise<{ message: string; action?: { type: string; payload?: any } }> {
     try {
-        const model = getGeminiModel();
+        if (!genAI) {
+            throw new APIError('Gemini API is not configured. Please set GOOGLE_GEMINI_API_KEY.', 500);
+        }
+
         const systemPrompt = buildSystemPrompt(resumeContext);
 
-        // Start chat with history
-        const chat = model.startChat({
-            history: [
-                {
-                    role: 'user',
-                    parts: [{ text: systemPrompt }],
-                },
-                {
-                    role: 'model',
-                    parts: [
-                        {
-                            text: "Hello! I'm here to help you learn about Apoorv Maurya's professional background and experience. Feel free to ask me anything!",
-                        },
-                    ],
-                },
-                ...conversationHistory,
-            ],
+        // Build conversation history in new format
+        const messages = [
+            {
+                role: 'user',
+                content: systemPrompt,
+            },
+            {
+                role: 'model',
+                content: "Hello! I'm here to help you learn about Apoorv Maurya's professional background and experience. Feel free to ask me anything!",
+            },
+            // Add conversation history
+            ...conversationHistory.map((msg) => ({
+                role: msg.role === 'user' ? 'user' : 'model',
+                content: msg.parts[0]?.text || '',
+            })),
+            // Add current user message
+            {
+                role: 'user',
+                content: userMessage,
+            },
+        ];
+
+        // Generate response using new SDK
+        const response = await genAI.models.generateContent({
+            model: 'gemini-2.5-flash-lite',
+            contents: messages.map(msg => msg.content).join('\n\n'),
+            config: {
+                temperature: 0.7,
+                topP: 0.95,
+                topK: 40,
+                maxOutputTokens: 1024,
+            },
         });
 
-        // Send message and get response
-        const result = await chat.sendMessage(userMessage);
-        const response = result.response;
-        const text = response.text();
+        const text = response.text || '';
 
         // Parse action from response
         return parseAction(text);
