@@ -97,7 +97,7 @@ export default function Hero() {
                 </div>
 
                 {/* Scroll indicator */}
-                <motion.div
+                {/* <motion.div
                     className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -124,7 +124,7 @@ export default function Hero() {
                             </svg>
                         </motion.div>
                     </div>
-                </motion.div>
+                </motion.div> */}
             </motion.div>
         </section>
     );

@@ -34,7 +34,7 @@ export default function About() {
                     <AnimatedSection delay={0.4}>
                         <Card>
                             <h3 className="text-2xl font-heading font-bold mb-4">
-                                Passionate Developer & Technology Leader
+                                Full-Stack Developer | AI/ML Practitioner | Bridging Code and Intelligence
                             </h3>
                             <div className="space-y-4 text-gray-300">
                                 <p>
@@ -58,11 +58,11 @@ export default function About() {
 
                             <div className="mt-6 grid grid-cols-3 gap-4">
                                 <div className="text-center">
-                                    <div className="text-3xl font-bold text-gradient">5+</div>
+                                    <div className="text-3xl font-bold text-gradient">1-2</div>
                                     <div className="text-sm text-gray-400">Years Experience</div>
                                 </div>
                                 <div className="text-center">
-                                    <div className="text-3xl font-bold text-gradient">50+</div>
+                                    <div className="text-3xl font-bold text-gradient">10+</div>
                                     <div className="text-sm text-gray-400">Projects Completed</div>
                                 </div>
                                 <div className="text-center">

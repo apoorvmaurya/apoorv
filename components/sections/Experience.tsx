@@ -19,7 +19,7 @@ export default function Experience() {
 
                 <div className="relative">
                     {/* Timeline line */}
-                    <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-600 via-accent-purple to-accent-cyan" />
+                    <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-600 via-accent-purple to-accent-cyan" />
 
                     <div className="space-y-12">
                         {experiences.map((exp, index) => (
@@ -28,20 +28,20 @@ export default function Experience() {
                                     <div className="hidden md:block flex-1" />
 
                                     {/* Timeline dot */}
-                                    <div className="relative flex-shrink-0 w-16 flex justify-center">
+                                    <div className="relative flex-shrink-0 w-8 md:w-16 flex justify-center">
                                         <div className="w-4 h-4 rounded-full bg-gradient-to-r from-primary-600 to-accent-purple glow-effect-strong" />
                                     </div>
 
-                                    <div className="flex-1">
-                                        <Card className={`ml-4 ${index % 2 === 0 ? 'md:ml-8' : 'md:mr-8 md:ml-0'}`}>
-                                            <div className="flex items-start justify-between mb-4">
-                                                <div>
-                                                    <h3 className="text-xl font-heading font-bold text-white">
+                                    <div className="flex-1 min-w-0">
+                                        <Card className={`ml-2 md:ml-4 lg:ml-8 ${index % 2 === 0 ? '' : 'md:mr-4 lg:mr-8 md:ml-0'}`}>
+                                            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
+                                                <div className="min-w-0">
+                                                    <h3 className="text-lg sm:text-xl font-heading font-bold text-white">
                                                         {exp.position}
                                                     </h3>
-                                                    <p className="text-accent-cyan font-medium">{exp.company}</p>
+                                                    <p className="text-accent-cyan font-medium text-sm sm:text-base">{exp.company}</p>
                                                 </div>
-                                                <span className="text-sm text-gray-400 whitespace-nowrap ml-4">
+                                                <span className="text-xs sm:text-sm text-gray-400 sm:ml-4 flex-shrink-0">
                                                     {formatDate(exp.startDate)} - {exp.endDate === 'Present' ? 'Present' : formatDate(exp.endDate)}
                                                 </span>
                                             </div>

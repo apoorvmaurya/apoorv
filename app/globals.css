@@ -159,7 +159,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2rem;
+    gap: 1rem;
     width: 100%;
   }
 
@@ -168,7 +168,17 @@ body {
     max-width: 384px;
   }
 
+  @media (min-width: 640px) {
+    .centered-card-grid {
+      gap: 1.5rem;
+    }
+  }
+
   @media (min-width: 768px) {
+    .centered-card-grid {
+      gap: 2rem;
+    }
+
     .centered-card-grid>* {
       width: calc(50% - 1rem);
       max-width: 384px;

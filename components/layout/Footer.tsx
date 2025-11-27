@@ -10,17 +10,17 @@ const socialLinks: SocialLink[] = [
     },
     {
         name: 'LinkedIn',
-        url: 'https://linkedin.com/in/apoorvmaurya',
+        url: 'https://www.linkedin.com/in/apoorv-maurya2506/',
         icon: 'linkedin',
     },
     {
-        name: 'Twitter',
-        url: 'https://twitter.com/apoorvmaurya',
+        name: 'X',
+        url: 'https://x.com/apoorvmaurya_',
         icon: 'twitter',
     },
     {
         name: 'Email',
-        url: 'mailto:contact@apoorvmaurya.com',
+        url: 'mailto:apoorvmauryaapoorv@gmail.com',
         icon: 'email',
     },
 ];
@@ -134,8 +134,7 @@ export default function Footer() {
                 {/* Bottom */}
                 <div className="border-t border-white/10 pt-8 text-center">
                     <p className="text-gray-400 text-sm">
-                        © {currentYear} Apoorv Maurya. Built with ❤️ using Next.js, TypeScript & Google
-                        Gemini AI
+                        © {currentYear} Built with ❤️ by Apoorv Maurya
                     </p>
                 </div>
             </div>

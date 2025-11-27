@@ -21,7 +21,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
         return (
             <motion.div
                 ref={ref}
-                className={cn('rounded-2xl p-6 shadow-glass', variants[variant], className)}
+                className={cn('rounded-2xl p-4 sm:p-6 shadow-glass overflow-hidden', variants[variant], className)}
                 variants={hover ? cardHover : undefined}
                 initial={hover ? 'rest' : undefined}
                 whileHover={hover ? 'hover' : undefined}

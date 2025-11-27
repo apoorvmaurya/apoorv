@@ -171,7 +171,7 @@ export default function Contact() {
                                 </svg>
                             </div>
                             <h4 className="font-semibold text-white mb-1">Email</h4>
-                            <p className="text-sm text-gray-400">contact@apoorvmaurya.com</p>
+                            <p className="text-sm text-gray-400">apoorvmauryaapoorv@gmail.com</p>
                         </Card>
 
                         <Card className="text-center">
