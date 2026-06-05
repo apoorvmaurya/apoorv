@@ -16,6 +16,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+    metadataBase: new URL('https://apoorv-gamma.vercel.app'),
     title: 'Apoorv Maurya | AI-Enabled Portfolio',
     description:
         'Portfolio of Apoorv Maurya - Full Stack Developer, AI Enthusiast, and Technology Leader. Explore my projects, experience, and skills.',
