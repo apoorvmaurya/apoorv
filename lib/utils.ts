@@ -78,13 +78,17 @@ export function isInViewport(element: HTMLElement): boolean {
 export function scrollToElement(elementId: string, offset: number = 80): void {
     const element = document.getElementById(elementId);
     if (element) {
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        if (typeof window !== 'undefined' && (window as any).lenis) {
+            (window as any).lenis.scrollTo(element, { offset: -offset });
+        } else {
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - offset;
 
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth',
-        });
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth',
+            });
+        }
     }
 }
 

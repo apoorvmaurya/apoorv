@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { generateChatResponse } from '@/lib/ai/gemini';
+import { generateChatResponse } from '@/lib/ai/groq';
 import { getResumeContext } from '@/lib/ai/resume-context';
 import { ValidationError, getUserFriendlyMessage, logError } from '@/lib/errors';
 
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
         // Get resume context
         const resumeContext = await getResumeContext();
 
-        // Format conversation history for Gemini
+        // Format conversation history for Groq LLaMA
         const formattedHistory =
             history?.map((msg: any) => ({
                 role: msg.role === 'user' ? 'user' : 'model',
@@ -80,13 +80,13 @@ export async function POST(req: NextRequest) {
  */
 export async function GET() {
     try {
-        const isConfigured = !!process.env.GOOGLE_GEMINI_API_KEY;
+        const isConfigured = !!process.env.GROQ_API_KEY;
 
         return NextResponse.json({
             success: true,
             data: {
                 configured: isConfigured,
-                model: 'gemini-2.5-flash-lite',
+                model: 'llama-3.1-8b-instant',
                 features: ['context-aware', 'action-detection', 'resume-trained'],
             },
         });

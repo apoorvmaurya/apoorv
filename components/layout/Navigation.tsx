@@ -75,14 +75,21 @@ export default function Navigation() {
 
             {/* Navigation */}
             <motion.nav
-                className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'glass-strong shadow-glass' : 'bg-transparent'
-                    }`}
+                className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-out ${
+                    isScrolled
+                        ? 'top-4 mx-auto w-[calc(100%-2rem)] max-w-5xl rounded-full glass-island shadow-glow-sm px-6'
+                        : 'top-0 w-full bg-transparent px-4 sm:px-6 lg:px-8'
+                }`}
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
             >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between h-20">
+                <div className="max-w-7xl mx-auto">
+                    <div
+                        className={`flex items-center justify-between transition-all duration-500 ease-out ${
+                            isScrolled ? 'h-16' : 'h-20'
+                        }`}
+                    >
                         {/* Logo */}
                         <motion.div
                             className="flex-shrink-0 cursor-pointer"
@@ -101,10 +108,11 @@ export default function Navigation() {
                                 <button
                                     key={item.href}
                                     onClick={() => handleNavClick(item.href)}
-                                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${activeSection === item.href
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                                        activeSection === item.href
                                             ? 'text-white bg-white/10'
                                             : 'text-gray-300 hover:text-white hover:bg-white/5'
-                                        }`}
+                                    }`}
                                     suppressHydrationWarning
                                 >
                                     {item.label}
@@ -114,7 +122,7 @@ export default function Navigation() {
 
                         {/* Mobile menu button */}
                         <button
-                            className="md:hidden p-3 rounded-lg glass hover:glass-strong transition-all active:scale-95"
+                            className="md:hidden p-3 rounded-full glass hover:glass-strong transition-all active:scale-95"
                             onPointerDown={(e) => {
                                 e.preventDefault();
                                 setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -127,7 +135,7 @@ export default function Navigation() {
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
-                            >
+                             >
                                 {isMobileMenuOpen ? (
                                     <path
                                         strokeLinecap="round"
@@ -163,17 +171,18 @@ export default function Navigation() {
                 )}
             </AnimatePresence>
 
-            {/* Mobile Navigation */}
+            {/* Mobile Navigation Dropdown Card */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
-                        className="fixed top-20 left-0 right-0 bottom-0 md:hidden glass-strong border-t border-white/10 z-50 overflow-y-auto"
-                        initial={{ x: '100%' }}
-                        animate={{ x: 0 }}
-                        exit={{ x: '100%' }}
-                        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                        className="fixed left-4 right-4 md:hidden glass-island rounded-2xl border border-white/10 z-50 overflow-hidden shadow-2xl"
+                        style={{ top: '88px' }}
+                        initial={{ opacity: 0, y: -15, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -15, scale: 0.95 }}
+                        transition={{ duration: 0.2, ease: 'easeOut' }}
                     >
-                        <nav className="px-4 py-6 space-y-1" role="navigation" aria-label="Mobile navigation">
+                        <nav className="p-4 space-y-1" role="navigation" aria-label="Mobile navigation">
                             {navItems.map((item) => (
                                 <button
                                     key={item.href}
@@ -181,10 +190,11 @@ export default function Navigation() {
                                         e.preventDefault();
                                         handleNavClick(item.href);
                                     }}
-                                    className={`w-full text-left px-6 py-4 rounded-xl text-lg font-medium transition-all duration-200 active:scale-[0.98] ${activeSection === item.href
-                                        ? 'text-white bg-white/15 shadow-lg'
-                                        : 'text-gray-300 hover:text-white hover:bg-white/10'
-                                        }`}
+                                    className={`w-full text-left px-5 py-3.5 rounded-xl text-base font-medium transition-all duration-200 active:scale-[0.98] ${
+                                        activeSection === item.href
+                                            ? 'text-white bg-white/15 shadow-lg'
+                                            : 'text-gray-300 hover:text-white hover:bg-white/10'
+                                    }`}
                                     aria-current={activeSection === item.href ? 'page' : undefined}
                                 >
                                     {item.label}

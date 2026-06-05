@@ -111,11 +111,12 @@ export default function ChatBot() {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        className="fixed bottom-24 right-6 z-[45] w-[400px] max-w-[calc(100vw-3rem)] h-[600px] max-h-[calc(100vh-10rem)] glass-strong rounded-2xl shadow-glow-md overflow-hidden flex flex-col border border-white/10"
+                        className="fixed bottom-24 right-6 z-[45] w-[400px] max-w-[calc(100vw-3rem)] h-[600px] max-h-[calc(100vh-10rem)] chat-panel rounded-2xl overflow-hidden flex flex-col"
                         variants={scaleIn}
                         initial="hidden"
                         animate="visible"
                         exit="hidden"
+                        data-lenis-prevent
                     >
                         {/* Header */}
                         <div className="bg-gradient-to-r from-primary-600/20 to-accent-purple/20 backdrop-blur-xl border-b border-white/10 p-4">
@@ -138,7 +139,7 @@ export default function ChatBot() {
                                     </div>
                                     <div>
                                         <h3 className="font-heading font-semibold text-white">AI Assistant</h3>
-                                        <p className="text-xs text-gray-400">Powered by Google Gemini</p>
+                                        <p className="text-xs text-gray-400">Powered by Groq LLaMA</p>
                                     </div>
                                 </div>
                                 {messages.length > 0 && (
@@ -166,68 +167,52 @@ export default function ChatBot() {
                         </div>
 
                         {/* Messages */}
-                        <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                            {messages.length === 0 ? (
+                        <div className="flex-1 overflow-y-auto p-4 space-y-4" style={{ overscrollBehavior: 'contain' }}>
+                            <motion.div
+                                variants={staggerContainer}
+                                initial="hidden"
+                                animate="visible"
+                                className="space-y-4"
+                            >
+                                {messages.map((message) => (
+                                    <ChatMessage key={message.id} message={message} />
+                                ))}
+                            </motion.div>
+
+                            {/* Suggestions (only shown if only welcome message is present) */}
+                            {messages.length === 1 && (
                                 <motion.div
-                                    className="h-full flex items-center justify-center text-center px-4"
-                                    variants={fadeInUp}
-                                    initial="hidden"
-                                    animate="visible"
+                                    className="pl-10 space-y-2 mt-4 max-w-[85%]"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.3 }}
                                 >
-                                    <div>
-                                        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary-500/20 flex items-center justify-center">
-                                            <svg
-                                                className="w-8 h-8 text-primary-400"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                viewBox="0 0 24 24"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={2}
-                                                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                                                />
-                                            </svg>
-                                        </div>
-                                        <h4 className="font-heading font-semibold text-white mb-2">
-                                            Start a conversation
-                                        </h4>
-                                        <p className="text-sm text-gray-400 mb-4">
-                                            Ask me about Apoorv's experience, skills, or projects!
-                                        </p>
-                                        <div className="space-y-2">
-                                            <button
-                                                onClick={() => handleSend("Tell me about Apoorv's experience")}
-                                                className="w-full text-left px-4 py-2 glass rounded-lg text-sm hover:glass-strong transition-all"
-                                            >
-                                                💼 Tell me about his experience
-                                            </button>
-                                            <button
-                                                onClick={() => handleSend('What are his technical skills?')}
-                                                className="w-full text-left px-4 py-2 glass rounded-lg text-sm hover:glass-strong transition-all"
-                                            >
-                                                🛠️ What are his skills?
-                                            </button>
-                                            <button
-                                                onClick={() => handleSend('Show me his projects')}
-                                                className="w-full text-left px-4 py-2 glass rounded-lg text-sm hover:glass-strong transition-all"
-                                            >
-                                                🚀 Show me his projects
-                                            </button>
-                                        </div>
+                                    <p className="text-xs text-gray-500 font-semibold mb-2 tracking-wider uppercase pl-1">
+                                        Suggested questions:
+                                    </p>
+                                    <div className="grid grid-cols-1 gap-2">
+                                        <button
+                                            onClick={() => handleSend("Tell me about Apoorv's experience")}
+                                            className="w-full text-left px-4 py-2.5 bg-white/5 border border-white/5 rounded-xl text-xs text-gray-300 hover:text-white hover:bg-white/10 hover:border-white/10 transition-all duration-300 flex items-center justify-between"
+                                        >
+                                            <span>💼 Tell me about his experience</span>
+                                            <span className="text-gray-500">→</span>
+                                        </button>
+                                        <button
+                                            onClick={() => handleSend('What are his technical skills?')}
+                                            className="w-full text-left px-4 py-2.5 bg-white/5 border border-white/5 rounded-xl text-xs text-gray-300 hover:text-white hover:bg-white/10 hover:border-white/10 transition-all duration-300 flex items-center justify-between"
+                                        >
+                                            <span>🛠️ What are his skills?</span>
+                                            <span className="text-gray-500">→</span>
+                                        </button>
+                                        <button
+                                            onClick={() => handleSend('Show me his projects')}
+                                            className="w-full text-left px-4 py-2.5 bg-white/5 border border-white/5 rounded-xl text-xs text-gray-300 hover:text-white hover:bg-white/10 hover:border-white/10 transition-all duration-300 flex items-center justify-between"
+                                        >
+                                            <span>🚀 Show me his projects</span>
+                                            <span className="text-gray-500">→</span>
+                                        </button>
                                     </div>
-                                </motion.div>
-                            ) : (
-                                <motion.div
-                                    variants={staggerContainer}
-                                    initial="hidden"
-                                    animate="visible"
-                                    className="space-y-4"
-                                >
-                                    {messages.map((message) => (
-                                        <ChatMessage key={message.id} message={message} />
-                                    ))}
                                 </motion.div>
                             )}
 

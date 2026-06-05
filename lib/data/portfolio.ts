@@ -34,6 +34,18 @@ export const experiences: Experience[] = [
 export const projects: Project[] = [
     {
         id: '1',
+        title: 'Planora',
+        description: 'Because going on adventures shouldn\'t feel like solving World Peace!',
+        longDescription:
+            ' A full-stack real-time collaborative platform that helps groups to plan trips with AI-powered itinerary generation, voting, budget splitting, and accountability features.',
+        image: '/planora.png',
+        technologies: ['Next.js', 'TypeScript', 'Llama 3.3 70B', 'Supabase'],
+        liveUrl: 'https://planora-plum-beta.vercel.app/',
+        githubUrl: 'https://github.com/apoorvmaurya/planora',
+        featured: true,
+    },
+    {
+        id: '2',
         title: 'Data Alchemist',
         description: 'AI Resource Allocation Configurator',
         longDescription:
@@ -45,7 +57,7 @@ export const projects: Project[] = [
         featured: true,
     },
     {
-        id: '2',
+        id: '3',
         title: 'AssessMed',
         description: 'Advanced Health Prediction with AI',
         longDescription:
@@ -54,10 +66,10 @@ export const projects: Project[] = [
         technologies: ['Next.js', 'TypeScript', 'Supabase', 'AI/ML'],
         liveUrl: 'https://assesmed.vercel.app/',
         githubUrl: 'https://github.com/apoorvmaurya/AssesMed',
-        featured: true,
+        featured: false,
     },
     {
-        id: '3',
+        id: '4',
         title: 'AI Companion',
         description: 'Video Call & Streaming Platform',
         longDescription:
@@ -69,7 +81,7 @@ export const projects: Project[] = [
         featured: true,
     },
     {
-        id: '4',
+        id: '5',
         title: 'iCloud Clone',
         description: 'Cloud storage solution',
         longDescription:

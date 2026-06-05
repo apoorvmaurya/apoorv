@@ -3,11 +3,53 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { ChatMessage } from '@/types';
 
+const WELCOME_MESSAGE: ChatMessage = {
+    id: 'welcome',
+    role: 'assistant',
+    content: "Hi! I'm Apoorv's AI assistant. I can help you learn about his background, skills, experience, and projects. Feel free to ask me anything!",
+    timestamp: new Date(),
+};
+
 export function useChat() {
     const [messages, setMessages] = useState<ChatMessage[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const abortControllerRef = useRef<AbortController | null>(null);
+
+    // Load messages from sessionStorage on mount
+    useEffect(() => {
+        const stored = sessionStorage.getItem('portfolio_chat_messages');
+        if (stored) {
+            try {
+                const parsed = JSON.parse(stored);
+                const formatted = parsed.map((m: any) => ({
+                    ...m,
+                    timestamp: new Date(m.timestamp),
+                }));
+                if (formatted.length === 0) {
+                    setMessages([WELCOME_MESSAGE]);
+                } else {
+                    setMessages(formatted);
+                }
+            } catch (e) {
+                console.error('Failed to parse chat messages from sessionStorage', e);
+                setMessages([WELCOME_MESSAGE]);
+            }
+        } else {
+            setMessages([WELCOME_MESSAGE]);
+        }
+    }, []);
+
+    // Save messages to sessionStorage when updated
+    useEffect(() => {
+        // Only save if we have actual conversation beyond the default welcome message
+        const actualMessages = messages.filter((m) => m.id !== 'welcome');
+        if (actualMessages.length > 0) {
+            sessionStorage.setItem('portfolio_chat_messages', JSON.stringify(messages));
+        } else {
+            sessionStorage.removeItem('portfolio_chat_messages');
+        }
+    }, [messages]);
 
     /**
      * Send a message to the chat API
@@ -33,11 +75,14 @@ export function useChat() {
             abortControllerRef.current = new AbortController();
 
             try {
-                // Prepare conversation history (last 10 messages)
-                const history = messages.slice(-10).map((msg) => ({
-                    role: msg.role,
-                    content: msg.content,
-                }));
+                // Prepare conversation history (excluding welcome message, last 10 messages)
+                const history = messages
+                    .filter((msg) => msg.id !== 'welcome')
+                    .slice(-10)
+                    .map((msg) => ({
+                        role: msg.role,
+                        content: msg.content,
+                    }));
 
                 // Call chat API
                 const response = await fetch('/api/chat', {
@@ -140,7 +185,7 @@ export function useChat() {
      * Clear all messages
      */
     const clearMessages = useCallback(() => {
-        setMessages([]);
+        setMessages([WELCOME_MESSAGE]);
         setError(null);
     }, []);
 

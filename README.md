@@ -146,7 +146,7 @@ Ensure you have the following installed on your system:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/apoorv-portfolio.git
+   git clone https://github.com/apoorvmaurya/apoorv.git
    cd apoorv-portfolio
    ```
 
@@ -385,7 +385,7 @@ The easiest way to deploy this Next.js app is using [Vercel](https://vercel.com)
    - Click "Deploy"
    - Your site will be live at `https://your-project.vercel.app`
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/apoorv-portfolio)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/apoorvmaurya/apoorv)
 
 ### Other Platforms
 
@@ -484,10 +484,10 @@ This project is **private and proprietary**. All rights reserved.
 
 **Apoorv Maurya**
 
-- 🌐 Portfolio: [Your Website](https://yourwebsite.com)
-- 💼 LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
-- 🐙 GitHub: [@yourusername](https://github.com/yourusername)
-- 📧 Email: your.email@example.com
+- 🌐 Portfolio: [apoorv-gamma.vercel.app](https://apoorv-gamma.vercel.app)
+- 💼 LinkedIn: [Apoorv Maurya](https://linkedin.com/in/apoorv-maurya2506)
+- 🐙 GitHub: [@apoorvmaurya](https://github.com/apoorvmaurya)
+- 📧 Email: apoorvmauryaapoorv@gmail.com
 
 ---
 

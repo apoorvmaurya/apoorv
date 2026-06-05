@@ -14,7 +14,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
 
     return (
         <motion.div
-            className={`flex items-start space-x-2 ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`}
+            className={`flex items-start space-x-3 ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`}
             variants={staggerItem}
         >
             {/* Avatar */}
@@ -57,12 +57,12 @@ export default function ChatMessage({ message }: ChatMessageProps) {
 
             {/* Message bubble */}
             <div
-                className={`max-w-[75%] rounded-2xl px-4 py-3 ${isUser
-                        ? 'bg-gradient-to-r from-primary-600 to-accent-purple text-white rounded-tr-none'
-                        : 'glass text-gray-100 rounded-tl-none'
+                className={`max-w-[78%] rounded-2xl px-5 py-3 shadow-md ${isUser
+                        ? 'bg-gradient-to-br from-primary-600 to-accent-purple text-white rounded-tr-none shadow-glow-sm'
+                        : 'bg-white/5 border border-white/5 border-l-2 border-l-primary-500 text-gray-100 rounded-tl-none'
                     }`}
             >
-                <div className="prose prose-invert prose-sm max-w-none">
+                <div className="text-sm font-sans leading-relaxed text-current whitespace-pre-wrap break-words">
                     <ReactMarkdown
                         components={{
                             p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
