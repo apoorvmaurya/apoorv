@@ -34,6 +34,18 @@ export const experiences: Experience[] = [
 export const projects: Project[] = [
     {
         id: '1',
+        title: 'RetentIQ',
+        description: 'An enterprise SaaS customer churn-intelligence and health-scoring platform',
+        longDescription:
+            ' AI-powered customer churn-intelligence platform built on Supabase, FastAPI, and Llama 3.3. Spot churn risk 30–60 days before it happens.',
+        image: '/retentiq.png',
+        technologies: ['Next.js', 'TypeScript', 'Llama 3.3 70B', 'Supabase', 'FastAPI'],
+        liveUrl: 'https://retentiq-chi.vercel.app/',
+        githubUrl: 'https://github.com/apoorvmaurya/retentiq',
+        featured: true,
+    },
+    {
+        id: '2',
         title: 'Planora',
         description: 'Because going on adventures shouldn\'t feel like solving World Peace!',
         longDescription:
@@ -45,7 +57,7 @@ export const projects: Project[] = [
         featured: true,
     },
     {
-        id: '2',
+        id: '3',
         title: 'Data Alchemist',
         description: 'AI Resource Allocation Configurator',
         longDescription:
@@ -57,7 +69,7 @@ export const projects: Project[] = [
         featured: true,
     },
     {
-        id: '3',
+        id: '4',
         title: 'AssessMed',
         description: 'Advanced Health Prediction with AI',
         longDescription:
@@ -69,7 +81,7 @@ export const projects: Project[] = [
         featured: false,
     },
     {
-        id: '4',
+        id: '5',
         title: 'AI Companion',
         description: 'Video Call & Streaming Platform',
         longDescription:
@@ -81,7 +93,7 @@ export const projects: Project[] = [
         featured: true,
     },
     {
-        id: '5',
+        id: '6',
         title: 'iCloud Clone',
         description: 'Cloud storage solution',
         longDescription:

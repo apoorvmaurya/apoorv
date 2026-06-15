@@ -49,7 +49,7 @@ export default function ChatInput({ onSend, disabled = false }: ChatInputProps) 
                 suppressHydrationWarning
             />
             
-            <div className="absolute right-14 bottom-4.5 text-[10px] text-gray-500 hidden sm:block">
+            <div className="absolute right-14 bottom-5 text-[10px] text-gray-500 hidden sm:block">
                 {message.length}/1000
             </div>
 

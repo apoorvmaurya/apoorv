@@ -19,24 +19,6 @@ export default function ChatBot() {
         }
     }, [messages]);
 
-    // Welcome message
-    useEffect(() => {
-        if (isOpen && messages.length === 0) {
-            // Add welcome message after a short delay
-            const timer = setTimeout(() => {
-                const welcomeMessage = {
-                    id: 'welcome',
-                    role: 'assistant' as const,
-                    content:
-                        "Hi! I'm Apoorv's AI assistant. I can help you learn about his background, skills, experience, and projects. Feel free to ask me anything!",
-                    timestamp: new Date(),
-                };
-                // This would normally be added through the chat system
-                // For now, we'll let users start the conversation
-            }, 500);
-            return () => clearTimeout(timer);
-        }
-    }, [isOpen, messages.length]);
 
     const handleSend = (message: string) => {
         sendMessage(message);

@@ -19,12 +19,12 @@ export const metadata: Metadata = {
     metadataBase: new URL('https://apoorv-gamma.vercel.app'),
     title: 'Apoorv Maurya | AI-Enabled Portfolio',
     description:
-        'Portfolio of Apoorv Maurya - Full Stack Developer, AI Enthusiast, and Technology Leader. Explore my projects, experience, and skills.',
+        'Apoorv Maurya - Python Full-Stack Engineer · AI-Integrated Products & Developer Tooling. Explore my projects, experience, and skills.',
     keywords: [
         'Apoorv Maurya',
         'Portfolio',
         'Full Stack Developer',
-        'AI',
+        'AI Engineer',
         'Machine Learning',
         'Web Development',
         'Software Engineer',
@@ -41,29 +41,29 @@ export const metadata: Metadata = {
         url: 'https://apoorv-gamma.vercel.app',
         title: 'Apoorv Maurya | AI-Enabled Portfolio',
         description:
-            'Portfolio of Apoorv Maurya - Full Stack Developer, AI Enthusiast, and Technology Leader.',
+            'Apoorv Maurya - Python Full-Stack Engineer · AI-Integrated Products & Developer Tooling ',
         siteName: 'Apoorv Maurya Portfolio',
         images: [
             {
                 url: '/og-image.png',
                 width: 1200,
                 height: 630,
-                alt: 'Apoorv Maurya - Full Stack Developer & AI Enthusiast',
+                alt: 'Apoorv Maurya - Apoorv Maurya - Python Full-Stack Engineer · AI-Integrated Products & Developer Tooling',
             },
         ],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Apoorv Maurya | AI-Enabled Portfolio',
+        title: "Apoorv Maurya's Portfolio",
         description:
-            'Portfolio of Apoorv Maurya - Full Stack Developer, AI Enthusiast, and Technology Leader.',
+            'Apoorv Maurya - Python Full-Stack Engineer · AI-Integrated Products & Developer Tooling',
         images: ['/og-image.png'],
     },
     other: {
         'x:card': 'summary_large_image',
-        'x:title': 'Apoorv Maurya | AI-Enabled Portfolio',
+        'x:title': 'Apoorv Maurya',
         'x:description':
-            'Portfolio of Apoorv Maurya - Full Stack Developer, AI Enthusiast, and Technology Leader.',
+            'Apoorv Maurya - Python Full-Stack Engineer · AI-Integrated Products & Developer Tooling',
         'x:image': '/og-image.png',
     },
     robots: {
