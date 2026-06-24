@@ -110,13 +110,14 @@ export function useChat() {
                     role: 'assistant',
                     content: data.data.message,
                     timestamp: new Date(),
+                    action: data.data.action || undefined,
                 };
 
                 // Add assistant message
                 setMessages((prev) => [...prev, assistantMessage]);
 
-                // Handle action if present
-                if (data.data.action) {
+                // Handle non-intrusive actions (navigation) automatically if present
+                if (data.data.action && data.data.action.type !== 'download') {
                     handleAction(data.data.action);
                 }
             } catch (err: any) {
@@ -159,13 +160,7 @@ export function useChat() {
                 break;
 
             case 'download':
-                // Download resume
-                if (action.payload === 'resume') {
-                    const link = document.createElement('a');
-                    link.href = '/Resume.pdf';
-                    link.download = 'Apoorv_Maurya_Resume.pdf';
-                    link.click();
-                }
+                // Download resume is handled via user click on the ChatMessage component
                 break;
 
             case 'contact':

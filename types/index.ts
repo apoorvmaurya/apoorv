@@ -8,6 +8,7 @@ export interface ChatMessage {
     role: 'user' | 'assistant';
     content: string;
     timestamp: Date;
+    action?: ChatAction;
 }
 
 export interface ChatAction {
