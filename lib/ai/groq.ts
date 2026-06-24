@@ -66,6 +66,12 @@ export function parseAction(response: string): {
         contact: /CONTACT:(\w+)/i,
     };
 
+    const cleanPatterns = {
+        navigate: /\s*[\*_\(\[\{\s]*NAVIGATE:\w+[\*_\)\]\}\s]*/gi,
+        download: /\s*[\*_\(\[\{\s]*DOWNLOAD:\w+[\*_\)\]\}\s]*/gi,
+        contact: /\s*[\*_\(\[\{\s]*CONTACT:\w+[\*_\)\]\}\s]*/gi,
+    };
+
     let message = response;
     let action: { type: string; payload?: any } | undefined;
 
@@ -73,22 +79,28 @@ export function parseAction(response: string): {
     const navigateMatch = response.match(actionPatterns.navigate);
     if (navigateMatch) {
         action = { type: 'navigate', payload: navigateMatch[1] };
-        message = message.replace(actionPatterns.navigate, '').trim();
+        message = message.replace(cleanPatterns.navigate, ' ').trim();
     }
 
     // Check for download action
     const downloadMatch = response.match(actionPatterns.download);
     if (downloadMatch) {
         action = { type: 'download', payload: downloadMatch[1] };
-        message = message.replace(actionPatterns.download, '').trim();
+        message = message.replace(cleanPatterns.download, ' ').trim();
     }
 
     // Check for contact action
     const contactMatch = response.match(actionPatterns.contact);
     if (contactMatch) {
         action = { type: 'contact', payload: contactMatch[1] };
-        message = message.replace(actionPatterns.contact, '').trim();
+        message = message.replace(cleanPatterns.contact, ' ').trim();
     }
+
+    // Post-processing cleanup to ensure clean text
+    message = message
+        .replace(/[ \t]+/g, ' ')             // collapse multiple spaces/tabs into a single space
+        .replace(/\s+([.,!?;:])/g, '$1')     // remove spaces before punctuation
+        .trim();
 
     return { message, action };
 }
