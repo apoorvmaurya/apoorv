@@ -43,15 +43,16 @@ export default function Hero() {
                             className="text-3xl sm:text-4xl md:text-5xl text-gray-300 mb-6 leading-snug"
                             variants={fadeInUp}
                         >
-                            Full Stack Developer & AI Enthusiast
+                            AI/ML Engineer · Multi-Agent Systems & LLM-Integrated Products
                         </motion.h2>
 
                         <motion.p
                             className="text-lg sm:text-xl text-gray-400 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed"
                             variants={fadeInUp}
                         >
-                            Building innovative solutions at the intersection of web development and artificial
-                            intelligence. Passionate about creating scalable applications that make a difference.
+                            Building innovative solutions at the intersection of full-stack development and
+                            artificial intelligence. Specializing in autonomous multi-agent frameworks, LLM
+                            integrations, and robust real-time applications.
                         </motion.p>
 
                         <motion.div
@@ -81,16 +82,29 @@ export default function Hero() {
                         variants={staggerItem}
                     >
                         <div className="relative w-full aspect-square max-w-md mx-auto">
-                            <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-accent-purple rounded-full blur-3xl opacity-30 animate-pulse-slow" />
+                            {/* Neural mesh background glow */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-accent-purple rounded-full blur-3xl opacity-35 animate-pulse-slow" />
+                            
                             <div className="relative glass-strong rounded-full p-2 glow-effect">
-                                <Image
-                                    src="/profile.png"
-                                    alt="Apoorv Maurya"
-                                    width={500}
-                                    height={500}
-                                    className="rounded-full"
-                                    priority
-                                />
+                                {/* Spinning data-ring */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-accent-cyan via-primary-500 via-accent-purple to-accent-cyan rounded-full animate-spin-slow opacity-75" style={{ margin: '-2px' }} />
+                                <div className="absolute inset-0 bg-[#0a0a0f] rounded-full" style={{ margin: '1px' }} />
+                                
+                                {/* Pulse Node checkpoints */}
+                                <div className="absolute top-1/4 -left-1 w-3 h-3 bg-accent-cyan rounded-full glow-effect animate-pulse z-20" />
+                                <div className="absolute bottom-1/4 -right-1 w-3 h-3 bg-accent-purple rounded-full glow-effect animate-pulse z-20" style={{ animationDelay: '1s' }} />
+                                <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-3 h-3 bg-primary-500 rounded-full glow-effect animate-pulse z-20" style={{ animationDelay: '0.5s' }} />
+                                
+                                <div className="relative z-10 rounded-full overflow-hidden">
+                                    <Image
+                                        src="/profile.png"
+                                        alt="Apoorv Maurya"
+                                        width={500}
+                                        height={500}
+                                        className="rounded-full relative z-10"
+                                        priority
+                                    />
+                                </div>
                             </div>
                         </div>
                     </motion.div>

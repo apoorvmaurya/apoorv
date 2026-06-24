@@ -34,25 +34,27 @@ export default function About() {
                     <AnimatedSection delay={0.4}>
                         <Card>
                             <h3 className="text-2xl font-heading font-bold mb-4">
-                                Full-Stack Developer | AI/ML Practitioner | Bridging Code and Intelligence
+                                AI/ML Engineer | Multi-Agent Systems & LLM-Integrated Products
                             </h3>
                             <div className="space-y-4 text-gray-300">
                                 <p>
-                                    I'm a Full Stack Developer with a passion for creating innovative solutions that
-                                    combine cutting-edge web technologies with artificial intelligence. With years of
-                                    experience in software development, I specialize in building scalable, performant
-                                    applications that deliver exceptional user experiences.
+                                    I'm an AI/ML Engineer and Full-Stack Developer with a passion for creating
+                                    innovative solutions that combine cutting-edge web technologies with artificial
+                                    intelligence. I specialize in building autonomous multi-agent systems and
+                                    LLM-integrated products that deliver exceptional, intelligent user experiences.
                                 </p>
                                 <p>
-                                    My expertise spans across modern web frameworks like Next.js and React, backend
-                                    technologies including Node.js and Python, and AI/ML integration using Google
-                                    Gemini and OpenAI APIs. I'm constantly exploring new technologies and best
-                                    practices to stay at the forefront of web development.
+                                    My expertise spans across multi-agent orchestration frameworks (LangChain, LangGraph),
+                                    LLM APIs (OpenAI, Claude, Groq Llama), modern web frameworks (Next.js, React), and
+                                    scalable backend architectures (FastAPI, Node.js). I'm constantly exploring new
+                                    technologies and patterns (like Human-in-the-Loop checkpoints and pgvector RAG-style AI
+                                    layers) to stay at the leading edge.
                                 </p>
                                 <p>
-                                    Beyond coding, I'm committed to giving back to the developer community through
-                                    open-source contributions, mentorship, and knowledge sharing. I believe in the
-                                    power of collaboration and continuous learning.
+                                    Beyond core engineering, I'm committed to giving back to the developer community
+                                    through open-source contributions, mentoring student chapters, and organizing tech
+                                    events. I believe in fostering collaborative learning and bridging students directly
+                                    with industry leadership.
                                 </p>
                             </div>
 

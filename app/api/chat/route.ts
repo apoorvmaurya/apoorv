@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { generateChatResponse } from '@/lib/ai/groq';
 import { getResumeContext } from '@/lib/ai/resume-context';
 import { ValidationError, getUserFriendlyMessage, logError } from '@/lib/errors';
+import { experiences, projects, skillCategories, communityActivities } from '@/lib/data/portfolio';
 
 /**
  * POST /api/chat
@@ -28,6 +29,21 @@ export async function POST(req: NextRequest) {
         // Get resume context
         const resumeContext = await getResumeContext();
 
+        // Get additional portfolio context to ensure full alignment between site & resume
+        const portfolioContextText = `
+ADDITIONAL PORTFOLIO DATA (ON THE WEBSITE):
+Projects on Site:
+${projects.map(p => `- ${p.title} (${p.featured ? 'Featured' : 'Non-featured'}): ${p.description}. Tech: ${p.technologies.join(', ')}`).join('\n')}
+
+Skill Categories on Site:
+${skillCategories.map(c => `- ${c.category}: ${c.skills.map(s => `${s.name} (${s.proficiency || 80}%)`).join(', ')}`).join('\n')}
+
+Community & Achievements on Site:
+${communityActivities.map(a => `- ${a.title}: ${a.description} (${a.date})`).join('\n')}
+`;
+
+        const combinedContext = `${resumeContext.text}\n\n${portfolioContextText}`;
+
         // Format conversation history for Groq LLaMA
         const formattedHistory =
             history?.map((msg: any) => ({
@@ -38,7 +54,7 @@ export async function POST(req: NextRequest) {
         // Generate response
         const response = await generateChatResponse(
             message,
-            resumeContext.text,
+            combinedContext,
             formattedHistory
         );
 

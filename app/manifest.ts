@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
     return {
         name: 'Apoorv Maurya Portfolio',
         short_name: 'Apoorv',
-        description: 'Portfolio of Apoorv Maurya - Full Stack Developer & AI Enthusiast',
+        description: 'Portfolio of Apoorv Maurya - AI/ML Engineer & Full-Stack Developer',
         start_url: '/',
         display: 'standalone',
         background_color: '#0a0a0f',

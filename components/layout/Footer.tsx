@@ -38,8 +38,7 @@ export default function Footer() {
                             Apoorv Maurya
                         </h3>
                         <p className="text-gray-400 text-sm">
-                            Full Stack Developer & AI Enthusiast building innovative solutions for the modern
-                            web.
+                            AI/ML Engineer & Full-Stack Developer building innovative solutions with Multi-Agent Systems & LLM-Integrated Products.
                         </p>
                     </div>
 

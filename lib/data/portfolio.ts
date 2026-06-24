@@ -4,16 +4,16 @@ export const experiences: Experience[] = [
     {
         id: '1',
         company: 'DevX Days',
-        position: 'Full Stack Developer Intern',
+        position: 'Full-Stack Developer Intern',
         startDate: '2025-01',
         endDate: '2025-09',
         description: [
-            'Build responsive landing page using Next.js with TypeScript implementing SSR for improved SEO performance.',
-            'Reduced page loading time by 40% through code splitting and lazy loading techniques.',
-            'Implemented client-side caching strategies resulting in smoother navigation experience for users.',
-            'Resolved cross-browser compatibility issues by creating custom CSS solutions for legacy browser support.',
+            'Architected async data ingestion pipelines in Next.js + TypeScript, directly applicable to the queue-based OCR and document ingestion patterns (SQS/BullMQ) required for legal document workflows.',
+            'Built API-response caching layers (SWR) reducing redundant calls by ~60% per session.',
+            'Implemented streaming response delivery and lazy-loading patterns that cut initial load time by 40% - directly transferable to streaming LLM draft generation required for real-time legal document creation.',
+            'Engineered multi-step validated UI flows with mandatory confirmation gates for critical user actions which directly mirrors the Human-in-the-Loop checkpoint design required in agent architectures.',
         ],
-        technologies: ['Next.js', 'TypeScript', 'React', 'Node.js', 'PostgreSQL'],
+        technologies: ['Next.js', 'TypeScript', 'SWR', 'BullMQ', 'SQS'],
     },
     {
         id: '2',
@@ -22,12 +22,10 @@ export const experiences: Experience[] = [
         startDate: '2024-07',
         endDate: '2024-12',
         description: [
-            'Developed AWS service migration UI with optimistic updates, reducing user wait time by 30%.',
-            'Translated complex Figma design mock-ups into pixel-perfect web pages using React and styled-components.',
-            'Created reusable component library that reduced development time for new features by 25%. ',
-            'Implemented responsive designs ensuring consistent user experience across mobile, tablet, and desktop devices.',
+            'Converted complex Figma designs into pixel-accurate React components using styled-components, validated pixel accuracy across the mobile, tablet, and desktop breakpoints via component-level QA.',
+            'Designed and documented a reusable React component library that measurably reduced the feature development time by ~25%, establishing the team\'s shared UI standard across all client products.',
         ],
-        technologies: ['React', 'Node.js', 'Express.js', 'AWS'],
+        technologies: ['React', 'styled-components', 'Figma'],
     },
 ];
 
@@ -35,11 +33,11 @@ export const projects: Project[] = [
     {
         id: '1',
         title: 'RetentIQ',
-        description: 'An enterprise SaaS customer churn-intelligence and health-scoring platform',
+        description: 'Multi-agent churn-intelligence SaaS platform combining scikit-learn and LangChain-orchestrated LLMs.',
         longDescription:
-            ' AI-powered customer churn-intelligence platform built on Supabase, FastAPI, and Llama 3.3. Spot churn risk 30–60 days before it happens.',
+            'Architected a multi-agent churn-intelligence SaaS platform combining a scikit-learn RandomForestClassifier with a LangChain-orchestrated Groq LLM layer. Built a database-backed async ingestion pipeline routing Stripe webhooks into a background job queue, decoupling data ingestion from the Express request thread and keeping the API non-blocking under concurrent loads. Implemented logprob-style confidence scoring on LLM outputs, flagging below-threshold predictions prominently before surfacing to users.',
         image: '/retentiq.png',
-        technologies: ['Next.js', 'TypeScript', 'Llama 3.3 70B', 'Supabase', 'FastAPI'],
+        technologies: ['FastAPI', 'Python', 'scikit-learn', 'LangChain', 'Groq LLM', 'Supabase', 'Docker', 'CI/CD'],
         liveUrl: 'https://retentiq-chi.vercel.app/',
         githubUrl: 'https://github.com/apoorvmaurya/retentiq',
         featured: true,
@@ -47,11 +45,11 @@ export const projects: Project[] = [
     {
         id: '2',
         title: 'Planora',
-        description: 'Because going on adventures shouldn\'t feel like solving World Peace!',
+        description: 'Real-time collaborative trip planning platform with a pgvector RAG-style AI layer.',
         longDescription:
-            ' A full-stack real-time collaborative platform that helps groups to plan trips with AI-powered itinerary generation, voting, budget splitting, and accountability features.',
+            'Built a full-stack real-time collaborative platform with a RAG-style AI layer: user preferences and history chunked, embedded, and stored in Supabase pgvector - retrieved via cosine similarity to ground Llama 3.3 itinerary generation. Integrated Llama 3.3 via LangChain with streaming response delivery for real-time draft generation and engineered a Momentum Engine. Built conflict-free collaborative state sync using Supabase Realtime channels.',
         image: '/planora.png',
-        technologies: ['Next.js', 'TypeScript', 'Llama 3.3 70B', 'Supabase'],
+        technologies: ['Next.js', 'TypeScript', 'Supabase', 'Llama 3.3', 'Vercel AI SDK', 'Zustand'],
         liveUrl: 'https://planora-plum-beta.vercel.app/',
         githubUrl: 'https://github.com/apoorvmaurya/planora',
         featured: true,
@@ -71,11 +69,11 @@ export const projects: Project[] = [
     {
         id: '4',
         title: 'AssessMed',
-        description: 'Advanced Health Prediction with AI',
+        description: 'Clinical decision interface exposing FastAPI-served ML prediction models.',
         longDescription:
-            'AssessMed leverages cutting-edge machine learning algorithms to provide accurate disease prediction based on your symptoms and medical history.',
+            'Built a full-stack clinical decision interface exposing FastAPI-served ML prediction models through guided & validated UI flows. Implemented API-response caching at the FastAPI layer to eliminate repeated ML inference overhead, significantly reducing latency. Designed a multi-step input form with real-time field validation.',
         image: '/assesmed.png',
-        technologies: ['Next.js', 'TypeScript', 'Supabase', 'AI/ML'],
+        technologies: ['Next.js', 'TypeScript', 'Python', 'FastAPI', 'Supabase', 'TailwindCSS'],
         liveUrl: 'https://assesmed.vercel.app/',
         githubUrl: 'https://github.com/apoorvmaurya/AssesMed',
         featured: false,
@@ -108,52 +106,54 @@ export const projects: Project[] = [
 
 export const skillCategories: SkillCategory[] = [
     {
-        category: 'Frontend',
+        category: 'Languages',
         skills: [
-            { name: 'React', category: 'frontend', proficiency: 95 },
-            { name: 'Next.js', category: 'frontend', proficiency: 95 },
             { name: 'TypeScript', category: 'frontend', proficiency: 90 },
             { name: 'JavaScript', category: 'frontend', proficiency: 95 },
-            { name: 'TailwindCSS', category: 'frontend', proficiency: 90 },
-            { name: 'HTML5/CSS3', category: 'frontend', proficiency: 95 },
+            { name: 'Python', category: 'backend', proficiency: 85 },
+            { name: 'SQL', category: 'database', proficiency: 80 },
         ],
     },
     {
-        category: 'Backend',
+        category: 'Frontend',
+        skills: [
+            { name: 'React.js', category: 'frontend', proficiency: 95 },
+            { name: 'Next.js (App Router / SSR)', category: 'frontend', proficiency: 95 },
+            { name: 'Tailwind CSS', category: 'frontend', proficiency: 90 },
+        ],
+    },
+    {
+        category: 'Backend & Database',
         skills: [
             { name: 'Node.js', category: 'backend', proficiency: 90 },
             { name: 'Express.js', category: 'backend', proficiency: 85 },
-            { name: 'Python', category: 'backend', proficiency: 80 },
-            { name: 'REST APIs', category: 'backend', proficiency: 90 },
-            { name: 'GraphQL', category: 'backend', proficiency: 75 },
-        ],
-    },
-    {
-        category: 'Database',
-        skills: [
-            { name: 'MongoDB', category: 'database', proficiency: 85 },
-            { name: 'PostgreSQL', category: 'database', proficiency: 85 },
+            { name: 'FastAPI', category: 'backend', proficiency: 85 },
+            { name: 'LangChain / LangGraph', category: 'backend', proficiency: 85 },
+            { name: 'Claude / OpenAI / Groq', category: 'backend', proficiency: 85 },
+            { name: 'Supabase', category: 'backend', proficiency: 90 },
             { name: 'MySQL', category: 'database', proficiency: 80 },
-            { name: 'Redis', category: 'database', proficiency: 75 },
         ],
     },
     {
         category: 'AI & ML',
         skills: [
-            { name: 'Google Gemini', category: 'ai', proficiency: 85 },
-            { name: 'OpenAI APIs', category: 'ai', proficiency: 85 },
-            { name: 'TensorFlow', category: 'ai', proficiency: 70 },
-            { name: 'PyTorch', category: 'ai', proficiency: 65 },
+            { name: 'Vercel AI SDK', category: 'ai', proficiency: 85 },
+            { name: 'LLM Integration', category: 'ai', proficiency: 90 },
+            { name: 'scikit-learn', category: 'ai', proficiency: 80 },
         ],
     },
     {
-        category: 'Tools & Cloud',
+        category: 'Tools & Platforms',
         skills: [
-            { name: 'Git/GitHub', category: 'tools', proficiency: 95 },
+            { name: 'Git', category: 'tools', proficiency: 95 },
             { name: 'Docker', category: 'tools', proficiency: 80 },
-            { name: 'AWS', category: 'tools', proficiency: 75 },
+            { name: 'AWS Textract', category: 'tools', proficiency: 75 },
+            { name: 'S3 / MinIO', category: 'tools', proficiency: 80 },
+            { name: 'BullMQ / SQS', category: 'tools', proficiency: 80 },
+            { name: 'Postman', category: 'tools', proficiency: 90 },
             { name: 'Vercel', category: 'tools', proficiency: 90 },
-            { name: 'CI/CD', category: 'tools', proficiency: 80 },
+            { name: 'Render', category: 'tools', proficiency: 80 },
+            { name: 'Figma', category: 'tools', proficiency: 75 },
         ],
     },
 ];

@@ -69,33 +69,37 @@ export async function getResumeContext(): Promise<ResumeContext> {
  */
 function getFallbackResumeContext(): string {
     return `
-Apoorv Maurya - Professional Portfolio
+Apoorv Maurya - AI/ML Engineer · Multi-Agent Systems & LLM-Integrated Products
 
 PROFESSIONAL SUMMARY:
-Experienced Full Stack Developer and Technology Leader with expertise in web development, AI/ML, and cloud technologies. Passionate about building scalable applications and innovative solutions.
+AI/ML Engineer specializing in Multi-Agent Systems and LLM-Integrated Products. Experienced in building scalable applications at the intersection of full-stack development and artificial intelligence.
 
 TECHNICAL SKILLS:
-- Frontend: React, Next.js, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS
-- Backend: Node.js, Python, Express.js, REST APIs
-- Database: MongoDB, PostgreSQL, MySQL, Redis
-- AI/ML: TensorFlow, PyTorch, Google Gemini, OpenAI
-- Cloud & DevOps: AWS, Google Cloud, Docker, Kubernetes, CI/CD
-- Tools: Git, GitHub, VS Code, Postman
+- Languages: TypeScript, JavaScript, Python, SQL
+- Frontend: React.js, Next.js (App Router / SSR), Tailwind CSS
+- Backend & Database: Node.js, Express.js, FastAPI, LangChain / LangGraph, Claude API / OpenAI / Groq Llama, Supabase, MySQL
+- AI / ML: Vercel AI SDK, LLM Integration, scikit-learn
+- Tools & Platforms: Git, Docker, AWS Textract, S3 / MinIO, BullMQ / SQS, Postman, Vercel, Render, Figma
+- Misc: Technical Documentation, Content Writing, Community Management, Cross-Functional Collaboration
 
 EXPERIENCE:
-Multiple years of experience in software development, working on various projects ranging from web applications to AI-powered solutions. Strong background in full-stack development, system architecture, and team leadership.
+- DevX Days (Full-Stack Developer Intern, Jan 2025 – Sept 2025):
+  * Architected async data ingestion pipelines in Next.js + TypeScript, directly applicable to the queue-based OCR and document ingestion patterns (SQS/BullMQ) required for legal document workflows.
+  * Built API-response caching layers (SWR) reducing redundant calls by ~60% per session.
+  * Implemented streaming response delivery and lazy-loading patterns that cut initial load time by 40% - directly transferable to streaming LLM draft generation required for real-time legal document creation.
+  * Engineered multi-step validated UI flows with mandatory confirmation gates for critical user actions which directly mirrors the Human-in-the-Loop checkpoint design required in agent architectures.
+- Pixelwand (Frontend Developer Intern, July 2024 – Dec 2024):
+  * Converted complex Figma designs into pixel-accurate React components using styled-components, validated pixel accuracy across the mobile, tablet, and desktop breakpoints via component-level QA.
+  * Designed and documented a reusable React component library that measurably reduced the feature development time by ~25%, establishing the team's shared UI standard across all client products.
 
 PROJECTS:
-- Built multiple full-stack applications using modern web technologies
-- Developed AI-powered solutions leveraging machine learning and natural language processing
-- Created scalable cloud-based applications with microservices architecture
-- Contributed to open-source projects and community initiatives
+- RetentIQ: Multi-agent churn-intelligence SaaS platform combining a scikit-learn RandomForestClassifier with a LangChain-orchestrated Groq LLM layer. Built async ingestion with Stripe webhooks and background queue.
+- Planora: Real-time collaborative platform with a pgvector RAG-style AI layer to ground Llama 3.3 itinerary generation, integrated streaming response delivery, and collaborative state sync.
+- AssessMed: Clinical decision interface exposing FastAPI-served ML prediction models, implementing API-response caching and real-time validated forms.
 
 EDUCATION:
-Strong educational background in Computer Science and Software Engineering.
-
-INTERESTS:
-Artificial Intelligence, Machine Learning, Web Development, Cloud Computing, Open Source, Community Building
+- IIT-Guwahati: Credit Linked AI/ML Extended Program (March 2025 – Present)
+- Galgotias University: BTech in Computer Science & Engineering (Oct 2021 – June 2025)
 
 For more detailed information, please explore the portfolio sections or contact Apoorv directly.
   `.trim();

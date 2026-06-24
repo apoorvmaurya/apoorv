@@ -19,21 +19,21 @@ export default function Experience() {
 
                 <div className="relative">
                     {/* Timeline line */}
-                    <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-600 via-accent-purple to-accent-cyan" />
+                    <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-600 via-accent-purple to-accent-cyan shadow-[0_0_15px_rgba(122,122,255,0.5)]" />
 
                     <div className="space-y-12">
                         {experiences.map((exp, index) => (
                             <AnimatedSection key={exp.id} delay={index * 0.2}>
-                                <div className={`flex items-center flex-row ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                                <div className={`flex items-center flex-row ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} group`}>
                                     <div className="hidden md:block flex-1" />
 
                                     {/* Timeline dot */}
                                     <div className="relative flex-shrink-0 w-8 md:w-16 flex justify-center">
-                                        <div className="w-4 h-4 rounded-full bg-gradient-to-r from-primary-600 to-accent-purple glow-effect-strong" />
+                                        <div className="w-4 h-4 rounded-full bg-gradient-to-r from-primary-600 to-accent-purple glow-effect-strong transition-all duration-300 group-hover:scale-125" />
                                     </div>
 
                                     <div className="flex-1 min-w-0">
-                                        <Card className={`ml-2 md:ml-4 lg:ml-8 ${index % 2 === 0 ? '' : 'md:mr-4 lg:mr-8 md:ml-0'}`}>
+                                        <Card className={`border-l-4 border-l-transparent hover:border-l-primary-500 ml-2 md:ml-4 lg:ml-8 ${index % 2 === 0 ? '' : 'md:mr-4 lg:mr-8 md:ml-0'}`}>
                                             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
                                                 <div className="min-w-0">
                                                     <h3 className="text-lg sm:text-xl font-heading font-bold text-white">

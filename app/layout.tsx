@@ -19,14 +19,14 @@ export const metadata: Metadata = {
     metadataBase: new URL('https://apoorv-gamma.vercel.app'),
     title: 'Apoorv Maurya | AI-Enabled Portfolio',
     description:
-        'Apoorv Maurya - Python Full-Stack Engineer · AI-Integrated Products & Developer Tooling. Explore my projects, experience, and skills.',
+        'Apoorv Maurya - AI/ML Engineer · Multi-Agent Systems & LLM-Integrated Products. Explore my projects, experience, and skills.',
     keywords: [
         'Apoorv Maurya',
         'Portfolio',
+        'AI/ML Engineer',
+        'Multi-Agent Systems',
+        'LLM Integration',
         'Full Stack Developer',
-        'AI Engineer',
-        'Machine Learning',
-        'Web Development',
         'Software Engineer',
     ],
     authors: [{ name: 'Apoorv Maurya' }],
@@ -41,14 +41,14 @@ export const metadata: Metadata = {
         url: 'https://apoorv-gamma.vercel.app',
         title: 'Apoorv Maurya | AI-Enabled Portfolio',
         description:
-            'Apoorv Maurya - Python Full-Stack Engineer · AI-Integrated Products & Developer Tooling ',
+            'Apoorv Maurya - AI/ML Engineer · Multi-Agent Systems & LLM-Integrated Products',
         siteName: 'Apoorv Maurya Portfolio',
         images: [
             {
                 url: '/og-image.png',
                 width: 1200,
                 height: 630,
-                alt: 'Apoorv Maurya - Apoorv Maurya - Python Full-Stack Engineer · AI-Integrated Products & Developer Tooling',
+                alt: 'Apoorv Maurya - AI/ML Engineer · Multi-Agent Systems & LLM-Integrated Products',
             },
         ],
     },
@@ -56,14 +56,14 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
         title: "Apoorv Maurya's Portfolio",
         description:
-            'Apoorv Maurya - Python Full-Stack Engineer · AI-Integrated Products & Developer Tooling',
+            'Apoorv Maurya - AI/ML Engineer · Multi-Agent Systems & LLM-Integrated Products',
         images: ['/og-image.png'],
     },
     other: {
         'x:card': 'summary_large_image',
         'x:title': 'Apoorv Maurya',
         'x:description':
-            'Apoorv Maurya - Python Full-Stack Engineer · AI-Integrated Products & Developer Tooling',
+            'Apoorv Maurya - AI/ML Engineer · Multi-Agent Systems & LLM-Integrated Products',
         'x:image': '/og-image.png',
     },
     robots: {
