@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { generateChatResponse } from '@/lib/ai/groq';
+import { generateChatResponse, getGroqConfig } from '@/lib/ai/groq';
 import { getResumeContext } from '@/lib/ai/resume-context';
+import { getRuleBasedFallback } from '@/lib/ai/fallback';
 import { ValidationError, getUserFriendlyMessage, logError } from '@/lib/errors';
-import { experiences, projects, skillCategories, communityActivities } from '@/lib/data/portfolio';
+import { projects, skillCategories, communityActivities } from '@/lib/data/portfolio';
 
 /**
  * POST /api/chat
- * Handle chat messages and generate AI responses
+ * Handle chat messages and generate AI responses with rule-based fallback
  */
 export async function POST(req: NextRequest) {
     try {
@@ -26,6 +27,10 @@ export async function POST(req: NextRequest) {
             throw new ValidationError('Message is too long (max 1000 characters)');
         }
 
+        // Check if strict error propagation is requested (used for deterministic test verification)
+        const url = new URL(req.url);
+        const isStrict = url.searchParams.get('strict') === 'true' || req.headers.get('x-test-strict') === 'true';
+
         // Get resume context
         const resumeContext = await getResumeContext();
 
@@ -44,36 +49,48 @@ ${communityActivities.map(a => `- ${a.title}: ${a.description} (${a.date})`).joi
 
         const combinedContext = `${resumeContext.text}\n\n${portfolioContextText}`;
 
-        // Format conversation history for Groq LLaMA
+        // Format conversation history for Groq
         const formattedHistory =
             history?.map((msg: any) => ({
                 role: msg.role === 'user' ? 'user' : 'model',
                 parts: [{ text: msg.content }],
             })) || [];
 
-        // Generate response
-        const response = await generateChatResponse(
-            message,
-            combinedContext,
-            formattedHistory
-        );
+        // Attempt provider generation
+        try {
+            const response = await generateChatResponse(
+                message,
+                combinedContext,
+                formattedHistory
+            );
 
-        return NextResponse.json({
-            success: true,
-            data: {
-                message: response.message,
-                action: response.action,
-            },
-        });
+            return NextResponse.json({
+                success: true,
+                data: {
+                    message: response.message,
+                    action: response.action,
+                    source: 'provider',
+                },
+            });
+        } catch (llmError: any) {
+            // In strict mode (e.g. CI failure fixture tests), rethrow so error maps to exact failure status
+            if (isStrict) {
+                throw llmError;
+            }
+
+            console.warn('Groq provider error encountered. Activating rule-based fallback:', llmError.message);
+            const fallback = getRuleBasedFallback(message);
+
+            return NextResponse.json({
+                success: true,
+                data: {
+                    message: fallback.message,
+                    action: fallback.action,
+                    source: 'fallback',
+                },
+            });
+        }
     } catch (error: any) {
-        // Log detailed error for debugging
-        console.error('=== CHAT API ERROR ===');
-        console.error('Error name:', error.name);
-        console.error('Error message:', error.message);
-        console.error('Error stack:', error.stack);
-        console.error('Full error:', error);
-        console.error('=====================');
-
         logError(error, 'Chat API');
 
         const statusCode = error.statusCode || 500;
@@ -96,14 +113,14 @@ ${communityActivities.map(a => `- ${a.title}: ${a.description} (${a.date})`).joi
  */
 export async function GET() {
     try {
-        const isConfigured = !!process.env.GROQ_API_KEY;
+        const { apiKey, model } = getGroqConfig();
 
         return NextResponse.json({
             success: true,
             data: {
-                configured: isConfigured,
-                model: 'llama-3.1-8b-instant',
-                features: ['context-aware', 'action-detection', 'resume-trained'],
+                configured: !!apiKey,
+                model,
+                features: ['context-aware', 'action-detection', 'resume-trained', 'rule-based-fallback'],
             },
         });
     } catch (error) {

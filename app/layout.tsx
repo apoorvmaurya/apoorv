@@ -17,9 +17,9 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
     metadataBase: new URL('https://apoorv-gamma.vercel.app'),
-    title: 'Apoorv Maurya | AI-Enabled Portfolio',
+    title: 'Apoorv Maurya - Full-Stack AI Engineer',
     description:
-        'Apoorv Maurya - AI/ML Engineer · Multi-Agent Systems & LLM-Integrated Products. Explore my projects, experience, and skills.',
+        'Full-Stack AI Engineer · LLM-Integrated Products. Explore my projects, experience, and skills.',
     keywords: [
         'Apoorv Maurya',
         'Portfolio',
@@ -39,31 +39,31 @@ export const metadata: Metadata = {
         type: 'website',
         locale: 'en_US',
         url: 'https://apoorv-gamma.vercel.app',
-        title: 'Apoorv Maurya | AI-Enabled Portfolio',
+        title: 'Apoorv Maurya - Full-Stack AI Engineer',
         description:
-            'Apoorv Maurya - AI/ML Engineer · Multi-Agent Systems & LLM-Integrated Products',
-        siteName: 'Apoorv Maurya Portfolio',
+            'Full-Stack AI Engineer · LLM-Integrated Products',
+        siteName: 'Apoorv Maurya - Full-Stack AI Engineer',
         images: [
             {
                 url: '/og-image.png',
                 width: 1200,
                 height: 630,
-                alt: 'Apoorv Maurya - AI/ML Engineer · Multi-Agent Systems & LLM-Integrated Products',
+                alt: 'Full-Stack AI Engineer · LLM-Integrated Products',
             },
         ],
     },
     twitter: {
         card: 'summary_large_image',
-        title: "Apoorv Maurya's Portfolio",
+        title: 'Apoorv Maurya - Full-Stack AI Engineer',
         description:
-            'Apoorv Maurya - AI/ML Engineer · Multi-Agent Systems & LLM-Integrated Products',
+            'Full-Stack AI Engineer · LLM-Integrated Products',
         images: ['/og-image.png'],
     },
     other: {
         'x:card': 'summary_large_image',
         'x:title': 'Apoorv Maurya',
         'x:description':
-            'Apoorv Maurya - AI/ML Engineer · Multi-Agent Systems & LLM-Integrated Products',
+            'Full-Stack AI Engineer · LLM-Integrated Products',
         'x:image': '/og-image.png',
     },
     robots: {

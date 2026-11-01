@@ -8,7 +8,7 @@ export const fadeIn: Variants = {
     visible: {
         opacity: 1,
         transition: {
-            duration: 0.6,
+            duration: 0.25,
             ease: [0.4, 0, 0.2, 1],
         },
     },
@@ -18,12 +18,12 @@ export const fadeIn: Variants = {
  * Fade in up animation
  */
 export const fadeInUp: Variants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 1, y: 6 },
     visible: {
         opacity: 1,
         y: 0,
         transition: {
-            duration: 0.6,
+            duration: 0.25,
             ease: [0.4, 0, 0.2, 1],
         },
     },
@@ -38,7 +38,7 @@ export const fadeInDown: Variants = {
         opacity: 1,
         y: 0,
         transition: {
-            duration: 0.6,
+            duration: 0.25,
             ease: [0.4, 0, 0.2, 1],
         },
     },
@@ -53,7 +53,7 @@ export const slideInLeft: Variants = {
         opacity: 1,
         x: 0,
         transition: {
-            duration: 0.6,
+            duration: 0.25,
             ease: [0.4, 0, 0.2, 1],
         },
     },
@@ -68,7 +68,7 @@ export const slideInRight: Variants = {
         opacity: 1,
         x: 0,
         transition: {
-            duration: 0.6,
+            duration: 0.25,
             ease: [0.4, 0, 0.2, 1],
         },
     },
@@ -107,7 +107,7 @@ export const staggerContainer: Variants = {
  * Stagger item animation
  */
 export const staggerItem: Variants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 1, y: 6 },
     visible: {
         opacity: 1,
         y: 0,
@@ -124,9 +124,9 @@ export const staggerItem: Variants = {
 export const hoverScale = {
     rest: { scale: 1 },
     hover: {
-        scale: 1.05,
+        scale: 1.02,
         transition: {
-            duration: 0.3,
+            duration: 0.2,
             ease: [0.4, 0, 0.2, 1],
         },
     },
@@ -138,15 +138,15 @@ export const hoverScale = {
 export const buttonHover = {
     rest: { scale: 1 },
     hover: {
-        scale: 1.05,
-        boxShadow: '0 0 20px rgba(122, 122, 255, 0.6)',
+        scale: 1.02,
+        boxShadow: 'none',
         transition: {
-            duration: 0.3,
+            duration: 0.2,
             ease: [0.4, 0, 0.2, 1],
         },
     },
     tap: {
-        scale: 0.95,
+        scale: 0.98,
     },
 };
 
@@ -156,13 +156,13 @@ export const buttonHover = {
 export const cardHover = {
     rest: {
         y: 0,
-        boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+        boxShadow: 'none',
     },
     hover: {
-        y: -8,
-        boxShadow: '0 12px 40px 0 rgba(122, 122, 255, 0.3)',
+        y: -3,
+        boxShadow: '0 8px 24px -4px rgba(0, 0, 0, 0.5)',
         transition: {
-            duration: 0.3,
+            duration: 0.2,
             ease: [0.4, 0, 0.2, 1],
         },
     },
@@ -172,12 +172,12 @@ export const cardHover = {
  * Page transition
  */
 export const pageTransition: Variants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 1, y: 6 },
     visible: {
         opacity: 1,
         y: 0,
         transition: {
-            duration: 0.6,
+            duration: 0.25,
             ease: [0.4, 0, 0.2, 1],
         },
     },

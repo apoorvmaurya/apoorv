@@ -7,6 +7,16 @@ const nextConfig: NextConfig = {
         imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     },
 
+    // Rewrite case variations for static assets on Linux deployments
+    async rewrites() {
+        return [
+            {
+                source: '/resume.pdf',
+                destination: '/Resume.pdf',
+            },
+        ];
+    },
+
     // Security headers
     async headers() {
         return [

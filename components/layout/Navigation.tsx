@@ -10,9 +10,9 @@ const navItems: NavItem[] = [
     { label: 'Home', href: 'hero' },
     { label: 'About', href: 'about' },
     { label: 'Experience', href: 'experience' },
+    { label: 'AI Lab', href: 'playground' },
     { label: 'Skills', href: 'skills' },
     { label: 'Projects', href: 'projects' },
-    { label: 'AI Lab', href: 'playground' },
     { label: 'Community', href: 'community' },
     { label: 'Contact', href: 'contact' },
 ];
@@ -48,57 +48,62 @@ export default function Navigation() {
 
     // Keyboard support - ESC to close menu
     useEffect(() => {
-        const handleEscape = (e: KeyboardEvent) => {
+        const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === 'Escape' && isMobileMenuOpen) {
                 setIsMobileMenuOpen(false);
             }
         };
 
-        window.addEventListener('keydown', handleEscape);
-        return () => window.removeEventListener('keydown', handleEscape);
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [isMobileMenuOpen]);
+
+    // Close mobile menu on resize to desktop
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768 && isMobileMenuOpen) {
+                setIsMobileMenuOpen(false);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, [isMobileMenuOpen]);
 
     const handleNavClick = (href: string) => {
+        scrollToElement(href);
         setIsMobileMenuOpen(false);
-        // Small delay to let menu close animation start before scrolling
-        setTimeout(() => {
-            scrollToElement(href);
-        }, 100);
     };
 
     return (
         <>
-            {/* Progress bar */}
+            {/* Scroll Progress Bar */}
             <motion.div
-                className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-600 via-accent-purple to-accent-cyan z-[60] origin-left"
-                style={{ scaleX: scrollProgress / 100 }}
+                className="fixed top-0 left-0 right-0 h-0.5 bg-[#F0B35A] z-50 origin-left"
+                style={{ scaleX: scrollProgress }}
             />
 
-            {/* Navigation */}
+            {/* Navigation Header */}
             <motion.nav
-                className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-out ${
+                className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
                     isScrolled
-                        ? 'top-4 mx-auto w-[calc(100%-2rem)] max-w-5xl rounded-full glass-island shadow-glow-sm px-6'
-                        : 'top-0 w-full bg-transparent px-4 sm:px-6 lg:px-8'
+                        ? 'top-4 mx-auto w-[calc(100%-2rem)] max-w-5xl rounded-full bg-[#18181B] border border-[#2E2E32] shadow-xl px-6'
+                        : 'bg-transparent'
                 }`}
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
-                transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                transition={{ duration: 0.5 }}
             >
-                <div className="max-w-7xl mx-auto">
-                    <div
-                        className={`flex items-center justify-between transition-all duration-500 ease-out ${
-                            isScrolled ? 'h-16' : 'h-20'
-                        }`}
-                    >
+                <div className={`${isScrolled ? '' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'}`}>
+                    <div className="flex items-center justify-between h-16">
                         {/* Logo */}
                         <motion.div
                             className="flex-shrink-0 cursor-pointer"
                             onClick={() => handleNavClick('hero')}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                         >
-                            <h1 className="text-2xl font-heading font-bold text-gradient">
+                            <h1 className="text-2xl font-heading font-bold text-[#F4F4F5] tracking-tight">
                                 Apoorv Maurya
                             </h1>
                         </motion.div>
@@ -109,21 +114,30 @@ export default function Navigation() {
                                 <button
                                     key={item.href}
                                     onClick={() => handleNavClick(item.href)}
-                                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                                    className={`px-3.5 py-1.5 rounded-md text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0B35A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111111] ${
                                         activeSection === item.href
-                                            ? 'text-white bg-white/10'
-                                            : 'text-gray-300 hover:text-white hover:bg-white/5'
+                                            ? 'text-[#F0B35A] font-semibold'
+                                            : 'text-[#A1A1AA] hover:text-[#F4F4F5]'
                                     }`}
                                     suppressHydrationWarning
                                 >
                                     {item.label}
                                 </button>
                             ))}
+                            {/* Resume Link Button in Nav */}
+                            <a
+                                href="/resume.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="ml-3 px-3 py-1.5 rounded-md text-sm font-medium text-[#F4F4F5] border border-neutral-700 hover:border-neutral-500 hover:bg-neutral-800/40 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0B35A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111111]"
+                            >
+                                Resume
+                            </a>
                         </div>
 
                         {/* Mobile menu button */}
                         <button
-                            className="md:hidden p-3 rounded-full glass hover:glass-strong transition-all active:scale-95"
+                            className="md:hidden p-2 rounded-lg border border-neutral-700 text-[#F4F4F5] bg-[#18181B]/80 hover:bg-[#18181B] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0B35A]"
                             onPointerDown={(e) => {
                                 e.preventDefault();
                                 setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -136,7 +150,7 @@ export default function Navigation() {
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
-                             >
+                            >
                                 {isMobileMenuOpen ? (
                                     <path
                                         strokeLinecap="round"
@@ -158,50 +172,50 @@ export default function Navigation() {
                 </div>
             </motion.nav>
 
-            {/* Backdrop overlay - click outside to close */}
+            {/* Mobile menu modal */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
-                        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+                        className="fixed inset-0 z-50 md:hidden bg-[#111111]/98 backdrop-blur-xl flex flex-col justify-center items-center p-6"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.15 }}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                    />
-                )}
-            </AnimatePresence>
-
-            {/* Mobile Navigation Dropdown Card */}
-            <AnimatePresence>
-                {isMobileMenuOpen && (
-                    <motion.div
-                        className="fixed left-4 right-4 md:hidden glass-island rounded-2xl border border-white/10 z-50 overflow-hidden shadow-2xl"
-                        style={{ top: '88px' }}
-                        initial={{ opacity: 0, y: -15, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -15, scale: 0.95 }}
-                        transition={{ duration: 0.2, ease: 'easeOut' }}
+                        transition={{ duration: 0.2 }}
                     >
-                        <nav className="p-4 space-y-1" role="navigation" aria-label="Mobile navigation">
+                        <button
+                            className="absolute top-6 right-6 p-2 rounded-lg border border-neutral-800 text-[#A1A1AA] hover:text-white transition-colors"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            aria-label="Close menu"
+                        >
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+
+                        <div className="flex flex-col items-center space-y-6 w-full max-w-xs">
                             {navItems.map((item) => (
                                 <button
                                     key={item.href}
-                                    onPointerDown={(e) => {
-                                        e.preventDefault();
-                                        handleNavClick(item.href);
-                                    }}
-                                    className={`w-full text-left px-5 py-3.5 rounded-xl text-base font-medium transition-all duration-200 active:scale-[0.98] ${
+                                    onClick={() => handleNavClick(item.href)}
+                                    className={`w-full py-2.5 rounded-lg text-lg transition-colors text-center ${
                                         activeSection === item.href
-                                            ? 'text-white bg-white/15 shadow-lg'
-                                            : 'text-gray-300 hover:text-white hover:bg-white/10'
+                                            ? 'text-[#F0B35A] font-bold'
+                                            : 'text-[#A1A1AA] hover:text-[#F4F4F5]'
                                     }`}
-                                    aria-current={activeSection === item.href ? 'page' : undefined}
                                 >
                                     {item.label}
                                 </button>
                             ))}
-                        </nav>
+                            <a
+                                href="/resume.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full py-2.5 rounded-lg text-base font-medium text-center text-[#F4F4F5] border border-neutral-700 hover:border-neutral-500 hover:bg-neutral-800/40 transition-colors"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Resume PDF
+                            </a>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>

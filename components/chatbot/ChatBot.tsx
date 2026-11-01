@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useChat } from '@/hooks/useChat';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
-import { scaleIn, fadeInUp, staggerContainer } from '@/lib/animations';
+import { scaleIn, staggerContainer } from '@/lib/animations';
 
 export default function ChatBot() {
     const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +19,6 @@ export default function ChatBot() {
         }
     }, [messages]);
 
-
     const handleSend = (message: string) => {
         sendMessage(message);
     };
@@ -28,26 +27,26 @@ export default function ChatBot() {
         <>
             {/* Chat Button */}
             <motion.button
-                className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-gradient-to-r from-primary-600 to-accent-purple shadow-glow-lg flex items-center justify-center text-white hover:shadow-glow-lg transition-all duration-300"
+                className="fixed bottom-[calc(0.75rem+env(safe-area-inset-bottom,0px))] right-3 sm:bottom-6 sm:right-6 z-50 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-[#18181B] text-[#F0B35A] border border-[#2E2E32] hover:border-[#F0B35A]/50 shadow-xl flex items-center justify-center transition-all duration-200"
                 onClick={() => setIsOpen(!isOpen)}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label={isOpen ? "Close chat assistant" : "Open chat assistant"}
             >
                 <AnimatePresence mode="wait">
                     {isOpen ? (
                         <motion.svg
                             key="close"
-                            className="w-6 h-6"
+                            className="w-5 h-5 sm:w-6 sm:h-6"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
                             initial={{ rotate: -90, opacity: 0 }}
                             animate={{ rotate: 0, opacity: 1 }}
                             exit={{ rotate: 90, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
+                            transition={{ duration: 0.15 }}
                         >
                             <path
                                 strokeLinecap="round"
@@ -59,14 +58,14 @@ export default function ChatBot() {
                     ) : (
                         <motion.svg
                             key="chat"
-                            className="w-6 h-6"
+                            className="w-5 h-5 sm:w-6 sm:h-6"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
                             initial={{ rotate: -90, opacity: 0 }}
                             animate={{ rotate: 0, opacity: 1 }}
                             exit={{ rotate: 90, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
+                            transition={{ duration: 0.15 }}
                         >
                             <path
                                 strokeLinecap="round"
@@ -78,10 +77,10 @@ export default function ChatBot() {
                     )}
                 </AnimatePresence>
 
-                {/* Notification dot for new features */}
+                {/* Notification dot */}
                 {!isOpen && (
                     <motion.span
-                        className="absolute -top-1 -right-1 w-4 h-4 bg-accent-cyan rounded-full border-2 border-background"
+                        className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-[#F0B35A] rounded-full border-2 border-[#18181B]"
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ delay: 0.5 }}
@@ -93,7 +92,7 @@ export default function ChatBot() {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        className="fixed bottom-24 right-6 z-[45] w-[400px] max-w-[calc(100vw-3rem)] h-[600px] max-h-[calc(100vh-10rem)] chat-panel rounded-2xl overflow-hidden flex flex-col"
+                        className="fixed inset-x-3 bottom-[calc(3.75rem+env(safe-area-inset-bottom,0px))] sm:inset-x-auto sm:bottom-24 sm:right-6 z-[45] sm:w-[380px] h-[500px] max-h-[calc(100vh-5rem)] rounded-2xl bg-[#18181B] border border-[#2E2E32] shadow-2xl flex flex-col overflow-hidden"
                         variants={scaleIn}
                         initial="hidden"
                         animate="visible"
@@ -101,12 +100,12 @@ export default function ChatBot() {
                         data-lenis-prevent
                     >
                         {/* Header */}
-                        <div className="bg-gradient-to-r from-primary-600/20 to-accent-purple/20 backdrop-blur-xl border-b border-white/10 p-4">
+                        <div className="bg-[#111111] border-b border-[#2E2E32] p-3.5 sm:p-4">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-3">
-                                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-primary-600 to-accent-purple flex items-center justify-center">
+                                    <div className="w-9 h-9 rounded-full bg-[#F0B35A]/15 border border-[#F0B35A]/30 flex items-center justify-center text-[#F0B35A]">
                                         <svg
-                                            className="w-6 h-6 text-white"
+                                            className="w-5 h-5"
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
@@ -120,18 +119,19 @@ export default function ChatBot() {
                                         </svg>
                                     </div>
                                     <div>
-                                        <h3 className="font-heading font-semibold text-white">AI Assistant</h3>
-                                        <p className="text-xs text-gray-400">Powered by Groq LLaMA</p>
+                                        <h3 className="font-heading font-semibold text-[#F4F4F5] text-sm">Portfolio Assistant</h3>
+                                        <p className="text-[11px] text-[#A1A1AA]">Full-Stack AI Profile Assistant</p>
                                     </div>
                                 </div>
                                 {messages.length > 0 && (
                                     <button
                                         onClick={clearMessages}
-                                        className="text-gray-400 hover:text-white transition-colors"
+                                        className="text-[#A1A1AA] hover:text-[#F4F4F5] transition-colors p-1"
                                         title="Clear chat"
+                                        aria-label="Clear chat"
                                     >
                                         <svg
-                                            className="w-5 h-5"
+                                            className="w-4 h-4 sm:w-5 sm:h-5"
                                             fill="none"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
@@ -149,7 +149,7 @@ export default function ChatBot() {
                         </div>
 
                         {/* Messages */}
-                        <div className="flex-1 overflow-y-auto p-4 space-y-4" style={{ overscrollBehavior: 'contain' }}>
+                        <div className="flex-1 overflow-y-auto p-3.5 sm:p-4 space-y-4 bg-[#111111]" style={{ overscrollBehavior: 'contain' }}>
                             <motion.div
                                 variants={staggerContainer}
                                 initial="hidden"
@@ -164,35 +164,35 @@ export default function ChatBot() {
                             {/* Suggestions (only shown if only welcome message is present) */}
                             {messages.length === 1 && (
                                 <motion.div
-                                    className="pl-10 space-y-2 mt-4 max-w-[85%]"
+                                    className="pl-2 sm:pl-10 space-y-2 mt-4 max-w-[95%] sm:max-w-[85%]"
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.3 }}
                                 >
-                                    <p className="text-xs text-gray-500 font-semibold mb-2 tracking-wider uppercase pl-1">
+                                    <p className="text-[11px] text-[#A1A1AA] font-semibold mb-2 tracking-wider uppercase pl-1">
                                         Suggested questions:
                                     </p>
                                     <div className="grid grid-cols-1 gap-2">
                                         <button
                                             onClick={() => handleSend("Tell me about Apoorv's experience")}
-                                            className="w-full text-left px-4 py-2.5 bg-white/5 border border-white/5 rounded-xl text-xs text-gray-300 hover:text-white hover:bg-white/10 hover:border-white/10 transition-all duration-300 flex items-center justify-between"
+                                            className="w-full text-left px-3.5 py-2.5 bg-white/[0.03] border border-[#2E2E32] rounded-xl text-xs text-[#D4D4D8] hover:text-[#F4F4F5] hover:bg-white/[0.06] hover:border-[#F0B35A]/40 transition-all duration-200 flex items-center justify-between"
                                         >
-                                            <span>💼 Tell me about his experience</span>
-                                            <span className="text-gray-500">→</span>
+                                            <span>Tell me about his experience</span>
+                                            <span className="text-[#A1A1AA]">→</span>
                                         </button>
                                         <button
                                             onClick={() => handleSend('What are his technical skills?')}
-                                            className="w-full text-left px-4 py-2.5 bg-white/5 border border-white/5 rounded-xl text-xs text-gray-300 hover:text-white hover:bg-white/10 hover:border-white/10 transition-all duration-300 flex items-center justify-between"
+                                            className="w-full text-left px-3.5 py-2.5 bg-white/[0.03] border border-[#2E2E32] rounded-xl text-xs text-[#D4D4D8] hover:text-[#F4F4F5] hover:bg-white/[0.06] hover:border-[#F0B35A]/40 transition-all duration-200 flex items-center justify-between"
                                         >
-                                            <span>🛠️ What are his skills?</span>
-                                            <span className="text-gray-500">→</span>
+                                            <span>What are his technical skills?</span>
+                                            <span className="text-[#A1A1AA]">→</span>
                                         </button>
                                         <button
                                             onClick={() => handleSend('Show me his projects')}
-                                            className="w-full text-left px-4 py-2.5 bg-white/5 border border-white/5 rounded-xl text-xs text-gray-300 hover:text-white hover:bg-white/10 hover:border-white/10 transition-all duration-300 flex items-center justify-between"
+                                            className="w-full text-left px-3.5 py-2.5 bg-white/[0.03] border border-[#2E2E32] rounded-xl text-xs text-[#D4D4D8] hover:text-[#F4F4F5] hover:bg-white/[0.06] hover:border-[#F0B35A]/40 transition-all duration-200 flex items-center justify-between"
                                         >
-                                            <span>🚀 Show me his projects</span>
-                                            <span className="text-gray-500">→</span>
+                                            <span>Show me his projects</span>
+                                            <span className="text-[#A1A1AA]">→</span>
                                         </button>
                                     </div>
                                 </motion.div>
@@ -205,16 +205,16 @@ export default function ChatBot() {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                 >
-                                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-primary-600 to-accent-purple flex-shrink-0" />
-                                    <div className="glass rounded-2xl rounded-tl-none px-4 py-3">
-                                        <div className="flex space-x-1">
-                                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
+                                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#F0B35A]/15 border border-[#F0B35A]/30 flex items-center justify-center text-[#F0B35A] flex-shrink-0" />
+                                    <div className="bg-[#18181B] border border-[#2E2E32] rounded-2xl rounded-tl-none px-4 py-3">
+                                        <div className="flex space-x-1.5">
+                                            <div className="w-1.5 h-1.5 bg-[#A1A1AA] rounded-full animate-bounce" />
                                             <div
-                                                className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                                                className="w-1.5 h-1.5 bg-[#A1A1AA] rounded-full animate-bounce"
                                                 style={{ animationDelay: '0.1s' }}
                                             />
                                             <div
-                                                className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                                                className="w-1.5 h-1.5 bg-[#A1A1AA] rounded-full animate-bounce"
                                                 style={{ animationDelay: '0.2s' }}
                                             />
                                         </div>
@@ -225,11 +225,11 @@ export default function ChatBot() {
                             {/* Error message */}
                             {error && (
                                 <motion.div
-                                    className="glass-strong rounded-lg p-3 border border-red-500/30"
+                                    className="rounded-lg p-3 bg-red-500/10 border border-red-500/30 text-xs text-red-400"
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                 >
-                                    <p className="text-sm text-red-400">{error}</p>
+                                    <p>{error}</p>
                                 </motion.div>
                             )}
 
@@ -237,7 +237,7 @@ export default function ChatBot() {
                         </div>
 
                         {/* Input */}
-                        <div className="border-t border-white/10 p-4 bg-background/50 backdrop-blur-xl">
+                        <div className="border-t border-[#2E2E32] p-3 sm:p-4 bg-[#111111]">
                             <ChatInput onSend={handleSend} disabled={isLoading} />
                         </div>
                     </motion.div>

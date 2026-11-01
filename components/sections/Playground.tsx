@@ -111,13 +111,13 @@ const vectorDocuments = [
     },
     {
         id: 'doc-2',
-        title: 'Project: RetentIQ Multi-Agent SaaS',
-        text: 'RetentIQ is a multi-agent customer churn-intelligence platform built on scikit-learn RandomForestClassifier, FastAPI, LangChain, Groq LLM, and Docker pipelines.'
+        title: 'Project: RetentIQ Churn Intelligence',
+        text: 'RetentIQ is an open-source churn intelligence platform built with LightGBM, TreeSHAP feature attributions, Groq LLM playbooks, and Next.js.'
     },
     {
         id: 'doc-3',
-        title: 'Project: Planora Collaborative AI Platform',
-        text: 'Planora is a real-time collaborative travel platform with a pgvector RAG AI layer grounding Llama 3.3 itinerary generation, using Supabase Realtime channels.'
+        title: 'Project: Planora Collaborative Travel Planner',
+        text: 'Planora is a real-time collaborative group trip planner built with Next.js 15, React 19, Supabase Realtime, and Groq Llama 3.3 for structured itineraries and expense OCR.'
     }
 ];
 
@@ -259,8 +259,8 @@ export default function Playground() {
                 });
 
                 // 2. Highlight keywords and types
-                styled = styled.replace(/\b(const|let|var|function|return|import|export|from|async|await|type|for|if|new|while|try|catch|finally)\b/g, '<span class="text-accent-purple font-semibold">$1</span>');
-                styled = styled.replace(/\b(string|number|boolean|any|AgentStep|void)\b/g, '<span class="text-accent-cyan font-medium">$1</span>');
+                styled = styled.replace(/\b(const|let|var|function|return|import|export|from|async|await|type|for|if|new|while|try|catch|finally)\b/g, '<span class="text-[#F0B35A] font-semibold">$1</span>');
+                styled = styled.replace(/\b(string|number|boolean|any|AgentStep|void)\b/g, '<span class="text-[#E4E4E7] font-medium">$1</span>');
 
                 // 3. Restore strings, highlighted
                 strings.forEach((str, i) => {
@@ -278,18 +278,15 @@ export default function Playground() {
     };
 
     return (
-        <section id="playground" className="py-20 bg-background relative overflow-hidden">
-            {/* Design Tokens - Grid & Glow */}
-            <div className="absolute inset-0 cyber-grid opacity-10" />
-            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-accent-purple/5 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-accent-cyan/5 rounded-full blur-[100px] pointer-events-none" />
+        <section id="playground" className="py-20 bg-background relative overflow-hidden scroll-mt-24">
+
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <AnimatedSection>
                     <div className="text-center mb-12">
                         <Badge variant="primary" className="mb-3">Reusable AI Engineering Showcase</Badge>
-                        <h2 className="text-4xl md:text-5xl font-heading font-bold text-gradient mb-4">
-                            AI Engineering Lab
+                        <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#F4F4F5] mb-4">
+                            AI Engineering <span className="text-[#F0B35A]">Lab</span>
                         </h2>
                         <p className="text-gray-400 max-w-2xl mx-auto text-base sm:text-lg">
                             Curated Agentic UX design patterns and clean mathematical algorithms optimized for real-time production AI pipelines.
@@ -303,30 +300,30 @@ export default function Playground() {
                         <div className="flex bg-white/5 p-1 rounded-xl border border-white/5 relative z-20">
                             <button
                                 onClick={() => setActiveTab('streaming')}
-                                className={`flex-1 py-3 text-sm font-medium rounded-lg transition-all duration-300 ${
+                                className={`flex-1 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
                                     activeTab === 'streaming'
-                                        ? 'bg-gradient-to-r from-primary-600 to-accent-purple text-white shadow-md'
-                                        : 'text-gray-400 hover:text-white'
+                                        ? 'bg-[#F0B35A] text-[#111111] font-semibold shadow-sm'
+                                        : 'text-[#A1A1AA] hover:text-[#F4F4F5]'
                                 }`}
                             >
                                 LLM Streaming
                             </button>
                             <button
                                 onClick={() => setActiveTab('agent')}
-                                className={`flex-1 py-3 text-sm font-medium rounded-lg transition-all duration-300 ${
+                                className={`flex-1 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
                                     activeTab === 'agent'
-                                        ? 'bg-gradient-to-r from-primary-600 to-accent-purple text-white shadow-md'
-                                        : 'text-gray-400 hover:text-white'
+                                        ? 'bg-[#F0B35A] text-[#111111] font-semibold shadow-sm'
+                                        : 'text-[#A1A1AA] hover:text-[#F4F4F5]'
                                 }`}
                             >
                                 Agent Orchestration
                             </button>
                             <button
                                 onClick={() => setActiveTab('vector')}
-                                className={`flex-1 py-3 text-sm font-medium rounded-lg transition-all duration-300 ${
+                                className={`flex-1 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
                                     activeTab === 'vector'
-                                        ? 'bg-gradient-to-r from-primary-600 to-accent-purple text-white shadow-md'
-                                        : 'text-gray-400 hover:text-white'
+                                        ? 'bg-[#F0B35A] text-[#111111] font-semibold shadow-sm'
+                                        : 'text-[#A1A1AA] hover:text-[#F4F4F5]'
                                 }`}
                             >
                                 Vector Matcher
@@ -359,7 +356,7 @@ export default function Playground() {
                                                     <motion.span
                                                         animate={{ opacity: [1, 0, 1] }}
                                                         transition={{ duration: 0.8, repeat: Infinity }}
-                                                        className="inline-block w-2 h-4 bg-accent-cyan ml-1 align-middle"
+                                                        className="inline-block w-2 h-4 bg-[#F0B35A] ml-1 align-middle"
                                                     />
                                                 )}
                                                 {!streamText && !isStreaming && (
@@ -457,7 +454,7 @@ export default function Playground() {
                                         <div>
                                             <div className="flex justify-between items-center mb-4">
                                                 <h3 className="text-lg font-heading font-bold text-white">Live Cosine Similarity Matcher</h3>
-                                                <Badge variant="outline" className="border-accent-cyan/30 text-accent-cyan bg-accent-cyan/10">pgvector RAG</Badge>
+                                                <Badge variant="outline" className="border-[#F0B35A]/30 text-[#F0B35A] bg-[#F0B35A]/10">pgvector RAG</Badge>
                                             </div>
                                             <p className="text-sm text-gray-400 mb-4">
                                                 Type any sentence below. Calculates a live cosine similarity match against portfolio docs.
@@ -468,7 +465,7 @@ export default function Playground() {
                                                     type="text"
                                                     value={searchQuery}
                                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                                    className="w-full px-3 py-2 bg-black/40 border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                                    className="w-full px-3 py-2 bg-black/40 border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#F0B35A]"
                                                     placeholder="Type query (e.g. Next.js, FastAPI, DevX)"
                                                 />
 
@@ -478,12 +475,12 @@ export default function Playground() {
                                                             <div className="flex justify-between text-xs">
                                                                 <span className="font-semibold text-gray-200">{doc.title}</span>
                                                                 <span className={`font-mono font-bold \${
-                                                                    doc.score > 30 ? 'text-accent-cyan' : 'text-gray-400'
+                                                                    doc.score > 30 ? 'text-[#F0B35A]' : 'text-gray-400'
                                                                 }`}>{doc.score}% similarity</span>
                                                             </div>
                                                             <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
                                                                 <div
-                                                                    className="h-full bg-gradient-to-r from-primary-500 to-accent-cyan transition-all duration-500"
+                                                                    className="h-full bg-[#F0B35A] transition-all duration-500"
                                                                     style={{ width: `\${doc.score}%` }}
                                                                 />
                                                             </div>

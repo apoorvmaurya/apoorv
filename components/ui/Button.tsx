@@ -25,14 +25,14 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref
     ) => {
         const baseStyles =
-            'inline-flex items-center justify-center rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed';
+            'inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#F0B35A] focus:ring-offset-2 focus:ring-offset-[#111111] disabled:opacity-50 disabled:cursor-not-allowed';
 
         const variants = {
             primary:
-                'bg-gradient-to-r from-primary-600 to-accent-purple text-white hover:shadow-glow-md',
-            secondary: 'glass text-white hover:glass-strong',
+                'bg-[#F0B35A] text-[#111111] hover:bg-[#E5A448] font-semibold',
+            secondary: 'border border-[#2E2E32] text-[#F4F4F5] hover:bg-white/[0.05]',
             outline:
-                'border-2 border-primary-500 text-primary-500 hover:bg-primary-500/10 hover:shadow-glow-sm',
+                'border border-[#F0B35A] text-[#F0B35A] hover:bg-[#F0B35A]/10',
             ghost: 'text-gray-300 hover:text-white hover:bg-white/5',
         };
 

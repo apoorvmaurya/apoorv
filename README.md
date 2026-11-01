@@ -1,4 +1,4 @@
-# 🚀 Portfolio Website
+# Apoorv Maurya - Full-Stack AI Engineer
 
 <div align="center">
 
@@ -7,7 +7,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178c6?style=for-the-badge&logo=typescript)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8?style=for-the-badge&logo=tailwind-css)
 
-**A modern, AI-powered portfolio website featuring glassmorphism design, smooth animations, and an intelligent chatbot assistant.**
+**Full-Stack AI Engineer · LLM-Integrated Products portfolio website.**
 
 [View Demo](#) • [Report Bug](#) • [Request Feature](#)
 

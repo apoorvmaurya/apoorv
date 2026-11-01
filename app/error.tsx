@@ -15,12 +15,12 @@ export default function Error({
     }, [error]);
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-background px-4">
-            <div className="max-w-md w-full glass rounded-2xl p-8 text-center">
+        <div className="min-h-screen flex items-center justify-center bg-[#111111] px-4">
+            <div className="max-w-md w-full bg-[#18181B] border border-[#2E2E32] rounded-2xl p-8 text-center shadow-xl">
                 <div className="mb-6">
-                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-pink/20 flex items-center justify-center">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center">
                         <svg
-                            className="w-10 h-10 text-accent-pink"
+                            className="w-8 h-8 text-red-400"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -33,26 +33,19 @@ export default function Error({
                             />
                         </svg>
                     </div>
-                    <h2 className="text-2xl font-heading font-bold text-gradient mb-2">
-                        Oops! Something went wrong
+                    <h2 className="text-2xl font-heading font-bold text-[#F4F4F5] mb-2">
+                        Something went wrong
                     </h2>
-                    <p className="text-gray-400">
+                    <p className="text-[#A1A1AA] text-sm">
                         {error.message || 'An unexpected error occurred. Please try again.'}
                     </p>
                 </div>
 
                 <button
                     onClick={reset}
-                    className="w-full px-6 py-3 bg-gradient-to-r from-primary-600 to-accent-purple rounded-lg font-medium hover:shadow-glow-md transition-all duration-300 hover:scale-105"
+                    className="w-full px-6 py-3 bg-[#F0B35A] text-[#111111] hover:bg-[#E5A448] font-semibold rounded-lg transition-colors"
                 >
                     Try Again
-                </button>
-
-                <button
-                    onClick={() => (window.location.href = '/')}
-                    className="w-full mt-3 px-6 py-3 glass rounded-lg font-medium hover:glass-strong transition-all duration-300"
-                >
-                    Go Home
                 </button>
             </div>
         </div>

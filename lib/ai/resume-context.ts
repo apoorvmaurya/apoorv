@@ -69,33 +69,33 @@ export async function getResumeContext(): Promise<ResumeContext> {
  */
 function getFallbackResumeContext(): string {
     return `
-Apoorv Maurya - AI/ML Engineer · Multi-Agent Systems & LLM-Integrated Products
+Apoorv Maurya - Full-Stack AI Engineer · LLM-Integrated Products
 
 PROFESSIONAL SUMMARY:
-AI/ML Engineer specializing in Multi-Agent Systems and LLM-Integrated Products. Experienced in building scalable applications at the intersection of full-stack development and artificial intelligence.
+Full-Stack AI Engineer specializing in LLM-Integrated Products. Experienced in building scalable applications at the intersection of full-stack development and artificial intelligence.
 
 TECHNICAL SKILLS:
 - Languages: TypeScript, JavaScript, Python, SQL
 - Frontend: React.js, Next.js (App Router / SSR), Tailwind CSS
 - Backend & Database: Node.js, Express.js, FastAPI, LangChain / LangGraph, Claude API / OpenAI / Groq Llama, Supabase, MySQL
-- AI / ML: Vercel AI SDK, LLM Integration, scikit-learn
-- Tools & Platforms: Git, Docker, AWS Textract, S3 / MinIO, BullMQ / SQS, Postman, Vercel, Render, Figma
+- AI / ML: Vercel AI SDK, LLM Integration, LightGBM, TreeSHAP
+- Tools & Platforms: Git, Docker, AWS Textract, S3 / MinIO, Postman, Vercel, Render, Figma
 - Misc: Technical Documentation, Content Writing, Community Management, Cross-Functional Collaboration
 
 EXPERIENCE:
 - DevX Days (Full-Stack Developer Intern, Jan 2025 – Sept 2025):
-  * Architected async data ingestion pipelines in Next.js + TypeScript, directly applicable to the queue-based OCR and document ingestion patterns (SQS/BullMQ) required for legal document workflows.
+  * Architected async data ingestion pipelines in Next.js + TypeScript.
   * Built API-response caching layers (SWR) reducing redundant calls by ~60% per session.
-  * Implemented streaming response delivery and lazy-loading patterns that cut initial load time by 40% - directly transferable to streaming LLM draft generation required for real-time legal document creation.
-  * Engineered multi-step validated UI flows with mandatory confirmation gates for critical user actions which directly mirrors the Human-in-the-Loop checkpoint design required in agent architectures.
+  * Implemented streaming response delivery and lazy-loading patterns that cut initial load time by 40%.
+  * Engineered multi-step validated UI flows with mandatory confirmation gates for critical user actions.
 - Pixelwand (Frontend Developer Intern, July 2024 – Dec 2024):
   * Converted complex Figma designs into pixel-accurate React components using styled-components, validated pixel accuracy across the mobile, tablet, and desktop breakpoints via component-level QA.
   * Designed and documented a reusable React component library that measurably reduced the feature development time by ~25%, establishing the team's shared UI standard across all client products.
 
 PROJECTS:
-- RetentIQ: Multi-agent churn-intelligence SaaS platform combining a scikit-learn RandomForestClassifier with a LangChain-orchestrated Groq LLM layer. Built async ingestion with Stripe webhooks and background queue.
-- Planora: Real-time collaborative platform with a pgvector RAG-style AI layer to ground Llama 3.3 itinerary generation, integrated streaming response delivery, and collaborative state sync.
-- AssessMed: Clinical decision interface exposing FastAPI-served ML prediction models, implementing API-response caching and real-time validated forms.
+- RetentIQ: Open-source predictive churn intelligence platform with LightGBM, TreeSHAP feature attributions, Groq LLM playbooks, Next.js frontend, and Node/TypeScript orchestration.
+- Planora: Real-time collaborative group trip planner built with Next.js 15, React 19, Supabase Realtime, and Groq Llama 3.3 for structured itineraries, PlaBot chat edits, and expense OCR.
+- AssesMed: Full-stack clinical decision interface exposing FastAPI-served ML prediction models through guided, validated UI workflows and client-side response caching.
 
 EDUCATION:
 - IIT-Guwahati: Credit Linked AI/ML Extended Program (March 2025 – Present)

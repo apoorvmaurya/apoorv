@@ -29,8 +29,9 @@ export default function AnimatedSection({
             ref={ref}
             id={id}
             className={className}
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+            style={{ opacity: 1 }}
             variants={fadeInUp}
             transition={{ delay }}
         >

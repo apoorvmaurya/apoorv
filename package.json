@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "test:chat": "node scripts/run-chat-tests.cjs",
+    "test:chat:live": "node scripts/run-live-smoke-test.cjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

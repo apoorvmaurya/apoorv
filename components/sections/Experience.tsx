@@ -1,73 +1,61 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import Card from '@/components/ui/Card';
 import { experiences } from '@/lib/data/portfolio';
 import { formatDate } from '@/lib/utils';
-import Badge from '@/components/ui/Badge';
 
 export default function Experience() {
     return (
-        <section id="experience" className="py-20 bg-background-secondary relative">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="experience" className="py-20 bg-background-secondary relative scroll-mt-24">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <AnimatedSection>
-                    <h2 className="text-4xl md:text-5xl font-heading font-bold text-gradient mb-12 text-center">
-                        Work Experience
+                    <h2 className="text-4xl md:text-5xl font-heading font-bold text-[#F4F4F5] mb-12 text-center">
+                        Work <span className="text-[#F0B35A]">Experience</span>
                     </h2>
                 </AnimatedSection>
 
-                <div className="relative">
-                    {/* Timeline line */}
-                    <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-600 via-accent-purple to-accent-cyan shadow-[0_0_15px_rgba(122,122,255,0.5)]" />
-
-                    <div className="space-y-12">
-                        {experiences.map((exp, index) => (
-                            <AnimatedSection key={exp.id} delay={index * 0.2}>
-                                <div className={`flex items-center flex-row ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} group`}>
-                                    <div className="hidden md:block flex-1" />
-
-                                    {/* Timeline dot */}
-                                    <div className="relative flex-shrink-0 w-8 md:w-16 flex justify-center">
-                                        <div className="w-4 h-4 rounded-full bg-gradient-to-r from-primary-600 to-accent-purple glow-effect-strong transition-all duration-300 group-hover:scale-125" />
+                {/* Simple Stacked List */}
+                <div className="space-y-6 sm:space-y-8">
+                    {experiences.map((exp, index) => (
+                        <AnimatedSection key={exp.id} delay={index * 0.1}>
+                            <Card className="border border-white/10 hover:border-[#F0B35A]/40 transition-colors duration-300 p-6 sm:p-8">
+                                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4 pb-4 border-b border-white/5">
+                                    <div>
+                                        <h3 className="text-xl sm:text-2xl font-heading font-bold text-[#F4F4F5]">
+                                            {exp.position}
+                                        </h3>
+                                        <p className="text-[#F0B35A] font-semibold text-base sm:text-lg mt-0.5">
+                                            {exp.company}
+                                        </p>
                                     </div>
-
-                                    <div className="flex-1 min-w-0">
-                                        <Card className={`border-l-4 border-l-transparent hover:border-l-primary-500 ml-2 md:ml-4 lg:ml-8 ${index % 2 === 0 ? '' : 'md:mr-4 lg:mr-8 md:ml-0'}`}>
-                                            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
-                                                <div className="min-w-0">
-                                                    <h3 className="text-lg sm:text-xl font-heading font-bold text-white">
-                                                        {exp.position}
-                                                    </h3>
-                                                    <p className="text-accent-cyan font-medium text-sm sm:text-base">{exp.company}</p>
-                                                </div>
-                                                <span className="text-xs sm:text-sm text-gray-400 sm:ml-4 flex-shrink-0">
-                                                    {formatDate(exp.startDate)} - {exp.endDate === 'Present' ? 'Present' : formatDate(exp.endDate)}
-                                                </span>
-                                            </div>
-
-                                            <ul className="space-y-2 mb-4">
-                                                {exp.description.map((item, i) => (
-                                                    <li key={i} className="text-gray-300 text-sm flex items-start">
-                                                        <span className="text-primary-500 mr-2">▹</span>
-                                                        <span>{item}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
-
-                                            <div className="flex flex-wrap gap-2">
-                                                {exp.technologies.map((tech) => (
-                                                    <Badge key={tech} variant="primary">
-                                                        {tech}
-                                                    </Badge>
-                                                ))}
-                                            </div>
-                                        </Card>
-                                    </div>
+                                    <span className="text-xs sm:text-sm text-[#A1A1AA] font-mono tracking-wide py-1 px-3 rounded-full bg-white/5 border border-white/10 self-start sm:self-auto">
+                                        {formatDate(exp.startDate)} – {exp.endDate === 'Present' ? 'Present' : formatDate(exp.endDate)}
+                                    </span>
                                 </div>
-                            </AnimatedSection>
-                        ))}
-                    </div>
+
+                                <ul className="space-y-2.5 mb-6">
+                                    {exp.description.map((item, i) => (
+                                        <li key={i} className="text-[#D4D4D8] text-sm sm:text-base flex items-start leading-relaxed">
+                                            <span className="text-[#F0B35A] mr-2.5 select-none font-bold text-sm">▪</span>
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                <div className="flex flex-wrap gap-2 pt-2">
+                                    {exp.technologies.map((tech) => (
+                                        <span
+                                            key={tech}
+                                            className="px-3 py-1 rounded-md text-xs font-medium text-[#F4F4F5] bg-white/5 border border-white/10"
+                                        >
+                                            {tech}
+                                        </span>
+                                    ))}
+                                </div>
+                            </Card>
+                        </AnimatedSection>
+                    ))}
                 </div>
             </div>
         </section>

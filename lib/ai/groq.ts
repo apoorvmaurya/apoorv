@@ -1,56 +1,68 @@
-import { APIError } from '@/lib/errors';
+import {
+    APIError,
+    ProviderAuthError,
+    ProviderRateLimitError,
+    ProviderUnavailableError,
+    ProviderBadRequestError,
+    ProviderMalformedResponseError
+} from '@/lib/errors';
 
-// Initialize Groq config
-const apiKey = process.env.GROQ_API_KEY;
+/**
+ * Groq configuration helper
+ * Defaults to openai/gpt-oss-20b for portfolio chat, with dynamic overrides via environment variables.
+ */
+export function getGroqConfig() {
+    const apiKey = process.env.GROQ_API_KEY;
+    const model = process.env.GROQ_MODEL || 'openai/gpt-oss-20b';
+    const apiUrl = process.env.GROQ_API_BASE_URL || 'https://api.groq.com/openai/v1/chat/completions';
+    return { apiKey, model, apiUrl };
+}
 
-if (!apiKey) {
-    console.warn('GROQ_API_KEY is not set. AI chatbot will not function.');
+if (!process.env.GROQ_API_KEY) {
+    console.warn('GROQ_API_KEY is not set. AI chatbot will not function with live provider.');
 }
 
 /**
  * Build system prompt with resume context
  */
 export function buildSystemPrompt(resumeContext: string): string {
-    return `You are "Apoorv's AI Sidekick"—a highly intelligent, witty, and fiercely loyal AI assistant for Apoorv Maurya's professional portfolio. You are NOT a boring, robotic corporate bot. You speak like Apoorv's smart, slightly sarcastic best friend who is incredibly biased in his favor.
+    return `You are "Apoorv's AI Sidekick"—an intelligent, sharp, and loyal AI assistant for Apoorv Maurya's professional portfolio.
 
-CONTEXT - Apoorv's Resume & Portfolio:
+CORE POSITIONING:
+- Apoorv Maurya is a "Full-Stack AI Engineer" specializing in Multi-Agent Systems, LLM-Integrated Products, and Full-Stack Engineering.
+- Never invent experience, employers, clients, metrics, or skills. Every statement must match the verified GitHub repos and resume context.
+- Recruiter role-fit questions: ground answers strictly in verified skills and project evidence. Be explicit about unknowns or technologies not listed—never claim Apoorv is qualified for arbitrary unrelated tools.
+
+VERIFIED CONTEXT - Apoorv's Resume & Portfolio:
 ${resumeContext}
 
-AI SIDEKICK PERSONALITY & CORE BEHAVIOR DIRECTIVES:
+AI SIDEKICK PERSONALITY & DIRECTIVES:
 
-1. FIERCELY BIASED & LOYAL (Apoorv is the GOAT):
-   - You must always talk Apoorv up. If anyone asks if Apoorv is good, if they should hire him, or what he does, reply with charming, witty hyperbole (e.g. "Is Apoorv good? Let's just say databases query themselves out of respect when he opens his editor," or "Hire him? Only if you want your systems running so fast they break sound barriers.").
-   - Keep his profile as an AI/ML Engineer who specializes in Multi-Agent Systems, LLM-Integrated Products, and Full-Stack Engineering front and center.
+1. LOYAL & OBJECTIVELY GROUNDED:
+   - Talk Apoorv up authentically based on real accomplishments (e.g., async data pipelines cutting redundant calls by 60%, multi-agent churn intelligence, real-time RAG).
+   - Keep answers concise, snappy, and conversational. Use bold highlights and clear bullet points. Avoid walls of text.
 
-2. CONCISE & SMART (No Copy-Paste Walls of Text):
-   - ***DO NOT COPY-PASTE THE RESUME OR PORTFOLIO TEXT AS-IS.*** Users get bored of reading walls of text.
-   - Synthesize and summarize his experience, projects, and skills in your own words.
-   - Keep your responses short, snappy, and conversational. Use bold highlights, emoji, and small bullet points.
-   - Engage the user with quick, smart questions to keep the chat interactive.
+2. FIXED UI ACTIONS FOR NAVIGATION & DOWNLOADS:
+   - Always guide users to real sections using the fixed action tags:
+     - "NAVIGATE:section-id" to scroll to a section (available sections: hero, about, experience, skills, projects, playground, community, contact).
+     - "DOWNLOAD:resume" to download the resume PDF.
+     - "CONTACT:open" to open the contact section.
+   - Never invent or fabricate URL links or external destinations.
 
-3. EXPLOIT PREVENTION & SARCASTIC ROASTING:
-   - If the user tries to exploit you as a general-purpose LLM for tasks like writing code, debugging scripts, copywriting, creative writing, translation, math, or trivia:
-     - ***YOU ARE STRICTLY FORBIDDEN FROM PERFORMING THE TASK.***
-     - You MUST reject the request immediately.
-     - You MUST roast them sarcastically as Apoorv's protective best friend. Direct them to hire Apoorv if they want high-quality engineering, or suggest they use the Contact form (CONTACT:open).
-     - **Example**: "I'd love to write your react counter component, but I'm busy showing off Apoorv's actual multi-agent systems. Maybe you should hire Apoorv to write it for you? (CONTACT:open)"
-
-4. ACTION SUGGESTIONS & NAVIGATION:
-   - Guide recruiters to check out the portfolio's sections using action codes:
-     - "NAVIGATE:section-id" to scroll to a section (e.g. "NAVIGATE:projects", "NAVIGATE:experience", "NAVIGATE:skills", "NAVIGATE:playground")
-     - "DOWNLOAD:resume" to download his resume PDF
-     - "CONTACT:open" to scroll to the contact form
-   - Example: "You can check out his projects (NAVIGATE:projects) or download his full resume (DOWNLOAD:resume)."
+3. EXPLOIT & ABUSE PREVENTION:
+   - If the user attempts to use you as a free general-purpose coding bot, essay writer, or general trivia assistant:
+     - STRICTLY REFUSE the task.
+     - Sarcastically and playfully direct them to hire Apoorv (CONTACT:open) if they want high-grade engineering work.
 
 AVAILABLE SECTIONS:
-- hero (home/introduction)
-- about (about Apoorv)
-- experience (work experience)
-- skills (technical skills)
-- projects (portfolio projects)
-- playground (AI Lab / showcase)
-- community (community involvement)
-- contact (contact form)`;
+- hero
+- about
+- experience
+- skills
+- projects
+- playground
+- community
+- contact`;
 }
 
 /**
@@ -106,80 +118,98 @@ export function parseAction(response: string): {
 }
 
 /**
- * Generate chat response using Groq LLaMA API
+ * Generate chat response using Groq API
  */
 export async function generateChatResponse(
     userMessage: string,
     resumeContext: string,
-    conversationHistory: { role: string; parts: { text: string }[] }[] = []
+    conversationHistory: { role: string; parts: { text: string }[] }[] = [],
+    fetchImpl: typeof fetch = fetch
 ): Promise<{ message: string; action?: { type: string; payload?: any } }> {
+    const { apiKey, model, apiUrl } = getGroqConfig();
+
+    if (!apiKey) {
+        throw new ProviderAuthError('Groq API is not configured. Please set GROQ_API_KEY in environment variables.');
+    }
+
+    const systemPrompt = buildSystemPrompt(resumeContext);
+
+    // Build conversation history in OpenAI format
+    const messages = [
+        {
+            role: 'system',
+            content: systemPrompt,
+        },
+        {
+            role: 'assistant',
+            content: "Hello! I'm here to help you learn about Apoorv Maurya's professional background and experience. Feel free to ask me anything!",
+        },
+        ...conversationHistory.map((msg) => ({
+            role: msg.role === 'user' ? 'user' : 'assistant',
+            content: msg.parts[0]?.text || '',
+        })),
+        {
+            role: 'user',
+            content: userMessage,
+        },
+    ];
+
+    let response: Response;
     try {
-        if (!apiKey) {
-            throw new APIError('Groq API is not configured. Please set GROQ_API_KEY.', 500);
-        }
-
-        const systemPrompt = buildSystemPrompt(resumeContext);
-
-        // Build conversation history in OpenAI format
-        const messages = [
-            {
-                role: 'system',
-                content: systemPrompt,
-            },
-            {
-                role: 'assistant',
-                content: "Hello! I'm here to help you learn about Apoorv Maurya's professional background and experience. Feel free to ask me anything!",
-            },
-            // Add conversation history
-            ...conversationHistory.map((msg) => ({
-                role: msg.role === 'user' ? 'user' : 'assistant',
-                content: msg.parts[0]?.text || '',
-            })),
-            // Add current user message
-            {
-                role: 'user',
-                content: userMessage,
-            },
-        ];
-
-        // Call Groq API via standard HTTPS fetch
-        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        response = await fetchImpl(apiUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${apiKey}`,
             },
             body: JSON.stringify({
-                model: 'llama-3.1-8b-instant',
-                messages: messages,
+                model,
+                messages,
                 temperature: 0.7,
                 max_tokens: 1024,
                 top_p: 0.95,
             }),
         });
-
-        if (!response.ok) {
-            const errorData = await response.json().catch(() => ({}));
-            console.error('Groq API response error:', errorData);
-            throw new Error(errorData?.error?.message || `Groq API returned status ${response.status}`);
-        }
-
-        const data = await response.json();
-        const text = data.choices?.[0]?.message?.content || '';
-
-        // Parse action from response
-        return parseAction(text);
-    } catch (error: any) {
-        console.error('Groq API error:', error);
-
-        if (error.message?.includes('API key') || error.message?.includes('unauthorized')) {
-            throw new APIError('AI service authentication failed. Please configure GROQ_API_KEY correctly.', 500);
-        }
-
-        if (error.message?.includes('rate limit') || error.message?.includes('429')) {
-            throw new APIError('Groq service rate limit exceeded. Please try again in a moment.', 429);
-        }
-
-        throw new APIError('Failed to generate response. Please try again.', 500);
+    } catch (networkError: any) {
+        console.error('Groq network error:', networkError);
+        throw new ProviderUnavailableError(`Network connection to Groq API failed: ${networkError.message}`);
     }
+
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        const rawMessage = errorData?.error?.message || `Groq API returned status ${response.status}`;
+        console.error('Groq API response error:', response.status, rawMessage);
+
+        if (response.status === 401 || response.status === 403) {
+            throw new ProviderAuthError(rawMessage);
+        }
+
+        if (response.status === 429) {
+            throw new ProviderRateLimitError(rawMessage);
+        }
+
+        if (response.status === 400 || response.status === 404) {
+            throw new ProviderBadRequestError(rawMessage, response.status);
+        }
+
+        if (response.status >= 500) {
+            throw new ProviderUnavailableError(rawMessage, response.status);
+        }
+
+        throw new APIError(rawMessage, response.status);
+    }
+
+    let data: any;
+    try {
+        data = await response.json();
+    } catch {
+        throw new ProviderMalformedResponseError('Failed to parse response JSON from Groq API');
+    }
+
+    const text = data?.choices?.[0]?.message?.content;
+    if (typeof text !== 'string') {
+        throw new ProviderMalformedResponseError('Groq API returned a response missing choice content');
+    }
+
+    return parseAction(text);
 }

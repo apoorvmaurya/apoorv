@@ -48,12 +48,22 @@ export interface Project {
 export interface Skill {
     name: string;
     category: 'frontend' | 'backend' | 'database' | 'tools' | 'ai' | 'other';
-    proficiency?: number; // 0-100
+    proficiency?: number; // 0-100 (optional legacy support)
+    context: 'used in internship work at Pixelwand / DevX Days' | 'used in personal projects';
 }
 
 export interface SkillCategory {
     category: string;
     skills: Skill[];
+}
+
+export interface Publication {
+    title: string;
+    authorship: string;
+    venue: string;
+    publisher: string;
+    date: string;
+    doiUrl: string;
 }
 
 export interface SocialLink {

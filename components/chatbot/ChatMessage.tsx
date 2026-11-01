@@ -14,19 +14,20 @@ export default function ChatMessage({ message }: ChatMessageProps) {
 
     return (
         <motion.div
-            className={`flex items-start space-x-3 ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`}
+            className={`flex items-start space-x-2.5 sm:space-x-3 ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`}
             variants={staggerItem}
         >
             {/* Avatar */}
             <div
-                className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center ${isUser
-                        ? 'bg-gradient-to-r from-accent-cyan to-accent-purple'
-                        : 'bg-gradient-to-r from-primary-600 to-accent-purple'
-                    }`}
+                className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex-shrink-0 flex items-center justify-center ${
+                    isUser
+                        ? 'bg-[#27272A] border border-[#3F3F46] text-[#A1A1AA]'
+                        : 'bg-[#F0B35A]/15 border border-[#F0B35A]/30 text-[#F0B35A]'
+                }`}
             >
                 {isUser ? (
                     <svg
-                        className="w-5 h-5 text-white"
+                        className="w-4 h-4 text-[#F4F4F5]"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -40,7 +41,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                     </svg>
                 ) : (
                     <svg
-                        className="w-5 h-5 text-white"
+                        className="w-4 h-4 text-[#F0B35A]"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -57,12 +58,13 @@ export default function ChatMessage({ message }: ChatMessageProps) {
 
             {/* Message bubble */}
             <div
-                className={`max-w-[78%] rounded-2xl px-5 py-3 shadow-md ${isUser
-                        ? 'bg-gradient-to-br from-primary-600 to-accent-purple text-white rounded-tr-none shadow-glow-sm'
-                        : 'bg-white/5 border border-white/5 border-l-2 border-l-primary-500 text-gray-100 rounded-tl-none'
-                    }`}
+                className={`max-w-[82%] sm:max-w-[78%] rounded-2xl px-4 py-2.5 shadow-sm ${
+                    isUser
+                        ? 'bg-[#27272A] border border-[#3E3E42] text-[#F4F4F5] rounded-tr-none'
+                        : 'bg-[#18181B] border border-[#2E2E32] border-l-2 border-l-[#F0B35A] text-[#E4E4E7] rounded-tl-none'
+                }`}
             >
-                <div className="text-sm font-sans leading-relaxed text-current whitespace-pre-wrap break-words">
+                <div className="text-xs sm:text-sm font-sans leading-relaxed text-current whitespace-pre-wrap break-words">
                     <ReactMarkdown
                         components={{
                             p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
@@ -71,7 +73,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                                     href={href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-accent-cyan hover:underline"
+                                    className="text-[#F0B35A] hover:underline font-medium"
                                 >
                                     {children}
                                 </a>
@@ -80,7 +82,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                             ol: ({ children }) => <ol className="list-decimal pl-4 mb-2">{children}</ol>,
                             li: ({ children }) => <li className="mb-1">{children}</li>,
                             code: ({ children }) => (
-                                <code className="bg-black/30 px-1 py-0.5 rounded text-accent-cyan text-xs">
+                                <code className="bg-black/40 text-[#F0B35A] px-1 py-0.5 rounded text-xs font-mono">
                                     {children}
                                 </code>
                             ),
@@ -91,26 +93,24 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                 </div>
 
                 {message.action?.type === 'download' && message.action.payload === 'resume' && (
-                    <motion.button
-                        onClick={() => {
-                            const link = document.createElement('a');
-                            link.href = '/Resume.pdf';
-                            link.download = 'Apoorv_Maurya_Resume.pdf';
-                            link.click();
-                        }}
-                        className="mt-3 flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-600 to-accent-purple text-white text-xs font-semibold rounded-lg hover:shadow-glow-sm transition-all duration-300 transform active:scale-95 border border-white/10"
+                    <motion.a
+                        href="/resume.pdf"
+                        download="Apoorv_Maurya_Resume.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#F0B35A] text-[#111111] text-xs font-semibold rounded-lg hover:bg-[#E5A448] transition-colors"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                     >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
-                        Download Apoorv's Resume
-                    </motion.button>
+                        Download Apoorv&apos;s Resume
+                    </motion.a>
                 )}
 
                 {/* Timestamp */}
-                <p className="text-xs opacity-60 mt-2">
+                <p className="text-[10px] text-[#71717A] mt-1.5">
                     {message.timestamp.toLocaleTimeString('en-US', {
                         hour: '2-digit',
                         minute: '2-digit',

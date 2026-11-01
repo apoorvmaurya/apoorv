@@ -34,11 +34,11 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                     {/* Brand */}
                     <div className="text-center md:text-left">
-                        <h3 className="text-xl font-heading font-bold text-gradient mb-4">
+                        <h3 className="text-xl font-heading font-bold text-[#F4F4F5] mb-4">
                             Apoorv Maurya
                         </h3>
                         <p className="text-gray-400 text-sm">
-                            AI/ML Engineer & Full-Stack Developer building innovative solutions with Multi-Agent Systems & LLM-Integrated Products.
+                            Full-Stack AI Engineer · LLM-Integrated Products
                         </p>
                     </div>
 
@@ -133,7 +133,7 @@ export default function Footer() {
                 {/* Bottom */}
                 <div className="border-t border-white/10 pt-8 text-center">
                     <p className="text-gray-400 text-sm">
-                        © {currentYear} Built with ❤️ by Apoorv Maurya
+                        © {currentYear} Apoorv Maurya. All rights reserved.
                     </p>
                 </div>
             </div>

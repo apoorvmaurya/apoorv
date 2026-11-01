@@ -14,16 +14,16 @@ export default function Badge({
     ...props
 }: BadgeProps) {
     const variants = {
-        default: 'bg-white/10 text-gray-300',
-        primary: 'bg-primary-500/20 text-primary-300 border border-primary-500/30',
-        accent: 'bg-accent-purple/20 text-accent-purple border border-accent-purple/30',
-        outline: 'border border-white/20 text-gray-300',
+        default: 'bg-white/[0.05] text-[#D4D4D8] border border-white/10',
+        primary: 'bg-[#F0B35A]/15 text-[#F0B35A] border border-[#F0B35A]/30',
+        accent: 'bg-[#F0B35A]/10 text-[#F0B35A] border border-[#F0B35A]/25',
+        outline: 'border border-[#2E2E32] text-[#A1A1AA]',
     };
 
     return (
         <span
             className={cn(
-                'inline-flex items-center px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:scale-105',
+                'inline-flex items-center px-3 py-1 rounded-full text-xs font-medium transition-all duration-200',
                 variants[variant],
                 className
             )}

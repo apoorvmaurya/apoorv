@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      run_live_smoke_test:
+        description: 'Run live Groq API smoke test (requires repository secret GROQ_API_KEY)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.20.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type check
+        run: pnpm type-check
+
+      - name: Deterministic Chat Route CI Check (Mocked Groq Provider)
+        run: pnpm test:chat
+
+      - name: Production Build Check
+        run: pnpm build
+
+      - name: Optional Live Groq Smoke Test
+        if: github.event_name == 'workflow_dispatch' && inputs.run_live_smoke_test
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GROQ_MODEL: 'openai/gpt-oss-20b'
+        run: pnpm test:chat:live

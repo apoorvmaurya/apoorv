@@ -34,7 +34,7 @@ export default function ChatInput({ onSend, disabled = false }: ChatInputProps) 
     };
 
     return (
-        <div className="relative flex items-end bg-white/5 border border-white/10 rounded-2xl p-1.5 focus-within:border-primary-500/50 focus-within:ring-1 focus-within:ring-primary-500/50 transition-all duration-300">
+        <div className="relative flex items-end bg-[#18181B] border border-[#2E2E32] rounded-xl p-1.5 focus-within:border-[#F0B35A] focus-within:ring-1 focus-within:ring-[#F0B35A]/50 transition-colors">
             <textarea
                 ref={textareaRef}
                 id="chat-message-input"
@@ -45,21 +45,22 @@ export default function ChatInput({ onSend, disabled = false }: ChatInputProps) 
                 placeholder="Ask me anything..."
                 disabled={disabled}
                 rows={1}
-                className="flex-1 bg-transparent border-0 text-white placeholder-gray-500 focus:ring-0 focus:outline-none pl-3 pr-16 py-3.5 resize-none max-h-32 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                className="flex-1 bg-transparent border-0 text-[#F4F4F5] placeholder-[#71717A] focus:ring-0 focus:outline-none pl-2.5 pr-12 py-2 resize-none max-h-28 disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm"
                 suppressHydrationWarning
             />
             
-            <div className="absolute right-14 bottom-5 text-[10px] text-gray-500 hidden sm:block">
+            <div className="absolute right-12 bottom-3 text-[10px] text-[#71717A] hidden sm:block">
                 {message.length}/1000
             </div>
 
             <button
                 onClick={handleSend}
                 disabled={disabled || !message.trim()}
-                className="w-11 h-11 rounded-xl bg-gradient-to-r from-primary-600 to-accent-purple flex items-center justify-center text-white shadow-md hover:shadow-glow-sm hover:scale-105 active:scale-95 disabled:opacity-20 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-300 flex-shrink-0 mb-0.5 mr-0.5"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#F0B35A] text-[#111111] hover:bg-[#E5A448] disabled:opacity-25 disabled:cursor-not-allowed flex items-center justify-center transition-colors flex-shrink-0"
+                aria-label="Send message"
             >
                 <svg
-                    className="w-5 h-5"
+                    className="w-4 h-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

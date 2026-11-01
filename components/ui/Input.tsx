@@ -37,7 +37,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                     type={type}
                     autoComplete={getAutocomplete()}
                     className={cn(
-                        'w-full px-4 py-3 rounded-lg glass border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300',
+                        'w-full px-4 py-3 rounded-lg bg-white/[0.04] border border-[#2E2E32] text-[#F4F4F5] placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#F0B35A] focus:border-transparent transition-all duration-200',
                         error && 'border-red-500 focus:ring-red-500',
                         className
                     )}

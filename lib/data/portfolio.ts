@@ -1,4 +1,36 @@
-import { Experience, Project, SkillCategory, CommunityActivity } from '@/types';
+import { Experience, Project, SkillCategory, CommunityActivity, Publication, SocialLink } from '@/types';
+
+export const socialLinks: SocialLink[] = [
+    {
+        name: 'GitHub',
+        url: 'https://github.com/apoorvmaurya',
+        icon: 'github',
+    },
+    {
+        name: 'LinkedIn',
+        url: 'https://www.linkedin.com/in/apoorv-maurya2506/',
+        icon: 'linkedin',
+    },
+    {
+        name: 'X',
+        url: 'https://x.com/apoorvmaurya_',
+        icon: 'x',
+    },
+    {
+        name: 'Email',
+        url: 'mailto:apoorvmauryaapoorv@gmail.com',
+        icon: 'email',
+    },
+];
+
+export const publication: Publication = {
+    title: 'Hybrid Generative AI Framework for Multilingual Text Summarization in Indian Languages',
+    authorship: 'co-authored',
+    venue: 'ICDSA 2025 proceedings, Springer LNNS vol. 1722',
+    publisher: 'Springer',
+    date: 'published January 2026',
+    doiUrl: 'https://doi.org/10.1007/978-3-032-10756-5_9',
+};
 
 export const experiences: Experience[] = [
     {
@@ -8,12 +40,12 @@ export const experiences: Experience[] = [
         startDate: '2025-01',
         endDate: '2025-09',
         description: [
-            'Architected async data ingestion pipelines in Next.js + TypeScript, directly applicable to the queue-based OCR and document ingestion patterns (SQS/BullMQ) required for legal document workflows.',
+            'Architected async data ingestion pipelines in Next.js + TypeScript.',
             'Built API-response caching layers (SWR) reducing redundant calls by ~60% per session.',
-            'Implemented streaming response delivery and lazy-loading patterns that cut initial load time by 40% - directly transferable to streaming LLM draft generation required for real-time legal document creation.',
-            'Engineered multi-step validated UI flows with mandatory confirmation gates for critical user actions which directly mirrors the Human-in-the-Loop checkpoint design required in agent architectures.',
+            'Implemented streaming response delivery and lazy-loading patterns that cut initial load time by 40%.',
+            'Engineered multi-step validated UI flows with mandatory confirmation gates for critical user actions.',
         ],
-        technologies: ['Next.js', 'TypeScript', 'SWR', 'BullMQ', 'SQS'],
+        technologies: ['Next.js', 'TypeScript', 'SWR'],
     },
     {
         id: '2',
@@ -33,11 +65,11 @@ export const projects: Project[] = [
     {
         id: '1',
         title: 'RetentIQ',
-        description: 'Multi-agent churn-intelligence SaaS platform combining scikit-learn and LangChain-orchestrated LLMs.',
+        description: 'Open-source predictive churn intelligence with LightGBM, TreeSHAP feature attributions, and LLM retention playbooks.',
         longDescription:
-            'Architected a multi-agent churn-intelligence SaaS platform combining a scikit-learn RandomForestClassifier with a LangChain-orchestrated Groq LLM layer. Built a database-backed async ingestion pipeline routing Stripe webhooks into a background job queue, decoupling data ingestion from the Express request thread and keeping the API non-blocking under concurrent loads. Implemented logprob-style confidence scoring on LLM outputs, flagging below-threshold predictions prominently before surfacing to users.',
+            'Open-source predictive churn intelligence and customer health scoring platform. Integrates deterministic LightGBM gradient boosted decision trees for numerical churn probabilities with game-theoretic TreeSHAP for 12-dimensional feature attribution. Uses high-throughput LLM playbooks via Groq with deterministic in-process fallback, built with a Next.js frontend, Node/TypeScript orchestration, Drizzle ORM, and Supabase.',
         image: '/retentiq.png',
-        technologies: ['FastAPI', 'Python', 'scikit-learn', 'LangChain', 'Groq LLM', 'Supabase', 'Docker', 'CI/CD'],
+        technologies: ['Next.js', 'TypeScript', 'Node.js', 'LightGBM', 'TreeSHAP', 'Groq LLM', 'Supabase'],
         liveUrl: 'https://retentiq-chi.vercel.app/',
         githubUrl: 'https://github.com/apoorvmaurya/retentiq',
         featured: true,
@@ -45,12 +77,12 @@ export const projects: Project[] = [
     {
         id: '2',
         title: 'Planora',
-        description: 'Real-time collaborative trip planning platform with a pgvector RAG-style AI layer.',
+        description: 'Real-time collaborative group trip planner with AI itinerary generation, consensus voting, and expense OCR.',
         longDescription:
-            'Built a full-stack real-time collaborative platform with a RAG-style AI layer: user preferences and history chunked, embedded, and stored in Supabase pgvector - retrieved via cosine similarity to ground Llama 3.3 itinerary generation. Integrated Llama 3.3 via LangChain with streaming response delivery for real-time draft generation and engineered a Momentum Engine. Built conflict-free collaborative state sync using Supabase Realtime channels.',
+            'Collaborative travel planning platform built with Next.js 15, React 19, Supabase Realtime, and the Groq inference engine. Features structured chronological itinerary generation with traveler pacing profiles, in-trip collaborative chat agent (PlaBot) for bulk itinerary edits, democratic group voting with consensus promotion, and receipt OCR expense splitting.',
         image: '/planora.png',
-        technologies: ['Next.js', 'TypeScript', 'Supabase', 'Llama 3.3', 'Vercel AI SDK', 'Zustand'],
-        liveUrl: 'https://planora-plum-beta.vercel.app/',
+        technologies: ['Next.js 15', 'React 19', 'TypeScript', 'Supabase Realtime', 'Groq Llama 3.3', 'Tailwind CSS', 'Zustand'],
+        liveUrl: 'https://planora-gamma.vercel.app/',
         githubUrl: 'https://github.com/apoorvmaurya/planora',
         featured: true,
     },
@@ -59,21 +91,21 @@ export const projects: Project[] = [
         title: 'Data Alchemist',
         description: 'AI Resource Allocation Configurator',
         longDescription:
-            'Data Alchemist is an AI-powered Next.js web application designed to transform messy spreadsheet data (CSV or XLSX) into clean, validated, and actionable insights for resource allocation. It provides a comprehensive suite of tools for data ingestion, real-time validation, AI-driven data correction and rule generation, and flexible priority configuration. The goal is to bring order to complex data, making it easy for non-technical users to manage and prepare data for downstream allocation systems.',
-        image: '/alchemist.png',
-        technologies: ['Next.js', 'TypeScript', 'Google Gemini', 'TailwindCSS'],
-        liveUrl: 'https://data-alchemist-ten-lovat.vercel.app/',
-        githubUrl: 'https://github.com/apoorvmaurya/data_alchemist',
+            'Designed a full-stack resource-allocation configurator featuring dynamic parameter adjustment, animated visualizers, and state sync via Zustand.',
+        image: '/data-alchemist.png',
+        technologies: ['Next.js', 'TypeScript', 'TailwindCSS', 'Zustand', 'Framer Motion'],
+        liveUrl: 'https://data-alchemist-apoorv.vercel.app/',
+        githubUrl: 'https://github.com/apoorvmaurya/data-alchemist',
         featured: true,
     },
     {
         id: '4',
-        title: 'AssessMed',
-        description: 'Clinical decision interface exposing FastAPI-served ML prediction models.',
+        title: 'AssesMed',
+        description: 'Full-stack clinical decision interface exposing ML prediction models through validated UI flows.',
         longDescription:
-            'Built a full-stack clinical decision interface exposing FastAPI-served ML prediction models through guided & validated UI flows. Implemented API-response caching at the FastAPI layer to eliminate repeated ML inference overhead, significantly reducing latency. Designed a multi-step input form with real-time field validation.',
+            'Full-stack clinical decision interface exposing FastAPI-served machine learning prediction models through guided, validated UI workflows. Implements client-side response caching, dynamic input validation, and real-time disease risk assessment tracking.',
         image: '/assesmed.png',
-        technologies: ['Next.js', 'TypeScript', 'Python', 'FastAPI', 'Supabase', 'TailwindCSS'],
+        technologies: ['Next.js', 'TypeScript', 'Python', 'FastAPI', 'Supabase', 'Tailwind CSS'],
         liveUrl: 'https://assesmed.vercel.app/',
         githubUrl: 'https://github.com/apoorvmaurya/AssesMed',
         featured: false,
@@ -98,7 +130,6 @@ export const projects: Project[] = [
             'A cloud storage platform with file management, sharing, and collaboration features.',
         image: '/icloud.png',
         technologies: ['React', 'Node.js', 'AWS S3', 'MongoDB'],
-        // liveUrl: 'https://example.com',
         githubUrl: 'https://github.com/apoorvmaurya/iCloud',
         featured: false,
     },
@@ -108,52 +139,48 @@ export const skillCategories: SkillCategory[] = [
     {
         category: 'Languages',
         skills: [
-            { name: 'TypeScript', category: 'frontend', proficiency: 90 },
-            { name: 'JavaScript', category: 'frontend', proficiency: 95 },
-            { name: 'Python', category: 'backend', proficiency: 85 },
-            { name: 'SQL', category: 'database', proficiency: 80 },
+            { name: 'TypeScript', category: 'frontend', context: 'used in internship work at Pixelwand / DevX Days' },
+            { name: 'JavaScript', category: 'frontend', context: 'used in internship work at Pixelwand / DevX Days' },
+            { name: 'Python', category: 'backend', context: 'used in personal projects' },
+            { name: 'SQL', category: 'database', context: 'used in personal projects' },
         ],
     },
     {
         category: 'Frontend',
         skills: [
-            { name: 'React.js', category: 'frontend', proficiency: 95 },
-            { name: 'Next.js (App Router / SSR)', category: 'frontend', proficiency: 95 },
-            { name: 'Tailwind CSS', category: 'frontend', proficiency: 90 },
+            { name: 'React.js', category: 'frontend', context: 'used in internship work at Pixelwand / DevX Days' },
+            { name: 'Next.js (App Router / SSR)', category: 'frontend', context: 'used in internship work at Pixelwand / DevX Days' },
+            { name: 'Tailwind CSS', category: 'frontend', context: 'used in personal projects' },
         ],
     },
     {
         category: 'Backend & Database',
         skills: [
-            { name: 'Node.js', category: 'backend', proficiency: 90 },
-            { name: 'Express.js', category: 'backend', proficiency: 85 },
-            { name: 'FastAPI', category: 'backend', proficiency: 85 },
-            { name: 'LangChain / LangGraph', category: 'backend', proficiency: 85 },
-            { name: 'Claude / OpenAI / Groq', category: 'backend', proficiency: 85 },
-            { name: 'Supabase', category: 'backend', proficiency: 90 },
-            { name: 'MySQL', category: 'database', proficiency: 80 },
+            { name: 'Node.js', category: 'backend', context: 'used in personal projects' },
+            { name: 'FastAPI', category: 'backend', context: 'used in personal projects' },
+            { name: 'LangChain / LangGraph', category: 'backend', context: 'used in personal projects' },
+            { name: 'Groq / OpenAI / Claude APIs', category: 'backend', context: 'used in personal projects' },
+            { name: 'Supabase & pgvector', category: 'backend', context: 'used in personal projects' },
+            { name: 'SWR Caching', category: 'backend', context: 'used in internship work at Pixelwand / DevX Days' },
         ],
     },
     {
         category: 'AI & ML',
         skills: [
-            { name: 'Vercel AI SDK', category: 'ai', proficiency: 85 },
-            { name: 'LLM Integration', category: 'ai', proficiency: 90 },
-            { name: 'scikit-learn', category: 'ai', proficiency: 80 },
+            { name: 'LLM Multi-Agent Systems', category: 'ai', context: 'used in personal projects' },
+            { name: 'RAG Architecture (pgvector)', category: 'ai', context: 'used in personal projects' },
+            { name: 'scikit-learn (Classification)', category: 'ai', context: 'used in personal projects' },
+            { name: 'Vercel AI SDK', category: 'ai', context: 'used in personal projects' },
         ],
     },
     {
         category: 'Tools & Platforms',
         skills: [
-            { name: 'Git', category: 'tools', proficiency: 95 },
-            { name: 'Docker', category: 'tools', proficiency: 80 },
-            { name: 'AWS Textract', category: 'tools', proficiency: 75 },
-            { name: 'S3 / MinIO', category: 'tools', proficiency: 80 },
-            { name: 'BullMQ / SQS', category: 'tools', proficiency: 80 },
-            { name: 'Postman', category: 'tools', proficiency: 90 },
-            { name: 'Vercel', category: 'tools', proficiency: 90 },
-            { name: 'Render', category: 'tools', proficiency: 80 },
-            { name: 'Figma', category: 'tools', proficiency: 75 },
+            { name: 'Git & GitHub', category: 'tools', context: 'used in internship work at Pixelwand / DevX Days' },
+            { name: 'Figma Component Systems', category: 'tools', context: 'used in internship work at Pixelwand / DevX Days' },
+            { name: 'Docker & Docker Compose', category: 'tools', context: 'used in personal projects' },
+            { name: 'Postman', category: 'tools', context: 'used in personal projects' },
+            { name: 'Vercel & Render', category: 'tools', context: 'used in internship work at Pixelwand / DevX Days' },
         ],
     },
 ];
