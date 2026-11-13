@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     keywords: [
         'Apoorv Maurya',
         'Portfolio',
-        'AI/ML Engineer',
+        'Full-Stack AI Engineer',
         'Multi-Agent Systems',
         'LLM Integration',
         'Full Stack Developer',

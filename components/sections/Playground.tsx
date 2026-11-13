@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
@@ -71,7 +71,7 @@ export async function runAgentCycle(
     onUpdate([...updated]);
   }
 }`,
-    vector: `// Pure TS Cosine Similarity Matcher for pgvector workflows
+    vector: `// Pure TS Cosine Similarity Matcher for Semantic Retrieval
 export function computeCosineSimilarity(str1: string, str2: string): number {
   const tokenize = (s: string) => s.toLowerCase().match(/\\w+/g) || [];
   const tokens1 = tokenize(str1);
@@ -128,19 +128,19 @@ export default function Playground() {
     // LLM Stream States
     const [streamText, setStreamText] = useState('');
     const [isStreaming, setIsStreaming] = useState(false);
-    const streamTargetText = "To build a robust Multi-Agent system, we orchestrate specialized nodes—such as a Planner, Searcher, and Synthesizer—via a structured state graph. Using libraries like LangGraph or LangChain, each node executes its task asynchronously, communicating through a shared thread state. By embedding Human-in-the-Loop checkpoints, we pause execution for authorization before executing high-risk tool calls (e.g. database updates or Stripe webhooks). This guarantees absolute reliability in enterprise production environments.";
+    const streamTargetText = "To build a robust multi-agent architecture, we orchestrate specialized nodes—such as a Planner, Searcher, and Synthesizer—via an asynchronous state graph. Each node executes its task asynchronously, communicating through structured state transitions. By embedding validation checkpoints, we pause execution for authorization before executing high-risk tool actions. This guarantees reliability and auditability in production environments.";
 
     // Agent Visualizer States
     const [agentSteps, setAgentSteps] = useState<any[]>([
         { id: '1', name: 'Query Analyzer', status: 'idle', detail: 'Classifying user intent & routing request' },
-        { id: '2', name: 'Semantic Searcher', status: 'idle', detail: 'Retrieving relevant embedding vectors from pgvector' },
+        { id: '2', name: 'Semantic Searcher', status: 'idle', detail: 'Retrieving relevant embedding vectors for context augmentation' },
         { id: '3', name: 'Reasoning Engine', status: 'idle', detail: 'Synthesizing response utilizing Llama 3.3 & scikit-learn' },
         { id: '4', name: 'Human Validator', status: 'idle', detail: 'Awaiting operator approval checkpoint' }
     ]);
     const [isAgentRunning, setIsAgentRunning] = useState(false);
 
     // Vector Matcher States
-    const [searchQuery, setSearchQuery] = useState('Next.js and LangChain pipelines');
+    const [searchQuery, setSearchQuery] = useState('Next.js and Groq pipelines');
     const [similarities, setSimilarities] = useState<any[]>([]);
 
     // Handler to copy code
@@ -194,7 +194,7 @@ export default function Playground() {
     };
 
     // Compute live cosine similarity between search query and doc text
-    const runVectorSimilarity = () => {
+    const runVectorSimilarity = useCallback(() => {
         const tokenize = (s: string) => s.toLowerCase().match(/\w+/g) || [];
         const qTokens = tokenize(searchQuery);
         
@@ -233,12 +233,12 @@ export default function Playground() {
         // Sort by score descending
         calculated.sort((a, b) => b.score - a.score);
         setSimilarities(calculated);
-    };
+    }, [searchQuery]);
 
     // Compute live cosine similarity when query changes
     useEffect(() => {
         runVectorSimilarity();
-    }, [searchQuery]);
+    }, [runVectorSimilarity]);
 
     // Format helper to display mock syntax highlighting in code block
     const renderCodeBlock = (code: string) => {
@@ -454,7 +454,7 @@ export default function Playground() {
                                         <div>
                                             <div className="flex justify-between items-center mb-4">
                                                 <h3 className="text-lg font-heading font-bold text-white">Live Cosine Similarity Matcher</h3>
-                                                <Badge variant="outline" className="border-[#F0B35A]/30 text-[#F0B35A] bg-[#F0B35A]/10">pgvector RAG</Badge>
+                                                <Badge variant="outline" className="border-[#F0B35A]/30 text-[#F0B35A] bg-[#F0B35A]/10">Vector Similarity</Badge>
                                             </div>
                                             <p className="text-sm text-gray-400 mb-4">
                                                 Type any sentence below. Calculates a live cosine similarity match against portfolio docs.

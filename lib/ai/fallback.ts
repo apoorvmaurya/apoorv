@@ -40,39 +40,39 @@ export function getRuleBasedFallback(userMessage: string): FallbackResponse {
             message: `Apoorv's verified industry experience includes:\n\n` +
                 `• **DevX Days** (Full-Stack Developer Intern, Jan 2025 – Sep 2025):\n` +
                 `  - Architected asynchronous data ingestion pipelines using Next.js and TypeScript.\n` +
-                `  - Implemented SWR API response caching layers, reducing redundant network calls by ~60%.\n` +
-                `  - Built streaming response delivery and lazy-loading patterns that decreased initial load time by 40%.\n` +
-                `  - Engineered multi-step validated UI workflows with mandatory confirmation gates for critical actions.\n\n` +
+                `  - Implemented SWR API response caching layers to eliminate redundant client-side network requests.\n` +
+                `  - Built streaming response delivery and lazy-loading patterns to optimize initial page render.\n` +
+                `  - Engineered multi-step validated UI workflows with confirmation gates for critical user actions.\n\n` +
                 `• **Pixelwand** (Frontend Developer Intern, Jul 2024 – Dec 2024):\n` +
                 `  - Built responsive React components from Figma specs and verified pixel accuracy across mobile, tablet, and desktop breakpoints.\n` +
-                `  - Created a reusable React component library that reduced feature development time by ~25%.\n\n` +
+                `  - Designed and documented a reusable React component library, establishing the team's shared UI standard across client products.\n\n` +
                 `You can view the interactive timeline in the Experience section:`,
             action: { type: 'navigate', payload: 'experience' },
         };
     }
 
-    // 4. Projects (RetentIQ, Planora, AssesMed)
+    // 4. Projects (RetentIQ, Planora, AssessMed)
     if (/\b(project|projects|portfolio|built|apps|retentiq|planora|assesmed|assessmed)\b/i.test(query)) {
         return {
             matched: true,
             message: `Here are Apoorv's primary engineering projects:\n\n` +
                 `• **RetentIQ**: Open-source predictive churn intelligence and customer health scoring platform. Combines deterministic LightGBM gradient boosted decision trees for churn scoring with game-theoretic TreeSHAP feature attribution, Groq LLM retention playbooks, and Next.js / Node orchestration.\n` +
                 `• **Planora**: Real-time collaborative group trip planner built with Next.js 15, React 19, Supabase Realtime, and Groq Llama 3.3 for structured itinerary generation, in-trip PlaBot chat edits, democratic consensus voting, and expense receipt OCR.\n` +
-                `• **AssesMed**: Full-stack clinical decision interface exposing FastAPI-served machine learning prediction models through guided, validated UI workflows and client-side response caching.\n\n` +
+                `• **AssessMed**: Full-stack clinical decision interface exposing FastAPI-served machine learning prediction models through guided, validated UI workflows and client-side response caching.\n\n` +
                 `Explore live demos, repos, and architectural details in the Projects section:`,
             action: { type: 'navigate', payload: 'projects' },
         };
     }
 
     // 5. Skills / Tech Stack
-    if (/\b(skills?|tech stack|technolog(y|ies)|stack|languages?|python|typescript|react|next|fastapi|langchain|llm|tools)\b/i.test(query)) {
+    if (/\b(skills?|tech stack|technolog(y|ies)|stack|languages?|python|typescript|react|next|fastapi|llm|tools)\b/i.test(query)) {
         return {
             matched: true,
             message: `Apoorv's verified technical skillset:\n\n` +
                 `• **Languages**: TypeScript, JavaScript, Python, SQL\n` +
                 `• **Frontend**: React.js, Next.js (App Router / SSR), Tailwind CSS\n` +
-                `• **Backend & AI**: Node.js, Express.js, FastAPI, LangChain / LangGraph, Supabase, Groq / OpenAI APIs, LightGBM, TreeSHAP\n` +
-                `• **Cloud & Infrastructure**: Docker, Git, AWS (S3, Textract), Vercel, Render\n\n` +
+                `• **Backend & AI**: Node.js, Express.js, FastAPI, Supabase (PostgreSQL), Groq / OpenAI APIs, LightGBM, TreeSHAP\n` +
+                `• **Cloud & Infrastructure**: Docker, Git, Vercel, Render\n\n` +
                 `Role Fit Note: If a role requires specialized technologies outside this verified stack, Apoorv's experience in full-stack architecture and fast onboarding applies, but specific niche libraries not listed above are considered unverified unknowns.\n\n` +
                 `View the full breakdown in the Skills section:`,
             action: { type: 'navigate', payload: 'skills' },

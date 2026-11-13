@@ -38,6 +38,9 @@ jobs:
       - name: Type check
         run: pnpm type-check
 
+      - name: Lint check
+        run: pnpm lint
+
       - name: Deterministic Chat Route CI Check (Mocked Groq Provider)
         run: pnpm test:chat
 

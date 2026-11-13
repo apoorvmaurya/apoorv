@@ -74,7 +74,7 @@ export default function Projects() {
                                 </div>
 
                                 <div className="flex gap-3">
-                                    {project.liveUrl && (
+                                    {Boolean(project.liveUrl && project.liveUrl.trim()) && (
                                         <a
                                             href={project.liveUrl}
                                             target="_blank"
@@ -97,7 +97,7 @@ export default function Projects() {
                                             Live Demo
                                         </a>
                                     )}
-                                    {project.githubUrl && (
+                                    {Boolean(project.githubUrl && project.githubUrl.trim()) && (
                                         <a
                                             href={project.githubUrl}
                                             target="_blank"

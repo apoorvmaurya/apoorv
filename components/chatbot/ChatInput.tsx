@@ -42,6 +42,7 @@ export default function ChatInput({ onSend, disabled = false }: ChatInputProps) 
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyDown={handleKeyDown}
+                maxLength={1000}
                 placeholder="Ask me anything..."
                 disabled={disabled}
                 rows={1}

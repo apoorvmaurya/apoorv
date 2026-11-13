@@ -1,29 +1,6 @@
 'use client';
 
-import { SocialLink } from '@/types';
-
-const socialLinks: SocialLink[] = [
-    {
-        name: 'GitHub',
-        url: 'https://github.com/apoorvmaurya',
-        icon: 'github',
-    },
-    {
-        name: 'LinkedIn',
-        url: 'https://www.linkedin.com/in/apoorv-maurya2506/',
-        icon: 'linkedin',
-    },
-    {
-        name: 'X',
-        url: 'https://x.com/apoorvmaurya_',
-        icon: 'x',
-    },
-    {
-        name: 'Email',
-        url: 'mailto:apoorvmauryaapoorv@gmail.com',
-        icon: 'email',
-    },
-];
+import { socialLinks } from '@/lib/data/portfolio';
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();

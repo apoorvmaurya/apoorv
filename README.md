@@ -2,14 +2,14 @@
 
 <div align="center">
 
-![Next.js](https://img.shields.io/badge/Next.js-16.0-black?style=for-the-badge&logo=next.js)
-![React](https://img.shields.io/badge/React-19.0-61dafb?style=for-the-badge&logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178c6?style=for-the-badge&logo=typescript)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8?style=for-the-badge&logo=tailwind-css)
+![Next.js](https://img.shields.io/badge/Next.js-16.2.7-black?style=for-the-badge&logo=next.js)
+![React](https://img.shields.io/badge/React-19.0.0-61dafb?style=for-the-badge&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.7.2-3178c6?style=for-the-badge&logo=typescript)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4.17-38bdf8?style=for-the-badge&logo=tailwind-css)
 
 **Full-Stack AI Engineer · LLM-Integrated Products portfolio website.**
 
-[View Demo](#) • [Report Bug](#) • [Request Feature](#)
+[View Demo](https://apoorv-gamma.vercel.app/) • [GitHub Profile](https://github.com/apoorvmaurya)
 
 </div>
 
@@ -43,44 +43,44 @@ A cutting-edge portfolio website built with the latest web technologies, designe
 ### Key Highlights
 
 - ⚡ **Blazing Fast** - Built with Next.js 16 and Turbopack
-- 🎨 **Modern Design** - Glassmorphism UI with smooth micro-interactions
-- 🤖 **AI-Powered** - Integrated Google Gemini chatbot for interactive Q&A
-- 📱 **Fully Responsive** - Mobile-first design approach
-- ♿ **Accessible** - WCAG compliant with semantic HTML
-- 🔒 **Type-Safe** - 100% TypeScript implementation
-- 🎭 **Animated** - Framer Motion for delightful user experiences
+- 🎨 **Modern Design** - Clean dark aesthetic with warm amber accents and smooth micro-interactions
+- 🤖 **AI-Powered** - Integrated Groq-powered AI chatbot with deterministic rule-based fallback
+- 📱 **Fully Responsive** - Mobile-first design approach tested across mobile, tablet, and desktop
+- ♿ **Accessible** - WCAG compliant with semantic HTML and keyboard navigation
+- 🔒 **Type-Safe** - Built with TypeScript throughout
+- 🎭 **Animated** - Framer Motion for subtle, purposeful interactions
 
 ---
 
 ## ✨ Features
 
 ### 🎨 Design & UX
-- **Glassmorphism Dark Theme** - Modern, premium aesthetic with blur effects and transparency
+- **Refined Dark Theme** - Modern aesthetic with high contrast and structured layout
 - **Smooth Animations** - Powered by Framer Motion for seamless transitions
-- **Micro-interactions** - Hover effects, button animations, and scroll-triggered animations
-- **Mobile-First Responsive** - Optimized for all screen sizes from mobile to 4K displays
+- **Micro-interactions** - Subtle hover and focus states
+- **Mobile-First Responsive** - Optimized for all screen sizes down to 360px
 
 ### 🤖 AI Chatbot
-- **Google Gemini Integration** - Intelligent chatbot that answers questions about my background
-- **Resume Context** - AI trained on my resume for accurate responses
+- **Groq Inference Integration** - Fast, responsive AI assistant powered by Groq Llama with deterministic rule-based fallback
+- **Resume & Portfolio Context** - Grounded in verified portfolio and resume data for accurate responses
 - **Markdown Support** - Rich text formatting in chat responses
-- **Persistent Chat History** - Maintains conversation context
+- **Session Persistence** - Maintains conversation context locally
 
 ### 📄 Sections
-- **Hero** - Dynamic introduction with call-to-action
-- **About** - Professional background and summary
-- **Experience** - Timeline-based work history
-- **Skills** - Categorized technical skills showcase
-- **Projects** - Portfolio of featured projects with links
-- **Community** - Involvement in tech communities and contributions
-- **Contact** - Validated contact form with EmailJS integration
+- **Hero** - Introduction with clear call-to-action
+- **About** - Professional background and verified publication
+- **Experience** - Timeline of work history and factual responsibilities
+- **Skills** - Categorized technical skills by verified application context
+- **Projects** - Portfolio of production projects with live demos and repository links
+- **Community** - Involvement in tech communities and open-source contributions
+- **Contact** - Direct contact form and social links
 
 ### 🛠️ Developer Experience
 - **TypeScript** - Full type safety across the entire codebase
 - **Form Validation** - React Hook Form with Zod schemas
-- **Error Handling** - Custom error boundaries and loading states
-- **SEO Optimized** - Meta tags, sitemap, robots.txt, and manifest
-- **Code Quality** - ESLint, Prettier, and TypeScript strict mode
+- **Error Handling** - Custom error boundaries and fallbacks
+- **SEO Optimized** - Meta tags, sitemap, robots.txt, and OpenGraph images
+- **Code Quality** - ESLint flat config, Prettier, and TypeScript strict mode
 
 ---
 
@@ -89,7 +89,7 @@ A cutting-edge portfolio website built with the latest web technologies, designe
 ### Core Framework
 | Technology | Version | Purpose |
 |------------|---------|---------|
-| [Next.js](https://nextjs.org/) | 16.0.3 | React framework with App Router |
+| [Next.js](https://nextjs.org/) | 16.2.7 | React framework with App Router |
 | [React](https://react.dev/) | 19.0.0 | UI library |
 | [TypeScript](https://www.typescriptlang.org/) | 5.7.2 | Type safety and developer experience |
 
@@ -103,8 +103,7 @@ A cutting-edge portfolio website built with the latest web technologies, designe
 ### AI & Integrations
 | Technology | Version | Purpose |
 |------------|---------|---------|
-| [Google Generative AI](https://ai.google.dev/) | 0.21.0 | Gemini chatbot integration |
-| [EmailJS](https://www.emailjs.com/) | 4.4.1 | Contact form email service |
+| [Groq](https://groq.com/) | Cloud API | Fast AI chatbot inference |
 | [pdf-parse](https://www.npmjs.com/package/pdf-parse) | 1.1.1 | Resume parsing for AI context |
 
 ### Forms & Validation
@@ -174,28 +173,18 @@ Ensure you have the following installed on your system:
 Create a `.env.local` file in the root directory with the following variables:
 
 ```env
-# Google Gemini AI Configuration (Required for chatbot)
-GOOGLE_GEMINI_API_KEY=your_gemini_api_key_here
-
-# EmailJS Configuration (Required for contact form)
-NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id
-NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
-NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
+# Groq Cloud API Configuration (Required for live chatbot inference)
+GROQ_API_KEY=your_groq_api_key_here
+GROQ_MODEL=openai/gpt-oss-20b
 ```
 
 #### Getting API Keys
 
-**Google Gemini API Key:**
-1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
-2. Sign in with your Google account
+**Groq API Key:**
+1. Visit [Groq Console](https://console.groq.com/keys)
+2. Sign in with your account
 3. Create a new API key
 4. Copy the key to your `.env.local` file
-
-**EmailJS Credentials:**
-1. Create an account at [EmailJS](https://www.emailjs.com/)
-2. Create an email service (Gmail, Outlook, etc.)
-3. Create an email template with variables: `{{from_name}}`, `{{from_email}}`, `{{message}}`
-4. Copy Service ID, Template ID, and Public Key to your `.env.local` file
 
 ---
 
@@ -245,7 +234,7 @@ apoorv-portfolio/
 │   │   └── ChatMessage.tsx       # Chat message display
 │   ├── layout/                   # Layout components
 │   │   ├── Footer.tsx            # Site footer
-│   │   └── Navbar.tsx            # Navigation bar
+│   │   └── Navigation.tsx        # Navigation bar
 │   ├── sections/                 # Page sections
 │   │   ├── About.tsx             # About section
 │   │   ├── Community.tsx         # Community involvement
@@ -495,7 +484,7 @@ This project is **private and proprietary**. All rights reserved.
 
 - [Next.js Team](https://nextjs.org/) - Amazing React framework
 - [Vercel](https://vercel.com/) - Hosting and deployment
-- [Google Gemini](https://ai.google.dev/) - AI chatbot capabilities
+- [Groq](https://groq.com/) - AI chatbot inference
 - [Framer Motion](https://www.framer.com/motion/) - Smooth animations
 - [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS
 

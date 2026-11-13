@@ -52,6 +52,36 @@ export function useChat() {
     }, [messages]);
 
     /**
+     * Handle actions from AI responses
+     */
+    const handleAction = useCallback((action: { type: string; payload?: any }) => {
+        switch (action.type) {
+            case 'navigate':
+                // Scroll to section
+                const element = document.getElementById(action.payload);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                break;
+
+            case 'download':
+                // Download resume is handled via user click on the ChatMessage component
+                break;
+
+            case 'contact':
+                // Open contact form or navigate to contact section
+                const contactElement = document.getElementById('contact');
+                if (contactElement) {
+                    contactElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                break;
+
+            default:
+                console.log('Unknown action type:', action.type);
+        }
+    }, []);
+
+    /**
      * Send a message to the chat API
      */
     const sendMessage = useCallback(
@@ -143,38 +173,8 @@ export function useChat() {
                 abortControllerRef.current = null;
             }
         },
-        [messages, isLoading]
+        [messages, isLoading, handleAction]
     );
-
-    /**
-     * Handle actions from AI responses
-     */
-    const handleAction = useCallback((action: { type: string; payload?: any }) => {
-        switch (action.type) {
-            case 'navigate':
-                // Scroll to section
-                const element = document.getElementById(action.payload);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-                break;
-
-            case 'download':
-                // Download resume is handled via user click on the ChatMessage component
-                break;
-
-            case 'contact':
-                // Open contact form or navigate to contact section
-                const contactElement = document.getElementById('contact');
-                if (contactElement) {
-                    contactElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-                break;
-
-            default:
-                console.log('Unknown action type:', action.type);
-        }
-    }, []);
 
     /**
      * Clear all messages

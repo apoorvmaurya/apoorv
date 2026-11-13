@@ -4,8 +4,8 @@ export default function Loading() {
             <div className="text-center">
                 {/* Simple spinner - faster initial load */}
                 <div className="relative w-16 h-16 mx-auto mb-4">
-                    <div className="absolute inset-0 rounded-full border-4 border-primary-500/20"></div>
-                    <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-primary-500 animate-spin"></div>
+                    <div className="absolute inset-0 rounded-full border-4 border-[#F0B35A]/20"></div>
+                    <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-[#F0B35A] animate-spin"></div>
                 </div>
 
                 {/* Minimal text */}

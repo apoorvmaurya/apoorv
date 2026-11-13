@@ -28,11 +28,11 @@ export default function Hero() {
                             className="text-[#F0B35A] font-medium mb-3 text-base sm:text-lg tracking-wide"
                             variants={fadeInUp}
                         >
-                            Hello, I'm
+                            Hello, I&apos;m
                         </motion.p>
 
                         <motion.h1
-                            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-bold mb-6 leading-tight text-[#F4F4F5] tracking-tight"
+                            className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-bold mb-6 leading-tight text-[#F4F4F5] tracking-tight break-words"
                             variants={fadeInUp}
                         >
                             Apoorv Maurya<span className="text-[#F0B35A]">.</span>
@@ -120,7 +120,7 @@ export default function Hero() {
                             <div className="relative w-full h-full rounded-full border border-neutral-700/60 overflow-hidden">
                                 <Image
                                     src="/profile.png"
-                                    alt="Apoorv Maurya"
+                                    alt="Apoorv Maurya - Full-Stack AI Engineer"
                                     fill
                                     className="rounded-full object-cover"
                                     priority

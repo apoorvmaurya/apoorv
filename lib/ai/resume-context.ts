@@ -77,25 +77,25 @@ Full-Stack AI Engineer specializing in LLM-Integrated Products. Experienced in b
 TECHNICAL SKILLS:
 - Languages: TypeScript, JavaScript, Python, SQL
 - Frontend: React.js, Next.js (App Router / SSR), Tailwind CSS
-- Backend & Database: Node.js, Express.js, FastAPI, LangChain / LangGraph, Claude API / OpenAI / Groq Llama, Supabase, MySQL
+- Backend & Database: Node.js, Express.js, FastAPI, Groq / OpenAI APIs, Supabase (PostgreSQL), MySQL
 - AI / ML: Vercel AI SDK, LLM Integration, LightGBM, TreeSHAP
-- Tools & Platforms: Git, Docker, AWS Textract, S3 / MinIO, Postman, Vercel, Render, Figma
+- Tools & Platforms: Git, Docker, Postman, Vercel, Render, Figma
 - Misc: Technical Documentation, Content Writing, Community Management, Cross-Functional Collaboration
 
 EXPERIENCE:
 - DevX Days (Full-Stack Developer Intern, Jan 2025 – Sept 2025):
   * Architected async data ingestion pipelines in Next.js + TypeScript.
-  * Built API-response caching layers (SWR) reducing redundant calls by ~60% per session.
-  * Implemented streaming response delivery and lazy-loading patterns that cut initial load time by 40%.
+  * Built API-response caching layers using SWR to eliminate redundant network requests across user sessions.
+  * Implemented streaming response delivery and lazy-loading patterns to optimize initial page render.
   * Engineered multi-step validated UI flows with mandatory confirmation gates for critical user actions.
 - Pixelwand (Frontend Developer Intern, July 2024 – Dec 2024):
-  * Converted complex Figma designs into pixel-accurate React components using styled-components, validated pixel accuracy across the mobile, tablet, and desktop breakpoints via component-level QA.
-  * Designed and documented a reusable React component library that measurably reduced the feature development time by ~25%, establishing the team's shared UI standard across all client products.
+  * Converted complex Figma designs into pixel-accurate React components using styled-components, validating responsive layouts across mobile, tablet, and desktop breakpoints.
+  * Designed and documented a reusable React component library, establishing the team's shared UI standard across client-facing products.
 
 PROJECTS:
 - RetentIQ: Open-source predictive churn intelligence platform with LightGBM, TreeSHAP feature attributions, Groq LLM playbooks, Next.js frontend, and Node/TypeScript orchestration.
 - Planora: Real-time collaborative group trip planner built with Next.js 15, React 19, Supabase Realtime, and Groq Llama 3.3 for structured itineraries, PlaBot chat edits, and expense OCR.
-- AssesMed: Full-stack clinical decision interface exposing FastAPI-served ML prediction models through guided, validated UI workflows and client-side response caching.
+- AssessMed: Full-stack clinical decision interface exposing FastAPI-served ML prediction models through guided, validated UI workflows and client-side response caching.
 
 EDUCATION:
 - IIT-Guwahati: Credit Linked AI/ML Extended Program (March 2025 – Present)

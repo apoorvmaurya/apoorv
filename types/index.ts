@@ -48,7 +48,6 @@ export interface Project {
 export interface Skill {
     name: string;
     category: 'frontend' | 'backend' | 'database' | 'tools' | 'ai' | 'other';
-    proficiency?: number; // 0-100 (optional legacy support)
     context: 'used in internship work at Pixelwand / DevX Days' | 'used in personal projects';
 }
 
