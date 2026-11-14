@@ -61,7 +61,7 @@ A cutting-edge portfolio website built with the latest web technologies, designe
 - **Mobile-First Responsive** - Optimized for all screen sizes down to 360px
 
 ### 🤖 AI Chatbot
-- **Groq Inference Integration** - Fast, responsive AI assistant powered by Groq Llama with deterministic rule-based fallback
+- **Groq Inference Integration** - Fast, responsive AI assistant powered by Groq GPT-OSS with deterministic rule-based fallback
 - **Resume & Portfolio Context** - Grounded in verified portfolio and resume data for accurate responses
 - **Markdown Support** - Rich text formatting in chat responses
 - **Session Persistence** - Maintains conversation context locally

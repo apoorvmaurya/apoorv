@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
@@ -117,7 +117,7 @@ const vectorDocuments = [
     {
         id: 'doc-3',
         title: 'Project: Planora Collaborative Travel Planner',
-        text: 'Planora is a real-time collaborative group trip planner built with Next.js 15, React 19, Supabase Realtime, and Groq Llama 3.3 for structured itineraries and expense OCR.'
+        text: 'Planora is a real-time collaborative group trip planner built with Next.js 15, React 19, Supabase Realtime, and Groq GPT-OSS via Vercel AI SDK for structured itineraries and shared expense tracking.'
     }
 ];
 
@@ -128,13 +128,14 @@ export default function Playground() {
     // LLM Stream States
     const [streamText, setStreamText] = useState('');
     const [isStreaming, setIsStreaming] = useState(false);
-    const streamTargetText = "To build a robust multi-agent architecture, we orchestrate specialized nodes—such as a Planner, Searcher, and Synthesizer—via an asynchronous state graph. Each node executes its task asynchronously, communicating through structured state transitions. By embedding validation checkpoints, we pause execution for authorization before executing high-risk tool actions. This guarantees reliability and auditability in production environments.";
+    const streamIntervalRef = useRef<NodeJS.Timeout | null>(null);
+    const streamTargetText = "To build a robust multi-agent architecture, we orchestrate specialized nodes—such as a Planner, Searcher, and Synthesizer—via an asynchronous state graph. Each node executes its task asynchronously, communicating through structured state transitions. By embedding validation checkpoints, we pause execution for authorization before executing high-risk tool actions.";
 
     // Agent Visualizer States
     const [agentSteps, setAgentSteps] = useState<any[]>([
         { id: '1', name: 'Query Analyzer', status: 'idle', detail: 'Classifying user intent & routing request' },
         { id: '2', name: 'Semantic Searcher', status: 'idle', detail: 'Retrieving relevant embedding vectors for context augmentation' },
-        { id: '3', name: 'Reasoning Engine', status: 'idle', detail: 'Synthesizing response utilizing Llama 3.3 & scikit-learn' },
+        { id: '3', name: 'Reasoning Engine', status: 'idle', detail: 'Synthesizing response utilizing Groq GPT-OSS & scikit-learn' },
         { id: '4', name: 'Human Validator', status: 'idle', detail: 'Awaiting operator approval checkpoint' }
     ]);
     const [isAgentRunning, setIsAgentRunning] = useState(false);
@@ -150,24 +151,41 @@ export default function Playground() {
         setTimeout(() => setCopied(false), 2000);
     };
 
+    // Clean up streaming interval on unmount
+    useEffect(() => {
+        return () => {
+            if (streamIntervalRef.current) {
+                clearInterval(streamIntervalRef.current);
+            }
+        };
+    }, []);
+
     // Simulate LLM streaming token-by-token
     const startStreamingSimulation = () => {
         if (isStreaming) return;
         setIsStreaming(true);
         setStreamText('');
-        
-        let index = 0;
+
+        if (streamIntervalRef.current) {
+            clearInterval(streamIntervalRef.current);
+        }
+
         const words = streamTargetText.split(' ');
-        
-        const interval = setInterval(() => {
-            if (index < words.length) {
-                setStreamText(prev => prev + (prev ? ' ' : '') + words[index]);
-                index++;
-            } else {
-                clearInterval(interval);
+        let currentIndex = 0;
+
+        streamIntervalRef.current = setInterval(() => {
+            currentIndex++;
+            if (currentIndex <= words.length) {
+                setStreamText(words.slice(0, currentIndex).join(' '));
+            }
+            if (currentIndex >= words.length) {
+                if (streamIntervalRef.current) {
+                    clearInterval(streamIntervalRef.current);
+                    streamIntervalRef.current = null;
+                }
                 setIsStreaming(false);
             }
-        }, 60);
+        }, 50);
     };
 
     // Run Agent visualizer cycle
@@ -466,7 +484,7 @@ export default function Playground() {
                                                     value={searchQuery}
                                                     onChange={(e) => setSearchQuery(e.target.value)}
                                                     className="w-full px-3 py-2 bg-black/40 border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#F0B35A]"
-                                                    placeholder="Type query (e.g. Next.js, FastAPI, DevX)"
+                                                    placeholder="Type query (e.g. Next.js, Groq, DevX)"
                                                 />
 
                                                 <div className="space-y-2 mt-4">

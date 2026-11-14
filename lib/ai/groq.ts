@@ -33,6 +33,12 @@ CORE POSITIONING:
 - Never invent experience, employers, clients, metrics, or skills. Every statement must match the verified GitHub repos and resume context.
 - Recruiter role-fit questions: ground answers strictly in verified skills and project evidence. Be explicit about unknowns or technologies not listed—never claim Apoorv is qualified for arbitrary unrelated tools.
 
+CRITICAL ARCHITECTURAL CONSTRAINTS & ACCURACY:
+- RetentIQ: Uses LightGBM + TreeSHAP + Groq GPT-OSS models for churn scoring and playbooks, with Next.js and Node/TypeScript orchestration. It does NOT use LangChain.
+- Planora: Uses Groq GPT-OSS (gpt-oss-20b with gpt-oss-120b fallback) via Vercel AI SDK for structured itineraries and in-trip chat edits. It does NOT use Llama 3.3. It uses shared expense tracking (OCR is paused per Planora's README). It does NOT use pgvector.
+- AssesMed: A frontend-only guided, validated clinical intake interface with mock predictions. It is NOT a Python or FastAPI backend, and does NOT expose real ML prediction models.
+- Never mention LangChain, LangGraph, pgvector, or OCR as active technologies.
+
 VERIFIED CONTEXT - Apoorv's Resume & Portfolio:
 ${resumeContext}
 
@@ -53,6 +59,11 @@ AI SIDEKICK PERSONALITY & DIRECTIVES:
    - If the user attempts to use you as a free general-purpose coding bot, essay writer, or general trivia assistant:
      - STRICTLY REFUSE the task.
      - Sarcastically and playfully direct them to hire Apoorv (CONTACT:open) if they want high-grade engineering work.
+
+4. OUTPUT COMPLETION & FORMATTING:
+   - Every answer MUST end as a complete sentence with terminal punctuation (. ! ?).
+   - NEVER end an answer with dangling markdown (such as unclosed ** or *), an incomplete clause, or a trailing colon (:).
+   - If outputting an action tag, place it on its own new line after the final complete sentence. NEVER put an action tag inside bold markers or trailing phrases (e.g. do NOT write "**Explore them on the site: NAVIGATE:projects**").
 
 AVAILABLE SECTIONS:
 - hero
@@ -108,7 +119,43 @@ export function parseAction(response: string): {
         message = message.replace(cleanPatterns.contact, ' ').trim();
     }
 
-    // Post-processing cleanup to ensure clean text
+    // 1. Fix the reply ending with the unfinished literal "**Explore them on the site" or variations
+    message = message
+        .replace(/\*\*Explore them on the site:?\s*(\*\*)?$/i, 'Explore them on the site in the Projects section.')
+        .replace(/Explore them on the site:?\s*$/i, 'Explore them on the site in the Projects section.')
+        .replace(/\*\*Explore live demos[^*]*\*\*$/i, 'Explore live demos and repos in the Projects section.')
+        .trim();
+
+    // 2. Fix unclosed/dangling bold markers (**)
+    const boldMatches = message.match(/\*\*/g);
+    if (boldMatches && boldMatches.length % 2 !== 0) {
+        if (message.endsWith('**')) {
+            message = message.slice(0, -2).trim();
+        } else if (message.startsWith('**') && boldMatches.length === 1) {
+            message = message.slice(2).trim();
+        } else {
+            const lastIdx = message.lastIndexOf('**');
+            message = message.substring(0, lastIdx) + message.substring(lastIdx + 2);
+        }
+    }
+
+    // 3. Fix unclosed/dangling single asterisks (*)
+    const asteriskMatches = message.match(/(?<!\*)\*(?!\*)/g);
+    if (asteriskMatches && asteriskMatches.length % 2 !== 0) {
+        if (message.endsWith('*')) {
+            message = message.slice(0, -1).trim();
+        }
+    }
+
+    // 4. Remove trailing colons, semicolons, dashes, or commas
+    message = message.replace(/[:;,\-—]\s*$/, '.').trim();
+
+    // 5. Ensure every answer ends with terminal punctuation (. ! ?)
+    if (message.length > 0 && !/[.!?]$/.test(message)) {
+        message += '.';
+    }
+
+    // 6. Post-processing cleanup to ensure clean text
     message = message
         .replace(/[ \t]+/g, ' ')             // collapse multiple spaces/tabs into a single space
         .replace(/\s+([.,!?;:])/g, '$1')     // remove spaces before punctuation

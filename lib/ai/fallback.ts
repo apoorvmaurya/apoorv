@@ -46,20 +46,20 @@ export function getRuleBasedFallback(userMessage: string): FallbackResponse {
                 `• **Pixelwand** (Frontend Developer Intern, Jul 2024 – Dec 2024):\n` +
                 `  - Built responsive React components from Figma specs and verified pixel accuracy across mobile, tablet, and desktop breakpoints.\n` +
                 `  - Designed and documented a reusable React component library, establishing the team's shared UI standard across client products.\n\n` +
-                `You can view the interactive timeline in the Experience section:`,
+                `You can view the interactive timeline in the Experience section.`,
             action: { type: 'navigate', payload: 'experience' },
         };
     }
 
-    // 4. Projects (RetentIQ, Planora, AssessMed)
+    // 4. Projects (RetentIQ, Planora, AssesMed)
     if (/\b(project|projects|portfolio|built|apps|retentiq|planora|assesmed|assessmed)\b/i.test(query)) {
         return {
             matched: true,
             message: `Here are Apoorv's primary engineering projects:\n\n` +
-                `• **RetentIQ**: Open-source predictive churn intelligence and customer health scoring platform. Combines deterministic LightGBM gradient boosted decision trees for churn scoring with game-theoretic TreeSHAP feature attribution, Groq LLM retention playbooks, and Next.js / Node orchestration.\n` +
-                `• **Planora**: Real-time collaborative group trip planner built with Next.js 15, React 19, Supabase Realtime, and Groq Llama 3.3 for structured itinerary generation, in-trip PlaBot chat edits, democratic consensus voting, and expense receipt OCR.\n` +
-                `• **AssessMed**: Full-stack clinical decision interface exposing FastAPI-served machine learning prediction models through guided, validated UI workflows and client-side response caching.\n\n` +
-                `Explore live demos, repos, and architectural details in the Projects section:`,
+                `• **RetentIQ**: Open-source predictive churn intelligence and customer health scoring platform. Combines deterministic LightGBM gradient boosted decision trees for churn scoring with game-theoretic TreeSHAP feature attribution, Groq GPT-OSS models for retention playbooks, and Next.js / Node orchestration.\n` +
+                `• **Planora**: Real-time collaborative group trip planner built with Next.js 15, React 19, Supabase Realtime, and Groq GPT-OSS (gpt-oss-20b with gpt-oss-120b fallback) via Vercel AI SDK for structured itinerary generation, in-trip PlaBot chat edits, democratic consensus voting, and shared expense tracking.\n` +
+                `• **AssesMed**: Frontend-only guided clinical intake interface featuring validated multi-step UI workflows, dynamic input validation, client-side response caching, and mock disease risk predictions (not a Python/FastAPI ML service).\n\n` +
+                `Explore live demos, repos, and architectural details in the Projects section.`,
             action: { type: 'navigate', payload: 'projects' },
         };
     }
@@ -74,7 +74,7 @@ export function getRuleBasedFallback(userMessage: string): FallbackResponse {
                 `• **Backend & AI**: Node.js, Express.js, FastAPI, Supabase (PostgreSQL), Groq / OpenAI APIs, LightGBM, TreeSHAP\n` +
                 `• **Cloud & Infrastructure**: Docker, Git, Vercel, Render\n\n` +
                 `Role Fit Note: If a role requires specialized technologies outside this verified stack, Apoorv's experience in full-stack architecture and fast onboarding applies, but specific niche libraries not listed above are considered unverified unknowns.\n\n` +
-                `View the full breakdown in the Skills section:`,
+                `View the full breakdown in the Skills section.`,
             action: { type: 'navigate', payload: 'skills' },
         };
     }
@@ -82,7 +82,7 @@ export function getRuleBasedFallback(userMessage: string): FallbackResponse {
     // 6. Generic / Recruiter fallback
     return {
         matched: false,
-        message: `I am currently operating in verified fallback mode. Apoorv Maurya is a **Full-Stack AI Engineer** specializing in Multi-Agent Systems and LLM-Integrated Products.\n\nYou can explore his verified projects, review his work history, or download his resume:`,
+        message: `I am currently operating in verified fallback mode. Apoorv Maurya is a **Full-Stack AI Engineer** specializing in Multi-Agent Systems and LLM-Integrated Products.\n\nYou can explore his verified projects, review his work history, or download his resume below.`,
         action: { type: 'navigate', payload: 'projects' },
     };
 }

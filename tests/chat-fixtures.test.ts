@@ -278,4 +278,59 @@ describe('Chat API Route Deterministic Fixtures (CI Check)', () => {
         assert.equal(data.data.model, 'openai/gpt-oss-20b');
         assert.equal(data.data.configured, true);
     });
+
+    test('10. Action parsing: fixes dangling "**Explore them on the site" and ensures complete sentences', async () => {
+        const groqModule = loadTsModule('./lib/ai/groq.ts');
+        
+        // Raw LLM output with action embedded inside bold formatting
+        const rawResponse1 = "Here are Apoorv's featured projects: RetentIQ and Planora. **Explore them on the site: NAVIGATE:projects**";
+        const parsed1 = groqModule.parseAction(rawResponse1);
+        assert.deepEqual(parsed1.action, { type: 'navigate', payload: 'projects' });
+        assert.ok(!parsed1.message.includes('NAVIGATE'));
+        assert.ok(!parsed1.message.endsWith('**'));
+        assert.ok(!parsed1.message.endsWith(':'));
+        assert.ok(/[.!?]$/.test(parsed1.message));
+        assert.ok(parsed1.message.includes('Explore them on the site in the Projects section.'));
+
+        // Output with unclosed bold
+        const rawResponse2 = "Apoorv builds **high-performance web apps. NAVIGATE:projects";
+        const parsed2 = groqModule.parseAction(rawResponse2);
+        assert.deepEqual(parsed2.action, { type: 'navigate', payload: 'projects' });
+        const asterisks = (parsed2.message.match(/\*\*/g) || []).length;
+        assert.equal(asterisks % 2, 0, 'No unclosed bold markers');
+        assert.ok(/[.!?]$/.test(parsed2.message));
+    });
+
+    test('11. Fallback answers: all answers must end as complete sentences with no dangling markdown', async () => {
+        const fallbackModule = loadTsModule('./lib/ai/fallback.ts');
+        const queries = [
+            'Tell me about your projects',
+            'Where did you work?',
+            'What is your tech stack?',
+            'How can I contact you?',
+            'Can I see your resume?',
+            'Random unsupported query'
+        ];
+
+        for (const q of queries) {
+            const result = fallbackModule.getRuleBasedFallback(q);
+            assert.ok(/[.!?]$/.test(result.message.trim()), `Query "${q}" should end with terminal punctuation`);
+            assert.ok(!result.message.trim().endsWith(':'), `Query "${q}" should not end with colon`);
+            const boldCount = (result.message.match(/\*\*/g) || []).length;
+            assert.equal(boldCount % 2, 0, `Query "${q}" should not have dangling bold tags`);
+        }
+
+        // Verify project claims
+        const projectResult = fallbackModule.getRuleBasedFallback('projects');
+        assert.ok(projectResult.message.includes('AssesMed'), 'Title must be AssesMed');
+        assert.ok(!projectResult.message.includes('AssessMed'), 'Must not have AssessMed with double s');
+        assert.ok(!projectResult.message.includes('LangChain'), 'Must not claim LangChain');
+        assert.ok(!projectResult.message.includes('Llama 3.3'), 'Must not claim Llama 3.3');
+        assert.ok(!projectResult.message.includes('OCR'), 'Must not claim OCR');
+        assert.ok(projectResult.message.includes('LightGBM'), 'RetentIQ uses LightGBM');
+        assert.ok(projectResult.message.includes('TreeSHAP'), 'RetentIQ uses TreeSHAP');
+        assert.ok(projectResult.message.includes('Groq GPT-OSS'), 'RetentIQ and Planora use Groq GPT-OSS');
+        assert.ok(projectResult.message.includes('shared expense tracking'), 'Planora uses shared expense tracking');
+        assert.ok(projectResult.message.includes('mock disease risk predictions'), 'AssesMed has mock predictions');
+    });
 });

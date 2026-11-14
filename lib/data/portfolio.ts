@@ -77,11 +77,11 @@ export const projects: Project[] = [
     {
         id: '2',
         title: 'Planora',
-        description: 'Real-time collaborative group trip planner with AI itinerary generation, consensus voting, and expense OCR.',
+        description: 'Real-time collaborative group trip planner with AI itinerary generation, consensus voting, and shared expense tracking.',
         longDescription:
-            'Collaborative travel planning platform built with Next.js 15, React 19, Supabase Realtime, and the Groq inference engine. Features structured chronological itinerary generation with traveler pacing profiles, in-trip collaborative chat agent (PlaBot) for bulk itinerary edits, democratic group voting with consensus promotion, and receipt OCR expense splitting.',
+            'Collaborative travel planning platform built with Next.js 15, React 19, Supabase Realtime, and the Groq inference engine. Features structured chronological itinerary generation with traveler pacing profiles, in-trip collaborative chat agent (PlaBot) for bulk itinerary edits, democratic group voting with consensus promotion, and shared expense tracking.',
         image: '/planora.png',
-        technologies: ['Next.js 15', 'React 19', 'TypeScript', 'Supabase Realtime', 'Groq Llama 3.3', 'Tailwind CSS', 'Zustand'],
+        technologies: ['Next.js 15', 'React 19', 'TypeScript', 'Supabase Realtime', 'Groq GPT-OSS', 'Vercel AI SDK', 'Tailwind CSS', 'Zustand'],
         liveUrl: 'https://planora-plum-beta.vercel.app/',
         githubUrl: 'https://github.com/apoorvmaurya/planora',
         featured: true,
@@ -99,14 +99,14 @@ export const projects: Project[] = [
     },
     {
         id: '4',
-        title: 'AssessMed',
-        description: 'Full-stack clinical decision interface exposing ML prediction models through validated UI flows.',
+        title: 'AssesMed',
+        description: 'Guided, validated clinical intake interface with responsive workflows and mock disease risk predictions.',
         longDescription:
-            'Full-stack clinical decision interface exposing FastAPI-served machine learning prediction models through guided, validated UI workflows. Implements client-side response caching, dynamic input validation, and real-time disease risk assessment tracking.',
+            'Guided, validated clinical intake interface featuring responsive workflows, client-side response caching, dynamic input validation, and real-time mock disease risk predictions.',
         image: '/assesmed.png',
-        technologies: ['Next.js', 'TypeScript', 'Python', 'FastAPI', 'Supabase', 'Tailwind CSS'],
+        technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'React'],
         liveUrl: 'https://assesmed.vercel.app/',
-        githubUrl: 'https://github.com/apoorvmaurya/AssessMed',
+        githubUrl: 'https://github.com/apoorvmaurya/AssesMed',
         featured: false,
     },
     {
